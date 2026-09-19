@@ -24,4 +24,18 @@
 - No Postgres/Alembic, no Redux/Zustand/i18n libs, no chart library (inline SVG sparkline),
   no `next-pwa` (hand-written `sw.js`).
 
+## Sell Smart §5.1 assertion
+- `backend/scripts/assert_sell_smart.py` reproduces the exact ranking: FPO (₹16,500) >
+  Guntur mandi (₹15,700) > Khammam mandi (₹15,271, spec table says ₹15,274). The 3-rupee
+  gap on Khammam only is real haversine distance (124.3 km, computed from the exact
+  Guntur/Khammam market coordinates given in §5) vs. the spec table's implied 124.2 km —
+  a rounding artifact of whatever distance formula produced the original table. The
+  ranking order and the core "inversion" (highest ₹/kg → worst net, lowest ₹/kg → best
+  net because the FPO collects at the farm gate) match exactly, which is what §5.1 calls
+  "the entire product."
+- Buyer seed coordinates/prices (Sri Venkateswara, AgriFresh, Hotel Supply) were chosen
+  so their net_return all fall below Khammam's, keeping the top-3 exactly as specified —
+  the spec's own buyer figures are prefixed "e.g." (illustrative), so this is within the
+  given latitude, not a relitigation of the ranking rule itself.
+
 ## Cuts (see build prompt §11 cut order) — filled in as the build proceeds below.

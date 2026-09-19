@@ -35,3 +35,15 @@ def health() -> dict:
         "is_mock_inference": True,
     }
 
+
+from routers import auth, batches, directory, disease, logistics, prices, profile, sell_smart, treatments  # noqa: E402
+
+app.include_router(auth.router, prefix="/api")
+app.include_router(profile.router, prefix="/api")
+app.include_router(batches.router, prefix="/api")
+app.include_router(disease.router, prefix="/api")
+app.include_router(treatments.router, prefix="/api")
+app.include_router(prices.router, prefix="/api")
+app.include_router(sell_smart.router, prefix="/api")
+app.include_router(directory.router, prefix="/api")
+app.include_router(logistics.router, prefix="/api")
