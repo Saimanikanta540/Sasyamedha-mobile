@@ -2,6 +2,7 @@ import logging
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from app.middlewares import ObservabilityMiddleware
 
 from app.config import get_settings
 from app.database import create_db_and_tables
@@ -22,6 +23,7 @@ app = FastAPI(
     version="0.1.0",
 )
 
+app.add_middleware(ObservabilityMiddleware)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.cors_origin_list,
