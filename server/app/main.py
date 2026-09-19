@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.config import get_settings
 from app.database import create_db_and_tables
 from app.logging_config import configure_logging
-from app.routers import auth, treatment, diagnosis, market_prices, cold_storage, logistics, sell_smart
+from app.routers import auth, treatment, diagnosis, market_prices, cold_storage, logistics, sell_smart, scan
 
 configure_logging()
 logger = logging.getLogger(__name__)
@@ -46,3 +46,4 @@ app.include_router(market_prices.router)
 app.include_router(cold_storage.router)
 app.include_router(logistics.router)
 app.include_router(sell_smart.router)
+app.include_router(scan.router)
