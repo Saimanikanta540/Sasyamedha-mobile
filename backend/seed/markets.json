@@ -1,0 +1,6 @@
+[
+  {"name": "Guntur Market Yard", "name_te": "గుంటూరు మార్కెట్ యార్డ్", "name_hi": "गुंटूर मार्केट यार्ड", "state": "Andhra Pradesh", "district": "Guntur", "lat": 16.5000, "lng": 80.6200},
+  {"name": "Khammam Market Yard", "name_te": "ఖమ్మం మార్కెట్ యార్డ్", "name_hi": "खम्मम मार्केट यार्ड", "state": "Telangana", "district": "Khammam", "lat": 17.3900, "lng": 80.1500},
+  {"name": "Tenali Market", "name_te": "తెనాలి మార్కెట్", "name_hi": "तेनाली मार्केट", "state": "Andhra Pradesh", "district": "Guntur", "lat": 16.2430, "lng": 80.6400},
+  {"name": "Narasaraopet Market", "name_te": "నరసరావుపేట మార్కెట్", "name_hi": "नरसरावपेट मार्केट", "state": "Andhra Pradesh", "district": "Guntur", "lat": 16.2350, "lng": 80.0500}
+]

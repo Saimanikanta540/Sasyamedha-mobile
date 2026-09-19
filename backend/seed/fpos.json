@@ -1,0 +1,15 @@
+[
+  {
+    "name": "Krishna Valley Farmer Producer Organization",
+    "crops": ["tomato", "chilli", "onion"],
+    "services": ["Farm-gate pickup", "Grading", "Collective sale"],
+    "membership_note": "Open to all registered farmers in Guntur district; no membership fee for the first season.",
+    "indicative_price_qtl": 3300,
+    "lat": 16.3500,
+    "lng": 80.5000,
+    "phone": "9848000101",
+    "verified": true,
+    "pickup_offered": true,
+    "district": "Guntur"
+  }
+]

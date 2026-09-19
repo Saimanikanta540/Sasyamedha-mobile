@@ -1,0 +1,200 @@
+[
+  {
+    "class_key": "healthy",
+    "lang": "en",
+    "crop": "tomato",
+    "display_name": "Healthy plant",
+    "symptoms": ["Leaves are deep green and evenly coloured", "No spots, wilting or curling", "Stem and fruit look normal"],
+    "immediate_actions": ["No treatment needed right now.", "Keep watering at the base on a regular schedule.", "Check the plant again in 5–7 days."],
+    "prevention": ["Rotate crops each season.", "Keep adequate spacing between plants.", "Remove any weak or diseased leaves promptly."],
+    "indicative_cost_note": "No spray cost — maintain routine care.",
+    "disclaimer": "Continue regular monitoring. If new symptoms appear, scan again."
+  },
+  {
+    "class_key": "healthy",
+    "lang": "te",
+    "crop": "tomato",
+    "display_name": "ఆరోగ్యకరమైన మొక్క",
+    "symptoms": ["ఆకులు ముదురు ఆకుపచ్చ రంగులో సమానంగా ఉన్నాయి", "మచ్చలు, వాడిపోవడం లేదా ముడుచుకోవడం లేదు", "కాండం మరియు కాయలు సాధారణంగా కనిపిస్తున్నాయి"],
+    "immediate_actions": ["ప్రస్తుతం చికిత్స అవసరం లేదు.", "మొదలు వద్ద క్రమం తప్పకుండా నీరు పెట్టండి.", "5–7 రోజుల్లో మళ్ళీ మొక్కను పరిశీలించండి."],
+    "prevention": ["ప్రతి సీజన్‌లో పంట మార్పిడి చేయండి.", "మొక్కల మధ్య తగిన దూరం ఉంచండి.", "బలహీనమైన లేదా వ్యాధిగ్రస్త ఆకులను వెంటనే తొలగించండి."],
+    "indicative_cost_note": "స్ప్రే ఖర్చు లేదు — సాధారణ సంరక్షణ కొనసాగించండి.",
+    "disclaimer": "క్రమం తప్పకుండా పరిశీలన కొనసాగించండి. కొత్త లక్షణాలు కనిపిస్తే మళ్ళీ స్కాన్ చేయండి."
+  },
+  {
+    "class_key": "healthy",
+    "lang": "hi",
+    "crop": "tomato",
+    "display_name": "स्वस्थ पौधा",
+    "symptoms": ["पत्तियाँ गहरे हरे रंग की और एक समान हैं", "कोई धब्बे, मुरझाना या मुड़ना नहीं", "तना और फल सामान्य दिखते हैं"],
+    "immediate_actions": ["अभी किसी उपचार की आवश्यकता नहीं है।", "जड़ के पास नियमित रूप से पानी दें।", "5–7 दिनों में पौधे की फिर से जाँच करें।"],
+    "prevention": ["हर मौसम में फसल चक्र अपनाएं।", "पौधों के बीच उचित दूरी रखें।", "कमजोर या रोगग्रस्त पत्तियों को तुरंत हटाएं।"],
+    "indicative_cost_note": "स्प्रे की कोई लागत नहीं — सामान्य देखभाल जारी रखें।",
+    "disclaimer": "नियमित निगरानी जारी रखें। नए लक्षण दिखने पर दोबारा स्कैन करें।"
+  },
+  {
+    "class_key": "early_blight",
+    "lang": "en",
+    "crop": "tomato",
+    "display_name": "Early blight",
+    "symptoms": ["Brown spots with rings on older, lower leaves", "Yellowing around the spots", "Leaves dry and fall early"],
+    "immediate_actions": ["Remove and burn the badly affected lower leaves.", "Do not water over the leaves — water at the base.", "Spray a copper-based fungicide, following the dosage on the product label.", "Repeat after 7 days if new spots appear."],
+    "prevention": ["Rotate tomato with a non-solanaceous crop.", "Keep 60 cm spacing so leaves dry quickly.", "Mulch to stop soil splashing onto leaves."],
+    "indicative_cost_note": "About ₹150–₹400 per acre per spray.",
+    "disclaimer": "This guidance is indicative. For a severe or spreading problem, confirm with your local agriculture officer before spraying."
+  },
+  {
+    "class_key": "early_blight",
+    "lang": "te",
+    "crop": "tomato",
+    "display_name": "తొలి ఎండు తెగులు (Early blight)",
+    "symptoms": ["పాత, కింది ఆకులపై వలయాలతో గోధుమ రంగు మచ్చలు", "మచ్చల చుట్టూ పసుపు రంగు", "ఆకులు ఎండి త్వరగా రాలిపోతాయి"],
+    "immediate_actions": ["తీవ్రంగా దెబ్బతిన్న కింది ఆకులను తొలగించి కాల్చివేయండి.", "ఆకులపై నీరు పోయవద్దు — మొదలు వద్ద మాత్రమే నీరు పెట్టండి.", "ఉత్పత్తి లేబుల్‌పై ఉన్న మోతాదును అనుసరించి రాగి-ఆధారిత శిలీంద్రనాశినిని పిచికారీ చేయండి.", "కొత్త మచ్చలు కనిపిస్తే 7 రోజుల తర్వాత మళ్ళీ పిచికారీ చేయండి."],
+    "prevention": ["టమాటాను సొలనేసి కాని పంటతో మార్పిడి చేయండి.", "ఆకులు త్వరగా ఆరిపోవడానికి 60 సెం.మీ. దూరం ఉంచండి.", "మట్టి ఆకులపై చిమ్మకుండా మల్చింగ్ చేయండి."],
+    "indicative_cost_note": "ఎకరానికి ఒక్కొ స్ప్రేకు సుమారు ₹150–₹400.",
+    "disclaimer": "ఈ సూచన సూచనాత్మకమైనది మాత్రమే. తీవ్రమైన లేదా వ్యాపిస్తున్న సమస్య ఉంటే, పిచికారీకి ముందు మీ స్థానిక వ్యవసాయ అధికారిని సంప్రదించండి."
+  },
+  {
+    "class_key": "early_blight",
+    "lang": "hi",
+    "crop": "tomato",
+    "display_name": "अगेती झुलसा रोग (Early blight)",
+    "symptoms": ["पुरानी, निचली पत्तियों पर छल्लेदार भूरे धब्बे", "धब्बों के चारों ओर पीलापन", "पत्तियाँ सूखकर जल्दी गिर जाती हैं"],
+    "immediate_actions": ["बुरी तरह प्रभावित निचली पत्तियों को हटाकर जला दें।", "पत्तियों पर पानी न डालें — केवल जड़ में पानी दें।", "उत्पाद लेबल पर बताई गई मात्रा के अनुसार कॉपर-आधारित फफूंदनाशक का छिड़काव करें।", "नए धब्बे दिखने पर 7 दिन बाद दोबारा छिड़काव करें।"],
+    "prevention": ["टमाटर को गैर-सोलेनेसी फसल के साथ चक्रित करें।", "पत्तियां जल्दी सूखें इसके लिए 60 सेमी की दूरी रखें।", "मिट्टी पत्तियों पर न उछले, इसके लिए मल्चिंग करें।"],
+    "indicative_cost_note": "प्रति एकड़ प्रति छिड़काव लगभग ₹150–₹400।",
+    "disclaimer": "यह सलाह केवल सांकेतिक है। गंभीर या फैलती समस्या होने पर छिड़काव से पहले अपने स्थानीय कृषि अधिकारी से पुष्टि करें।"
+  },
+  {
+    "class_key": "late_blight",
+    "lang": "en",
+    "crop": "tomato",
+    "display_name": "Late blight",
+    "symptoms": ["Large, water-soaked dark patches on leaves", "White fungal growth on the underside in damp weather", "Rapid blackening and collapse of the whole leaf"],
+    "immediate_actions": ["Remove and destroy infected plants immediately — do not compost them.", "Avoid overhead irrigation; water at the base only.", "Spray a copper-based fungicide, following the dosage on the product label.", "Improve airflow by removing overcrowded foliage."],
+    "prevention": ["Use certified disease-free seedlings.", "Avoid working in the field when leaves are wet.", "Ensure good drainage — late blight spreads fast in waterlogged soil."],
+    "indicative_cost_note": "About ₹200–₹500 per acre per spray.",
+    "disclaimer": "Late blight can destroy a crop within days. If it is spreading fast, contact your agriculture officer immediately."
+  },
+  {
+    "class_key": "late_blight",
+    "lang": "te",
+    "crop": "tomato",
+    "display_name": "ఆలస్య ఎండు తెగులు (Late blight)",
+    "symptoms": ["ఆకులపై పెద్ద, నీరు-తడిసినట్లు ముదురు మచ్చలు", "తేమ వాతావరణంలో ఆకు అడుగు భాగంపై తెలుపు శిలీంధ్ర పెరుగుదల", "మొత్తం ఆకు వేగంగా నల్లగా మారి కుళ్లిపోవడం"],
+    "immediate_actions": ["వ్యాధిగ్రస్త మొక్కలను వెంటనే తొలగించి నాశనం చేయండి — వాటిని కమ్పోస్ట్ చేయవద్దు.", "పైనుండి నీరు పెట్టడం మానండి; మొదలు వద్ద మాత్రమే నీరు పెట్టండి.", "ఉత్పత్తి లేబుల్‌పై ఉన్న మోతాదును అనుసరించి రాగి-ఆధారిత శిలీంద్రనాశిని పిచికారీ చేయండి.", "గాలి ప్రసరణ మెరుగుపరచడానికి రద్దీగా ఉన్న ఆకులను తొలగించండి."],
+    "prevention": ["ధృవీకరించిన వ్యాధి-రహిత నారును వాడండి.", "ఆకులు తడిగా ఉన్నప్పుడు పొలంలో పనిచేయవద్దు.", "మురుగునీరు నిల్వ ఉండకుండా మంచి డ్రైనేజీ ఉండేలా చూసుకోండి."],
+    "indicative_cost_note": "ఎకరానికి ఒక్కొ స్ప్రేకు సుమారు ₹200–₹500.",
+    "disclaimer": "ఆలస్య ఎండు తెగులు కొన్ని రోజుల్లోనే పంటను నాశనం చేయగలదు. వేగంగా వ్యాపిస్తుంటే వెంటనే మీ వ్యవసాయ అధికారిని సంప్రదించండి."
+  },
+  {
+    "class_key": "late_blight",
+    "lang": "hi",
+    "crop": "tomato",
+    "display_name": "पछेती झुलसा रोग (Late blight)",
+    "symptoms": ["पत्तियों पर बड़े, पानी से भीगे जैसे गहरे धब्बे", "नम मौसम में पत्ती के निचолे हिस्से पर सफेद फफूंद", "पूरी पत्ती का तेजी से काला पड़ना और गिरना"],
+    "immediate_actions": ["संक्रमित पौधों को तुरंत हटाकर नष्ट करें — उन्हें खाद में न डालें।", "ऊपर से सिंचाई न करें; केवल जड़ में पानी दें।", "उत्पाद लेबल पर बताई गई मात्रा के अनुसार कॉपर-आधारित फफूंदनाशक का छिड़काव करें।", "हवा के आवागमन के लिए घनी पत्तियों को हटाएं।"],
+    "prevention": ["प्रमाणित रोग-मुक्त पौध का उपयोग करें।", "पत्तियाँ गीली हों तब खेत में काम न करें।", "जलभराव रोकने के लिए अच्छी जल निकासी सुनिश्चित करें।"],
+    "indicative_cost_note": "प्रति एकड़ प्रति छिड़काव लगभग ₹200–₹500।",
+    "disclaimer": "पछेती झुलसा कुछ ही दिनों में फसल को नष्ट कर सकता है। तेजी से फैलने पर तुरंत अपने कृषि अधिकारी से संपर्क करें।"
+  },
+  {
+    "class_key": "target_spot",
+    "lang": "en",
+    "crop": "tomato",
+    "display_name": "Target spot",
+    "symptoms": ["Small brown spots with concentric rings, like a target", "Spots merge into larger patches on older leaves", "Yellowing and early leaf drop"],
+    "immediate_actions": ["Remove severely spotted leaves and destroy them away from the field.", "Avoid overhead watering.", "Spray a copper-based fungicide, following the dosage on the product label.", "Recheck the plant in a week — this diagnosis has lower confidence, consider a clearer photo."],
+    "prevention": ["Rotate with a non-solanaceous crop.", "Stake plants to improve air circulation.", "Avoid excess nitrogen fertiliser, which encourages soft, susceptible growth."],
+    "indicative_cost_note": "About ₹150–₹400 per acre per spray.",
+    "disclaimer": "This result has lower confidence. Confirm with a clearer photo or your local agriculture officer before spraying."
+  },
+  {
+    "class_key": "target_spot",
+    "lang": "te",
+    "crop": "tomato",
+    "display_name": "టార్గెట్ స్పాట్",
+    "symptoms": ["గురి వలె కేంద్రీకృత వలయాలతో చిన్న గోధుమ మచ్చలు", "పాత ఆకులపై మచ్చలు కలిసి పెద్ద మచ్చలుగా మారడం", "పసుపు రంగు మరియు ముందస్తు ఆకు రాలడం"],
+    "immediate_actions": ["తీవ్రంగా మచ్చలు ఉన్న ఆకులను తొలగించి పొలానికి దూరంగా నాశనం చేయండి.", "పైనుండి నీరు పెట్టడం మానండి.", "ఉత్పత్తి లేబుల్‌పై ఉన్న మోతాదును అనుసరించి రాగి-ఆధారిత శిలీంద్రనాశిని పిచికారీ చేయండి.", "ఒక వారం తర్వాత మొక్కను మళ్ళీ పరిశీలించండి — ఈ నిర్ధారణలో నమ్మకం తక్కువ, స్పష్టమైన ఫోటో తీయడం మంచది."],
+    "prevention": ["సొలనేసి కాని పంటతో మార్పిడి చేయండి.", "గాలి ప్రసరణ మెరుగుపరచడానికి మొక్కలకు ఆధారం ఇవ్వండి.", "మెత్తని, బలహీనమైన పెరుగుదలను ప్రోత్సహించే అధిక నత్రజని ఎరువును నివారించండి."],
+    "indicative_cost_note": "ఎకరానికి ఒక్కొ స్ప్రేకు సుమారు ₹150–₹400.",
+    "disclaimer": "ఈ ఫలితంలో నమ్మకం తక్కువగా ఉంది. పిచికారీకి ముందు స్పష్టమైన ఫోటోతో లేదా మీ స్థానిక వ్యవసాయ అధికారితో నిర్ధారించుకోండి."
+  },
+  {
+    "class_key": "target_spot",
+    "lang": "hi",
+    "crop": "tomato",
+    "display_name": "टारगेट स्पॉट",
+    "symptoms": ["निशाने जैसे गोलाकार छल्लों वाले छोटे भूरे धब्बे", "पुरानी पत्तियों पर धब्बे मिलकर बड़े हो जाते हैं", "पीलापन और समय से पहले पत्तियाँ गिरना"],
+    "immediate_actions": ["ज्यादा धब्बे वाली पत्तियों को हटाकर खेत से दूर नष्ट करें।", "ऊपर से सिंचाई न करें।", "उत्पाद लेबल पर बताई गई मात्रा के अनुसार कॉपर-आधारित फफूंदनाशक का छिड़काव करें।", "एक सप्ताह बाद पौधे की दोबारा जाँच करें — इस निदान में भरोसा कम है, स्पष्ट फोटो लेना बेहतर होगा।"],
+    "prevention": ["गैर-सोलेनेसी फसल के साथ चक्रित करें।", "हवा के आवागमन के लिए पौधों को सहारा दें।", "अधिक नाइट्रोजन उर्वरक से बचें, जो कोमल वृद्धि को बढ़ावा देता है।"],
+    "indicative_cost_note": "प्रति एकड़ प्रति छिड़काव लगभग ₹150–₹400।",
+    "disclaimer": "इस परिणाम में भरोसा कम है। छिड़काव से पहले स्पष्ट फोटो या अपने स्थानीय कृषि अधिकारी से पुष्टि करें।"
+  },
+  {
+    "class_key": "yellow_leaf_curl_virus",
+    "lang": "en",
+    "crop": "tomato",
+    "display_name": "Yellow leaf curl virus",
+    "symptoms": ["Leaves turn yellow and curl upward at the edges", "Stunted, bushy growth", "Sharp drop in flowering and fruit set"],
+    "immediate_actions": ["Remove and destroy infected plants — this virus does not have a cure.", "Control whiteflies, which spread the virus, using a recommended insecticide or yellow sticky traps.", "Do not replant tomato in the same spot immediately."],
+    "prevention": ["Use virus-resistant tomato varieties where available.", "Use insect-proof nets on nurseries.", "Control weeds nearby that host whiteflies."],
+    "indicative_cost_note": "Whitefly control: about ₹100–₹300 per acre.",
+    "disclaimer": "There is no chemical cure for this virus. Focus on removing infected plants and controlling whiteflies."
+  },
+  {
+    "class_key": "yellow_leaf_curl_virus",
+    "lang": "te",
+    "crop": "tomato",
+    "display_name": "పసుపు ఆకు ముడత వైరస్",
+    "symptoms": ["ఆకులు పసుపు రంగులోకి మారి అంచుల వద్ద పైకి ముడుచుకోవడం", "మొక్క గిడసబారిన, పొదలా పెరుగుదల", "పూత మరియు కాయ ఏర్పడటంలో పెద్ద తగ్గుదల"],
+    "immediate_actions": ["వ్యాధిగ్రస్త మొక్కలను తొలగించి నాశనం చేయండి — ఈ వైరస్‌కి చికిత్స లేదు.", "వైరస్‌ను వ్యాపించే తెల్లదోమలను సిఫారసు చేసిన పురుగుమందుతో లేదా పసుపు జిగురు ఉచ్చులతో నియంత్రించండి.", "అదే స్థలంలో వెంటనే టమాటా మళ్ళీ నాటవద్దు."],
+    "prevention": ["అందుబాటులో ఉంటే వైరస్-నిరోధక టమాటా రకాలను వాడండి.", "నర్సరీల్లో కీటక-నిరోధక వలలు వాడండి.", "తెల్లదోమలకు ఆశ్రయమిచ్చే సమీప కలుపు మొక్కలను నియంత్రించండి."],
+    "indicative_cost_note": "తెల్లదోమ నియంత్రణ: ఎకరానికి సుమారు ₹100–₹300.",
+    "disclaimer": "ఈ వైరస్‌కి రసాయన చికిత్స లేదు. వ్యాధిగ్రస్త మొక్కలను తొలగించడం మరియు తెల్లదోమలను నియంత్రించడంపై దృష్టి పెట్టండి."
+  },
+  {
+    "class_key": "yellow_leaf_curl_virus",
+    "lang": "hi",
+    "crop": "tomato",
+    "display_name": "पीत पत्ती मोड़क विषाणु (Yellow leaf curl virus)",
+    "symptoms": ["पत्तियाँ पीली होकर किनारों से ऊपर की ओर मुड़ जाती हैं", "पौधे की बढ़वार रुककर झाड़ीनुमा हो जाती है", "फूल और फल बनने में भारी कमी"],
+    "immediate_actions": ["संक्रमित पौधों को हटाकर नष्ट करें — इस विषाणु का कोई इलाज नहीं है।", "विषाणु फैलाने वाली सफेद मक्खी को अनुशंसित कीटनाशक या पीले चिपचिपे जाल से नियंत्रित करें।", "उसी जगह पर तुरंत दोबारा टमाटर न लगाएं।"],
+    "prevention": ["उपलब्ध होने पर विषाणु-प्रतिरोधी टमाटर किस्मों का उपयोग करें।", "नर्सरी में कीट-रोधी जाल का उपयोग करें।", "सफेद मक्खी को शरण देने वाले आस-पास के खरपतवार नियंत्रित करें।"],
+    "indicative_cost_note": "सफेद मक्खी नियंत्रण: प्रति एकड़ लगभग ₹100–₹300।",
+    "disclaimer": "इस विषाणु का कोई रासायनिक इलाज नहीं है। संक्रमित पौधों को हटाने और सफेद मक्खी नियंत्रण पर ध्यान दें।"
+  },
+  {
+    "class_key": "mosaic_virus",
+    "lang": "en",
+    "crop": "tomato",
+    "display_name": "Mosaic virus",
+    "symptoms": ["Mottled light and dark green pattern on leaves", "Leaves are curled, narrow or misshapen", "Stunted plant growth and reduced yield"],
+    "immediate_actions": ["Remove and destroy infected plants — this virus does not have a cure.", "Wash hands and tools with soap after handling infected plants to avoid spreading it.", "Control aphids, which can spread the virus, using a recommended insecticide."],
+    "prevention": ["Use certified virus-free seed.", "Control weeds that can host the virus.", "Avoid handling healthy plants right after infected ones."],
+    "indicative_cost_note": "Aphid control: about ₹100–₹300 per acre.",
+    "disclaimer": "There is no chemical cure for this virus. Focus on removing infected plants and controlling aphids."
+  },
+  {
+    "class_key": "mosaic_virus",
+    "lang": "te",
+    "crop": "tomato",
+    "display_name": "మొజాయిక్ వైరస్",
+    "symptoms": ["ఆకులపై లేత మరియు ముదురు ఆకుపచ్చ మిశ్రమ మచ్చలు", "ఆకులు ముడుచుకుపోయి, సన్నగా లేదా వికృతంగా ఉంటాయి", "మొక్క పెరుగుదల తగ్గి దిగుబడి తగ్గుతుంది"],
+    "immediate_actions": ["వ్యాధిగ్రస్త మొక్కలను తొలగించి నాశనం చేయండి — ఈ వైరస్‌కి చికిత్స లేదు.", "వ్యాపించకుండా ఉండటానికి వ్యాధిగ్రస్త మొక్కలను తాకిన తర్వాత చేతులు, పనిముట్లు సబ్బుతో కడగండి.", "వైరస్‌ను వ్యాపించగల పేనుబంక (aphids)ను సిఫారసు చేసిన పురుగుమందుతో నియంత్రించండి."],
+    "prevention": ["ధృవీకరించిన వైరస్-రహిత విత్తనాలను వాడండి.", "వైరస్‌కి ఆశ్రయమిచ్చే కలుపు మొక్కలను నియంత్రించండి.", "వ్యాధిగ్రస్త మొక్కలను తాకిన వెంటనే ఆరోగ్యకరమైన మొక్కలను తాకవద్దు."],
+    "indicative_cost_note": "పేనుబంక నియంత్రణ: ఎకరానికి సుమారు ₹100–₹300.",
+    "disclaimer": "ఈ వైరస్‌కి రసాయన చికిత్స లేదు. వ్యాధిగ్రస్త మొక్కలను తొలగించడం మరియు పేనుబంకను నియంత్రించడంపై దృష్టి పెట్టండి."
+  },
+  {
+    "class_key": "mosaic_virus",
+    "lang": "hi",
+    "crop": "tomato",
+    "display_name": "मोज़ेक विषाणु",
+    "symptoms": ["पत्तियों पर हल्के और गहरे हरे रंग का धब्बेदार पैटर्न", "पत्तियाँ मुड़ी हुई, पतली या विकृत होती हैं", "पौधे की बढ़वार रुकना और उपज घटना"],
+    "immediate_actions": ["संक्रमित पौधों को हटाकर नष्ट करें — इस विषाणु का कोई इलाज नहीं है।", "फैलने से बचने के लिए संक्रमित पौधों को छूने के बाद हाथ और औजार साबुन से धोएं।", "विषाणु फैलाने वाले माहू (aphids) को अनुशंसित कीटनाशक से नियंत्रित करें।"],
+    "prevention": ["प्रमाणित विषाणु-मुक्त बीज का उपयोग करें।", "विषाणु को शरण देने वाले खरपतवार नियंत्रित करें।", "संक्रमित पौधों को छूने के तुरंत बाद स्वस्थ पौधों को न छुएं।"],
+    "indicative_cost_note": "माहू नियंत्रण: प्रति एकड़ लगभग ₹100–₹300।",
+    "disclaimer": "इस विषाणु का कोई रासायनिक इलाज नहीं है। संक्रमित पौधों को हटाने और माहू नियंत्रण पर ध्यान दें।"
+  }
+]

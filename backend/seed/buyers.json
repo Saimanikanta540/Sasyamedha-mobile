@@ -1,0 +1,41 @@
+[
+  {
+    "name": "Sri Venkateswara Traders",
+    "crops": ["tomato"],
+    "min_qty_kg": 200,
+    "max_qty_kg": 2000,
+    "indicative_price_qtl": 3400,
+    "lat": 16.4200,
+    "lng": 80.5500,
+    "phone": "9876500001",
+    "verified": true,
+    "pickup_offered": false,
+    "district": "Guntur"
+  },
+  {
+    "name": "AgriFresh Wholesale",
+    "crops": ["tomato", "onion"],
+    "min_qty_kg": 500,
+    "max_qty_kg": 5000,
+    "indicative_price_qtl": 3450,
+    "lat": 15.7000,
+    "lng": 80.6000,
+    "phone": "9876500002",
+    "verified": true,
+    "pickup_offered": false,
+    "district": "Bapatla"
+  },
+  {
+    "name": "Hotel Supply Co",
+    "crops": ["tomato"],
+    "min_qty_kg": 100,
+    "max_qty_kg": 600,
+    "indicative_price_qtl": 3600,
+    "lat": 16.9500,
+    "lng": 81.0500,
+    "phone": "9876500003",
+    "verified": false,
+    "pickup_offered": false,
+    "district": "East Godavari"
+  }
+]

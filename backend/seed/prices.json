@@ -1,0 +1,21 @@
+[
+  {"market_index": 0, "commodity": "tomato", "variety": "Hybrid", "min_price_qtl": 3220, "max_price_qtl": 3780, "modal_price_qtl": 3500},
+  {"market_index": 0, "commodity": "onion", "variety": "Local", "min_price_qtl": 2024, "max_price_qtl": 2376, "modal_price_qtl": 2200},
+  {"market_index": 0, "commodity": "chilli", "variety": "Guntur Sannam", "min_price_qtl": 13340, "max_price_qtl": 15660, "modal_price_qtl": 14500},
+  {"market_index": 0, "commodity": "brinjal", "variety": "Local", "min_price_qtl": 1656, "max_price_qtl": 1944, "modal_price_qtl": 1800},
+
+  {"market_index": 1, "commodity": "tomato", "variety": "Hybrid", "min_price_qtl": 3496, "max_price_qtl": 4104, "modal_price_qtl": 3800},
+  {"market_index": 1, "commodity": "onion", "variety": "Local", "min_price_qtl": 1932, "max_price_qtl": 2268, "modal_price_qtl": 2100},
+  {"market_index": 1, "commodity": "chilli", "variety": "Guntur Sannam", "min_price_qtl": 13984, "max_price_qtl": 16416, "modal_price_qtl": 15200},
+  {"market_index": 1, "commodity": "brinjal", "variety": "Local", "min_price_qtl": 1564, "max_price_qtl": 1836, "modal_price_qtl": 1700},
+
+  {"market_index": 2, "commodity": "tomato", "variety": "Hybrid", "min_price_qtl": 3082, "max_price_qtl": 3618, "modal_price_qtl": 3350},
+  {"market_index": 2, "commodity": "onion", "variety": "Local", "min_price_qtl": 1886, "max_price_qtl": 2214, "modal_price_qtl": 2050},
+  {"market_index": 2, "commodity": "chilli", "variety": "Guntur Sannam", "min_price_qtl": 12696, "max_price_qtl": 14904, "modal_price_qtl": 13800},
+  {"market_index": 2, "commodity": "brinjal", "variety": "Local", "min_price_qtl": 1518, "max_price_qtl": 1782, "modal_price_qtl": 1650},
+
+  {"market_index": 3, "commodity": "tomato", "variety": "Hybrid", "min_price_qtl": 3018, "max_price_qtl": 3542, "modal_price_qtl": 3280},
+  {"market_index": 3, "commodity": "onion", "variety": "Local", "min_price_qtl": 1822, "max_price_qtl": 2138, "modal_price_qtl": 1980},
+  {"market_index": 3, "commodity": "chilli", "variety": "Guntur Sannam", "min_price_qtl": 12420, "max_price_qtl": 14580, "modal_price_qtl": 13500},
+  {"market_index": 3, "commodity": "brinjal", "variety": "Local", "min_price_qtl": 1472, "max_price_qtl": 1728, "modal_price_qtl": 1600}
+]
