@@ -17,7 +17,12 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "config": {
+        "googleMaps": {
+          "apiKey": ""
+        }
+      }
     },
     "web": {
       "output": "static",
@@ -32,7 +37,17 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 76
         }
-      ]
+      ],
+      "expo-secure-store",
+      "expo-sqlite",
+      "expo-localization",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Smart Crop Care uses the camera to photograph crop leaves for diagnosis."
+        }
+      ],
+      "expo-notifications"
     ],
     "experiments": {
       "typedRoutes": true,
