@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.config import get_settings
 from app.database import create_db_and_tables
 from app.logging_config import configure_logging
-from app.routers import auth
+from app.routers import auth, treatment
 
 configure_logging()
 logger = logging.getLogger(__name__)
@@ -40,3 +40,4 @@ def on_startup() -> None:
 def health() -> dict:
     return {"status": "ok"}
 app.include_router(auth.router)
+app.include_router(treatment.router)
