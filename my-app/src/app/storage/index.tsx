@@ -113,7 +113,10 @@ export default function ColdStorageScreen() {
                 }`}
                 onPress={() => {
                   focusFacility(item.id);
-                  router.push({ pathname: '/storage/[id]', params: { id: item.id } });
+                  router.push({
+                    pathname: '/storage/[id]',
+                    params: { id: item.id, lat: lat != null ? String(lat) : '', lng: lng != null ? String(lng) : '' },
+                  });
                 }}
                 accessibilityRole="button"
               >

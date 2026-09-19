@@ -12,13 +12,19 @@ import { getColdStorage } from '@/lib/api/endpoints';
 export default function FacilityDetailScreen() {
   const router = useRouter();
   const { t } = useTranslation();
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id, lat: latParam, lng: lngParam } = useLocalSearchParams<{
+    id: string;
+    lat?: string;
+    lng?: string;
+  }>();
   const [booked, setBooked] = useState(false);
+  const lat = latParam ? Number(latParam) : undefined;
+  const lng = lngParam ? Number(lngParam) : undefined;
 
-  // Reads the same cached list the Cold Storage screen already fetched.
+  // Same query key as the Cold Storage list screen — reads its cache, no new request.
   const query = useQuery({
-    queryKey: ['coldStorage', undefined, undefined],
-    queryFn: () => getColdStorage(),
+    queryKey: ['coldStorage', lat, lng],
+    queryFn: () => getColdStorage(lat, lng),
   });
   const facility = query.data?.find((f) => f.id === id);
 
