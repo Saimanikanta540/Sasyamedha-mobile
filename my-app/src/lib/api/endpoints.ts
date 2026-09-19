@@ -1,4 +1,5 @@
 import { apiFetch, hasBackendConfigured } from './client';
+import { fetchGovPrices } from './prices-fetcher';
 import {
   mockBuyer,
   mockColdStorage,
@@ -66,7 +67,7 @@ export async function getTreatment(disease: string): Promise<TreatmentGuidance> 
 export async function getPrices(commodity: string): Promise<PricesResponse> {
   return readWithFallback(
     () => apiFetch<PricesResponse>(`/prices?commodity=${encodeURIComponent(commodity)}`),
-    () => mockPrices(commodity),
+    () => fetchGovPrices(commodity).catch(() => mockPrices(commodity)),
   );
 }
 
