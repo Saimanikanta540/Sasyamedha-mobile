@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Image, SafeAreaView } from 'react-native';
-import { Stack } from 'expo-router';
+import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
+import { Stack, useRouter } from 'expo-router';
 
 export default function OnboardingScreen() {
+  const router = useRouter();
   const [selectedLanguage, setSelectedLanguage] = useState('English');
 
   const languages = [
@@ -65,6 +66,7 @@ export default function OnboardingScreen() {
           <TouchableOpacity 
             className="bg-green-600 py-4 rounded-2xl items-center shadow-md"
             activeOpacity={0.8}
+            onPress={() => router.push('/home')}
           >
             <Text className="text-white text-lg font-semibold">
               Continue
