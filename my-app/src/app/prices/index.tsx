@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList, RefreshControl, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { LinearGradient } from 'expo-linear-gradient';
 
 import { EmptyState } from '@/components/EmptyState';
+import { LinearGradient } from '@/components/LinearGradient';
 import { ScreenHeader } from '@/components/ScreenHeader';
 import { StaleBadge } from '@/components/StaleBadge';
 import { getPrices } from '@/lib/api/endpoints';

@@ -1,4 +1,3 @@
-import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -6,6 +5,7 @@ import { ActivityIndicator, Animated, Text, TouchableOpacity, View } from 'react
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { RecordingPresets, requestRecordingPermissionsAsync, useAudioRecorder } from 'expo-audio';
 
+import { LinearGradient } from '@/components/LinearGradient';
 import { transcribeVoice } from '@/lib/api/endpoints';
 import { ApiError, hasBackendConfigured } from '@/lib/api/client';
 
