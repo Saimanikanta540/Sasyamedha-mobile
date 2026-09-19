@@ -18,9 +18,16 @@
 - SQLite (not Postgres/Supabase), auto-created + auto-seeded on startup.
 - Inference is a deterministic heuristic (HSV histogram of the leaf photo), not a trained
   model. `is_mock: true` is always returned and shown in the UI — never hidden.
-- Real-time Mandi ingestion (`scripts/ingest_prices.py`) uses the data.gov.in OGD API key
-  provided in the prompt, but the API is **not** in the demo's request path — `/api/prices`
-  always serves the seeded table so the demo can't fail on a slow government API.
+- Real-time Mandi ingestion (`backend/scripts/ingest_prices.py`) uses the data.gov.in OGD
+  API key provided in the prompt (resource `9ef84268-d588-465a-a308-a864a43d0070`,
+  "Current Daily Price of Various Commodities from Various Markets (Mandi)"), matches
+  records by state+district onto the seeded `Market` rows, and upserts them as
+  `source="ogd"`. It is **not** in the demo's request path — `/api/prices` always serves
+  the seeded table. Verified this matters: a live test run from this machine timed out
+  against api.data.gov.in (network reachability, not a code bug) — the script caught it
+  and exited cleanly without touching the seeded rows, exactly the fallback behaviour the
+  build prompt asks for. Run it manually with a healthier network connection to refresh
+  prices with `source="ogd"`.
 - No Postgres/Alembic, no Redux/Zustand/i18n libs, no chart library (inline SVG sparkline),
   no `next-pwa` (hand-written `sw.js`).
 
