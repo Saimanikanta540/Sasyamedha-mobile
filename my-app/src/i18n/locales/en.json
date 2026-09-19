@@ -1,0 +1,61 @@
+{
+  "common": {
+    "appName": "Rythu Mitra",
+    "ok": "OK",
+    "cancel": "Cancel",
+    "save": "Save",
+    "retry": "Retry",
+    "back": "Back",
+    "loading": "Loading…",
+    "online": "Online",
+    "offline": "Offline",
+    "calculate": "Calculate",
+    "call": "Call",
+    "message": "Message",
+    "viewDetails": "View details",
+    "kg": "kg",
+    "km": "km",
+    "listen": "Listen",
+    "stop": "Stop",
+    "close": "Close",
+    "seeAll": "See all",
+    "distanceAway": "{{distance}} km away"
+  },
+  "home": {
+    "greeting": "Hello",
+    "tileDiagnose": "Diagnose",
+    "tileDiagnoseSub": "Photograph a leaf",
+    "tileTreat": "Treat",
+    "tileTreatSub": "See treatment guidance",
+    "tilePrices": "Prices",
+    "tilePricesSub": "Today's mandi rates",
+    "tileSell": "Sell",
+    "tileSellSub": "Compare where to sell",
+    "tileStore": "Store",
+    "tileStoreSub": "Nearby cold storage",
+    "tileTransport": "Transport",
+    "tileTransportSub": "Book a vehicle",
+    "settings": "Settings",
+    "voiceAssistant": "Speak to ask"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "languageTelugu": "తెలుగు (Telugu)",
+    "languageEnglish": "English",
+    "languageHindi": "हिन्दी (Hindi)",
+    "cacheSummary": "Cached data",
+    "cacheSize": "Approximate size",
+    "lastSync": "Last synced",
+    "clearCache": "Clear cache",
+    "clearCacheConfirmTitle": "Clear cached data?",
+    "clearCacheConfirmBody": "This removes saved prices and treatment guidance. Your login and any pending requests are kept.",
+    "cacheCleared": "Cache cleared",
+    "notifications": "Notifications",
+    "notificationsSub": "Get notified about prices and request updates"
+  },
+  "connectivity": {
+    "onlineBadge": "Online",
+    "offlineBadge": "Offline — showing saved data"
+  }
+}

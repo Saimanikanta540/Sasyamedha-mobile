@@ -1,0 +1,61 @@
+{
+  "common": {
+    "appName": "రైతు మిత్ర",
+    "ok": "సరే",
+    "cancel": "రద్దు చేయండి",
+    "save": "సేవ్ చేయండి",
+    "retry": "మళ్ళీ ప్రయత్నించండి",
+    "back": "వెనక్కి",
+    "loading": "లోడ్ అవుతోంది…",
+    "online": "ఆన్‌లైన్",
+    "offline": "ఆఫ్‌లైన్",
+    "calculate": "లెక్కించండి",
+    "call": "కాల్ చేయండి",
+    "message": "సందేశం పంపండి",
+    "viewDetails": "వివరాలు చూడండి",
+    "kg": "కిలోలు",
+    "km": "కి.మీ",
+    "listen": "వినండి",
+    "stop": "ఆపండి",
+    "close": "మూసివేయండి",
+    "seeAll": "అన్నీ చూడండి",
+    "distanceAway": "{{distance}} కి.మీ దూరంలో"
+  },
+  "home": {
+    "greeting": "నమస్కారం",
+    "tileDiagnose": "వ్యాధి నిర్ధారణ",
+    "tileDiagnoseSub": "ఆకు ఫోటో తీయండి",
+    "tileTreat": "చికిత్స",
+    "tileTreatSub": "సలహాలు చూడండి",
+    "tilePrices": "మార్కెట్ ధరలు",
+    "tilePricesSub": "నేటి మండి ధరలు",
+    "tileSell": "అమ్మకం",
+    "tileSellSub": "ఎక్కడ అమ్మాలో చూడండి",
+    "tileStore": "కోల్డ్ స్టోరేజ్",
+    "tileStoreSub": "దగ్గరి గోదాములు",
+    "tileTransport": "రవాణా",
+    "tileTransportSub": "వాహనం బుక్ చేయండి",
+    "settings": "సెట్టింగులు",
+    "voiceAssistant": "మాట్లాడి అడగండి"
+  },
+  "settings": {
+    "title": "సెట్టింగులు",
+    "language": "భాష",
+    "languageTelugu": "తెలుగు",
+    "languageEnglish": "English",
+    "languageHindi": "हिन्दी",
+    "cacheSummary": "నిల్వ చేసిన డేటా",
+    "cacheSize": "సుమారు పరిమాణం",
+    "lastSync": "చివరిసారి సమకాలీకరణ",
+    "clearCache": "నిల్వను ఖాళీ చేయండి",
+    "clearCacheConfirmTitle": "నిల్వను ఖాళీ చేయాలా?",
+    "clearCacheConfirmBody": "ఇది సేవ్ చేసిన ధరలు మరియు చికిత్స సమాచారాన్ని తొలగిస్తుంది. మీ లాగిన్ మరియు పంపవలసిన అభ్యర్థనలు అలాగే ఉంటాయి.",
+    "cacheCleared": "నిల్వ ఖాళీ చేయబడింది",
+    "notifications": "నోటిఫికేషన్లు",
+    "notificationsSub": "ధరలు మరియు అభ్యర్థన నవీకరణల గురించి తెలియజేయండి"
+  },
+  "connectivity": {
+    "onlineBadge": "ఆన్‌లైన్",
+    "offlineBadge": "ఆఫ్‌లైన్ — నిల్వ చేసిన డేటా చూపిస్తోంది"
+  }
+}

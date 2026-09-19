@@ -1,0 +1,61 @@
+{
+  "common": {
+    "appName": "रैतु मित्र",
+    "ok": "ठीक है",
+    "cancel": "रद्द करें",
+    "save": "सेव करें",
+    "retry": "फिर कोशिश करें",
+    "back": "वापस",
+    "loading": "लोड हो रहा है…",
+    "online": "ऑनलाइन",
+    "offline": "ऑफ़लाइन",
+    "calculate": "गणना करें",
+    "call": "कॉल करें",
+    "message": "संदेश भेजें",
+    "viewDetails": "विवरण देखें",
+    "kg": "किलो",
+    "km": "कि.मी",
+    "listen": "सुनें",
+    "stop": "रोकें",
+    "close": "बंद करें",
+    "seeAll": "सभी देखें",
+    "distanceAway": "{{distance}} कि.मी दूर"
+  },
+  "home": {
+    "greeting": "नमस्ते",
+    "tileDiagnose": "रोग पहचान",
+    "tileDiagnoseSub": "पत्ते की फोटो लें",
+    "tileTreat": "उपचार",
+    "tileTreatSub": "सलाह देखें",
+    "tilePrices": "मंडी भाव",
+    "tilePricesSub": "आज के मंडी भाव",
+    "tileSell": "बिक्री",
+    "tileSellSub": "कहाँ बेचें, तुलना करें",
+    "tileStore": "कोल्ड स्टोरेज",
+    "tileStoreSub": "पास के गोदाम",
+    "tileTransport": "परिवहन",
+    "tileTransportSub": "वाहन बुक करें",
+    "settings": "सेटिंग्स",
+    "voiceAssistant": "बोलकर पूछें"
+  },
+  "settings": {
+    "title": "सेटिंग्स",
+    "language": "भाषा",
+    "languageTelugu": "తెలుగు (तेलुगु)",
+    "languageEnglish": "English (अंग्रेज़ी)",
+    "languageHindi": "हिन्दी",
+    "cacheSummary": "सहेजा गया डेटा",
+    "cacheSize": "अनुमानित आकार",
+    "lastSync": "आख़िरी बार समन्वयित",
+    "clearCache": "कैश साफ़ करें",
+    "clearCacheConfirmTitle": "कैश साफ़ करें?",
+    "clearCacheConfirmBody": "इससे सहेजे गए भाव और उपचार जानकारी हट जाएगी। आपका लॉगिन और लंबित अनुरोध सुरक्षित रहेंगे।",
+    "cacheCleared": "कैश साफ़ हो गया",
+    "notifications": "सूचनाएँ",
+    "notificationsSub": "भाव और अनुरोध अपडेट की सूचना पाएं"
+  },
+  "connectivity": {
+    "onlineBadge": "ऑनलाइन",
+    "offlineBadge": "ऑफ़लाइन — सहेजा गया डेटा दिखाया जा रहा है"
+  }
+}
