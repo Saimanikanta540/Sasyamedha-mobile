@@ -1,6 +1,0 @@
-[
-  {"name": "Ravi Auto Transport", "vehicle_type": "3-wheeler tempo", "capacity_kg": 400, "rate_per_km": 18, "min_fare": 600, "lat": 16.3100, "lng": 80.4400, "phone": "9900011001", "district": "Guntur"},
-  {"name": "Guntur Mini Trucks", "vehicle_type": "Tata Ace", "capacity_kg": 850, "rate_per_km": 30, "min_fare": 1800, "lat": 16.3100, "lng": 80.4400, "phone": "9900011002", "district": "Guntur"},
-  {"name": "Sri Lakshmi Carriers", "vehicle_type": "Mahindra Bolero pickup", "capacity_kg": 1500, "rate_per_km": 38, "min_fare": 2400, "lat": 16.3100, "lng": 80.4400, "phone": "9900011003", "district": "Guntur"},
-  {"name": "Annapurna Logistics", "vehicle_type": "6-tyre truck", "capacity_kg": 6000, "rate_per_km": 55, "min_fare": 6000, "lat": 16.3100, "lng": 80.4400, "phone": "9900011004", "district": "Guntur"}
-]

@@ -1,8 +1,0 @@
-fastapi
-uvicorn[standard]
-sqlmodel
-pyjwt
-pillow
-python-multipart
-httpx
-python-dotenv
