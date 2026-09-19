@@ -1,37 +1,28 @@
 import { useQuery } from '@tanstack/react-query';
-import Constants from 'expo-constants';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FlatList, Platform, Text, TouchableOpacity, View } from 'react-native';
-import MapView, { Marker, Region } from 'react-native-maps';
+import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AvailabilityBar } from '@/components/AvailabilityBar';
 import { EmptyState } from '@/components/EmptyState';
+import { OsmMapView, type OsmMapViewHandle } from '@/components/OsmMapView';
 import { ScreenHeader } from '@/components/ScreenHeader';
 import { StaleBadge } from '@/components/StaleBadge';
 import { getColdStorage } from '@/lib/api/endpoints';
 import { useIsOnline } from '@/lib/network/connectivity';
 import { useLocationStore } from '@/stores/locationStore';
 
-const DEFAULT_REGION: Region = { latitude: 16.3067, longitude: 80.4365, latitudeDelta: 0.3, longitudeDelta: 0.3 };
+const DEFAULT_CENTER = { lat: 16.3067, lng: 80.4365 };
 const RADIUS_STEPS = [10, 25, 50, Infinity];
-
-// Android's only map provider is Google Maps, which renders solid black without a
-// configured API key (and Expo Go can't accept one without a custom dev client build
-// anyway — see app.json's android.config.googleMaps.apiKey). iOS uses Apple Maps and
-// needs no key. Skip the map entirely rather than show a broken black box — the list
-// below is fully functional on its own either way.
-const MAPS_AVAILABLE =
-  Platform.OS === 'ios' || Boolean(Constants.expoConfig?.android?.config?.googleMaps?.apiKey);
 
 export default function ColdStorageScreen() {
   const router = useRouter();
   const { t } = useTranslation();
   const isOnline = useIsOnline();
   const params = useLocalSearchParams<{ destinationLat?: string; destinationLng?: string }>();
-  const mapRef = useRef<MapView>(null);
+  const mapRef = useRef<OsmMapViewHandle>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [radiusStep, setRadiusStep] = useState(0);
 
@@ -50,29 +41,21 @@ export default function ColdStorageScreen() {
   const radiusKm = RADIUS_STEPS[radiusStep];
   const facilities = (query.data ?? []).filter((f) => f.distanceKm <= radiusKm);
 
-  const initialRegion: Region = useMemo(
-    () => (lat != null && lng != null ? { ...DEFAULT_REGION, latitude: lat, longitude: lng } : DEFAULT_REGION),
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- deliberately mount-only, see the effect below
-    [],
-  );
+  const mapCenter = lat != null && lng != null ? { lat, lng } : DEFAULT_CENTER;
 
-  // `initialRegion` only takes effect on mount — react-native-maps ignores it on
-  // re-renders. Live GPS resolves asynchronously after the map has already mounted
-  // with the fallback coords, so without this the map never recenters once a real
-  // fix comes in.
+  // The map's initial HTML is only built once on mount (reloading it to recenter
+  // would refetch every OSM tile), so once live GPS resolves after that first
+  // render, pan the already-loaded map to it explicitly.
   useEffect(() => {
-    if (!MAPS_AVAILABLE || lat == null || lng == null) return;
-    mapRef.current?.animateToRegion({ ...DEFAULT_REGION, latitude: lat, longitude: lng }, 400);
+    if (lat == null || lng == null) return;
+    mapRef.current?.panTo(lat, lng);
   }, [lat, lng]);
 
   const focusFacility = (facilityId: string) => {
     setSelectedId(facilityId);
     const facility = query.data?.find((f) => f.id === facilityId);
-    if (facility && mapRef.current) {
-      mapRef.current.animateToRegion(
-        { latitude: facility.lat, longitude: facility.lng, latitudeDelta: 0.08, longitudeDelta: 0.08 },
-        300,
-      );
+    if (facility) {
+      mapRef.current?.panTo(facility.lat, facility.lng);
     }
   };
 
@@ -80,21 +63,20 @@ export default function ColdStorageScreen() {
     <SafeAreaView className="flex-1 bg-surface-app" edges={['top']}>
       <ScreenHeader title={t('home.tileStore')} subtitle={t('home.tileStoreSub')} onBack={() => router.back()} />
 
-      {MAPS_AVAILABLE && (
-        <View className="mx-4 mb-3 overflow-hidden rounded-3xl shadow-md" style={{ elevation: 3 }}>
-          <MapView ref={mapRef} style={{ height: 200 }} initialRegion={initialRegion}>
-            {(query.data ?? []).map((facility) => (
-              <Marker
-                key={facility.id}
-                coordinate={{ latitude: facility.lat, longitude: facility.lng }}
-                title={facility.name}
-                pinColor={selectedId === facility.id ? '#F58220' : '#0B3B24'}
-                onPress={() => focusFacility(facility.id)}
-              />
-            ))}
-          </MapView>
-        </View>
-      )}
+      <View className="mx-4 mb-3 overflow-hidden rounded-3xl shadow-md" style={{ elevation: 3, height: 200 }}>
+        <OsmMapView
+          ref={mapRef}
+          center={mapCenter}
+          markers={(query.data ?? []).map((facility) => ({
+            id: facility.id,
+            lat: facility.lat,
+            lng: facility.lng,
+            title: facility.name,
+            selected: selectedId === facility.id,
+          }))}
+          onMarkerPress={focusFacility}
+        />
+      </View>
 
       {isOffline && query.data && (
         <View className="px-4 pt-2">
