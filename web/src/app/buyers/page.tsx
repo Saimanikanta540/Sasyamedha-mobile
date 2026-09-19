@@ -6,6 +6,7 @@ import DataAge from "@/components/DataAge";
 import { useT } from "@/lib/i18n";
 import { useAuth } from "@/lib/auth";
 import { useApi } from "@/lib/api";
+import { cropLabel } from "@/lib/crops";
 import type { BuyerItem, FpoItem } from "@/lib/types";
 
 const RADIUS_KM = 200;
@@ -66,7 +67,7 @@ export default function BuyersPage() {
               ) : null}
             </div>
             <p className="mt-1 text-sm text-foreground/70">
-              {t("buyers.cropsSought")}: {item.crops.map((c) => c[0].toUpperCase() + c.slice(1)).join(", ")}
+              {t("buyers.cropsSought")}: {item.crops.map((c) => cropLabel(c, t)).join(", ")}
             </p>
             {"min_qty_kg" in item ? (
               <p className="text-sm text-foreground/70">
@@ -75,7 +76,8 @@ export default function BuyersPage() {
               </p>
             ) : null}
             <p className="text-sm text-foreground/70">
-              {t("buyers.indicativePrice")}: ₹{item.indicative_price_qtl.toLocaleString("en-IN")}/quintal
+              {t("buyers.indicativePrice")}: ₹{item.indicative_price_qtl.toLocaleString("en-IN")}{" "}
+              {t("prices.perQuintal")}
             </p>
             {item.distance_km != null ? (
               <p className="text-sm text-foreground/70">

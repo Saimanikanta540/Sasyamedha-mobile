@@ -7,6 +7,7 @@ import Sparkline from "@/components/Sparkline";
 import { useT } from "@/lib/i18n";
 import { useAuth } from "@/lib/auth";
 import { useApi, apiFetch } from "@/lib/api";
+import { cropLabel } from "@/lib/crops";
 import type { MarketPriceItem, PriceHistoryPoint, PricesResponse } from "@/lib/types";
 
 function isStale(priceDate: string): boolean {
@@ -78,7 +79,7 @@ export default function PricesPage() {
           <option value="">{t("prices.allCommodities")}</option>
           {commodities.map((c) => (
             <option key={c} value={c}>
-              {c[0].toUpperCase() + c.slice(1)}
+              {cropLabel(c, t)}
             </option>
           ))}
         </select>
@@ -113,7 +114,9 @@ export default function PricesPage() {
           >
             <div className="flex items-start justify-between gap-2">
               <div>
-                <p className="text-base font-bold text-primary-700">{item.market_name_local}</p>
+                <p className="text-base font-bold text-primary-700">
+                  {item.market_name_local} · {cropLabel(item.commodity, t)}
+                </p>
                 <p className="text-xs text-foreground/60">
                   {item.district}
                   {item.distance_km != null ? ` · ${item.distance_km} ${t("common.km")}` : ""}

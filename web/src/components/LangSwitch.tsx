@@ -22,7 +22,7 @@ export default function LangSwitch() {
 
   return (
     <select
-      aria-label="Language"
+      aria-label={t("common.languageSwitchLabel")}
       value={lang}
       onChange={(e) => choose(e.target.value as Lang)}
       className="min-h-[44px] rounded-btn border border-primary-400/40 bg-card px-2 text-sm font-semibold text-primary-700"

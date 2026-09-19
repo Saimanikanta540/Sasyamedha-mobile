@@ -8,6 +8,7 @@ import { useT } from "@/lib/i18n";
 import { useAuth } from "@/lib/auth";
 import { apiFetch, useApi } from "@/lib/api";
 import { cacheGet, cacheSet } from "@/lib/cache";
+import { cropLabel } from "@/lib/crops";
 import type { Batch, SellSmartResponse } from "@/lib/types";
 
 export default function SellPage() {
@@ -67,8 +68,8 @@ export default function SellPage() {
       {crop && quantity ? (
         <div className="mb-4 flex items-end justify-between gap-3 rounded-card bg-card p-4 shadow-sm ring-1 ring-primary-700/10">
           <div>
-            <p className="text-sm font-semibold text-foreground/60">{crop[0].toUpperCase() + crop.slice(1)}</p>
-            <p className="text-2xl font-extrabold text-primary-700">{quantity} kg</p>
+            <p className="text-sm font-semibold text-foreground/60">{cropLabel(crop, t)}</p>
+            <p className="text-2xl font-extrabold text-primary-700">{t("home.batchQuantity", { qty: quantity })}</p>
           </div>
           <label className="flex flex-col items-end text-sm">
             <span className="mb-1 font-semibold text-foreground/60">{t("sell.quantity")}</span>

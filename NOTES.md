@@ -45,4 +45,29 @@
   the spec's own buyer figures are prefixed "e.g." (illustrative), so this is within the
   given latitude, not a relitigation of the ranking rule itself.
 
-## Cuts (see build prompt §11 cut order) — filled in as the build proceeds below.
+## Cuts (see build prompt §11 cut order)
+- Nothing on the "never cut" list was cut: Sell Smart, confidence bands, disclaimers,
+  Telugu (+ English + Hindi, all three fully translated), and offline data-age labels are
+  all in.
+- `/assistant` was built anyway (cheap: a keyword → route text box) rather than cut, since
+  the home tile already links to it and a working stub cost little.
+- Leaflet map on `/storage`: not built — shipped list-only per the spec's own explicit
+  permission ("If minute 90 arrives, ship list-only"), which is enough for the demo script.
+- Sell-request persistence (`POST /sell-requests`) and the transport request form are both
+  implemented, not cut.
+- No browser automation tool was available in this session (Claude in Chrome was declined),
+  so the UI was verified via `tsc --noEmit`, a full production build, and an API-level
+  walkthrough of the exact demo script (login → disease/predict on a real green/brown test
+  image → treatment lookup → sell-smart ranking), rather than an actual clicked-through
+  browser run. Recommend a manual click-through before presenting.
+
+## Known gaps worth knowing about
+- `GET /buyers` and `GET /fpos` default to `radius_km=50` per the API contract in §8; the
+  `/buyers` screen itself requests `radius_km=200` so all three seeded buyers are visible
+  there (two of them sit ~70–95 km out by design, see "Sell Smart §5.1 assertion" above).
+  Calling the API with its bare default will only return the closest buyer.
+- Buyer/FPO business names are not translated (only mandi names have `name_te`/`name_hi`)
+  — proper nouns are shown as given, consistent with how a real business name would appear
+  regardless of the app's language.
+- `PATCH /me` language sync to the backend on language-switch is best-effort/fire-and-forget
+  (UI switches instantly either way).

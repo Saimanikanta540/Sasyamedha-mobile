@@ -9,6 +9,7 @@ import DataAge from "@/components/DataAge";
 import { useAuth } from "@/lib/auth";
 import { useT } from "@/lib/i18n";
 import { useApi, useOnline } from "@/lib/api";
+import { cropLabel } from "@/lib/crops";
 import type { Batch } from "@/lib/types";
 
 export default function HomePage() {
@@ -47,8 +48,8 @@ export default function HomePage() {
         <p className="mb-1 text-sm font-semibold text-foreground/60">{t("home.batchTitle")}</p>
         {batch ? (
           <p className="text-xl font-extrabold text-primary-700">
-            {batch.crop[0].toUpperCase() + batch.crop.slice(1)} ·{" "}
-            {t("home.batchQuantity", { qty: batch.quantity_kg })} · {farmer.district}
+            {cropLabel(batch.crop, t)} · {t("home.batchQuantity", { qty: batch.quantity_kg })} ·{" "}
+            {farmer.district}
           </p>
         ) : (
           <div>

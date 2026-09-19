@@ -1,6 +1,9 @@
 "use client";
 
+import { useT } from "@/lib/i18n";
+
 export default function Sparkline({ values }: { values: number[] }) {
+  const { t } = useT();
   if (values.length < 2) return null;
   const w = 280;
   const h = 60;
@@ -14,7 +17,7 @@ export default function Sparkline({ values }: { values: number[] }) {
     .join(" ");
 
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="h-16 w-full" role="img" aria-label="price trend">
+    <svg viewBox={`0 0 ${w} ${h}`} className="h-16 w-full" role="img" aria-label={t("common.priceTrendLabel")}>
       <polyline points={points} fill="none" stroke="var(--color-primary-600)" strokeWidth="2.5" />
       {values.map((v, i) => (
         <circle
