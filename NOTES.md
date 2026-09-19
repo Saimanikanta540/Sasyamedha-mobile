@@ -16,8 +16,15 @@
 
 ## Scope / mocking (per build prompt, not relitigated)
 - SQLite (not Postgres/Supabase), auto-created + auto-seeded on startup.
-- Inference is a deterministic heuristic (HSV histogram of the leaf photo), not a trained
-  model. `is_mock: true` is always returned and shown in the UI — never hidden.
+- Inference: real Gemini Vision (`gemini-3.6-flash`, structured JSON output constrained to
+  the 6 class keys) when `backend/.env` has `GEMINI_API_KEY` — a genuine per-photo
+  classification, not the fake heuristic. One retry on transient failure (Gemini does
+  occasionally return 503 under load — confirmed live during testing), then falls back to
+  the deterministic HSV heuristic if the key is missing or the API is unreachable, so a
+  flaky external call can never break the scan flow. `is_mock` reflects which path actually
+  ran on that request (`false` for Gemini/a real tflite model, `true` for the heuristic) and
+  the UI's "Demo model" chip follows it — never hidden either way. `GEMINI_API_KEY` lives in
+  `backend/.env` (gitignored, never committed).
 - Real-time Mandi ingestion (`backend/scripts/ingest_prices.py`) uses the data.gov.in OGD
   API key provided in the prompt (resource `9ef84268-d588-465a-a308-a864a43d0070`,
   "Current Daily Price of Various Commodities from Various Markets (Mandi)"), matches

@@ -10,6 +10,7 @@ and production backend). See `NOTES.md` for every decision made under time press
 # backend (FastAPI + SQLite, auto-seeded on first startup)
 cd backend
 source .venv/bin/activate          # venv created with `uv venv --python 3.12 .venv`
+uv pip install -r requirements.txt # or: pip install -r requirements.txt
 uvicorn main:app --reload --port 8000
 
 # frontend (Next.js PWA), in a second terminal
@@ -18,6 +19,20 @@ npm run dev                        # http://localhost:3000
 ```
 
 API docs: http://localhost:8000/docs · Health check: http://localhost:8000/api/health
+
+### Real disease classification (optional)
+
+Put `GEMINI_API_KEY=...` in `backend/.env` (gitignored) to route `/api/disease/predict`
+through Gemini Vision (`gemini-3.6-flash`) for a genuine per-photo diagnosis instead of the
+HSV heuristic — `is_mock` and the result screen's "Demo model" chip follow automatically.
+No key → falls back to the deterministic heuristic with no code changes needed.
+
+### Speech input
+
+Onboarding's name field and the Assistant screen both show a 🎤 mic button when the
+browser supports the Web Speech API (`SpeechRecognition`) — speaks in the current
+language (te-IN/en-IN/hi-IN) and fills the field (Assistant auto-routes on the transcript).
+Renders nothing on browsers without support, same as the existing speaker button.
 
 ## Demo script (see build prompt §12)
 

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useT } from "@/lib/i18n";
 import { useAuth } from "@/lib/auth";
 import { apiFetch, ApiError } from "@/lib/api";
+import MicButton from "@/components/MicButton";
 import type { Farmer } from "@/lib/auth";
 
 const DISTRICTS_BY_STATE: Record<string, string[]> = {
@@ -111,12 +112,15 @@ export default function OnboardingPage() {
         <span className="mb-1 block text-sm font-semibold text-foreground/70">
           {t("onboarding.nameLabel")}
         </span>
-        <input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder={t("onboarding.namePlaceholder")}
-          className="min-h-[56px] w-full rounded-btn border border-primary-700/20 bg-card px-4 text-base"
-        />
+        <div className="flex gap-2">
+          <input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder={t("onboarding.namePlaceholder")}
+            className="min-h-[56px] w-full flex-1 rounded-btn border border-primary-700/20 bg-card px-4 text-base"
+          />
+          <MicButton onResult={setName} />
+        </div>
       </label>
 
       <label className="mb-4 block">

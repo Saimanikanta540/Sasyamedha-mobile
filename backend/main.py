@@ -5,6 +5,7 @@ from sqlmodel import Session, select
 from db import engine, get_session, init_db
 from models import Market
 from seed.seed import seed_if_empty
+from services.inference import GEMINI_API_KEY, _tflite_interpreter
 
 app = FastAPI(title="Smart Crop Care & Direct Market Access")
 
@@ -32,7 +33,7 @@ def health() -> dict:
         "status": "ok",
         "db": "sqlite",
         "seeded": seeded,
-        "is_mock_inference": True,
+        "is_mock_inference": _tflite_interpreter is None and not GEMINI_API_KEY,
     }
 
 

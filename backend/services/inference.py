@@ -1,9 +1,16 @@
+import base64
 import hashlib
 import io
+import json
+import os
 import random
 from pathlib import Path
 
+import httpx
+from dotenv import load_dotenv
 from PIL import Image
+
+load_dotenv(Path(__file__).parent.parent / ".env")
 
 CLASSES = [
     "healthy",
@@ -13,6 +20,19 @@ CLASSES = [
     "yellow_leaf_curl_virus",
     "mosaic_virus",
 ]
+
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.6-flash")
+GEMINI_URL = (
+    f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
+)
+
+GEMINI_PROMPT = (
+    "You are an expert plant pathologist. Look at this photo of a tomato leaf and "
+    "classify it into exactly one of these six classes: healthy, early_blight, "
+    "late_blight, target_spot, yellow_leaf_curl_virus, mosaic_virus. "
+    "Base the confidence only on how clearly the photo shows that class's symptoms."
+)
 
 _MODEL_PATH = Path(__file__).parent.parent / "models" / "model.tflite"
 _tflite_interpreter = None
@@ -77,6 +97,57 @@ def _heuristic_predict(image_bytes: bytes) -> tuple[str, float]:
     return "target_spot", rng.uniform(0.42, 0.58)
 
 
+def _gemini_predict(image_bytes: bytes) -> tuple[str, float] | None:
+    """Real vision classification via the Gemini API. Returns None on any failure
+    (network, rate limit, malformed response) so the caller can fall back cleanly —
+    a flaky external API must never break the scan flow."""
+    if not GEMINI_API_KEY:
+        return None
+
+    img_b64 = base64.b64encode(image_bytes).decode()
+    payload = {
+        "contents": [
+            {
+                "parts": [
+                    {"text": GEMINI_PROMPT},
+                    {"inline_data": {"mime_type": "image/jpeg", "data": img_b64}},
+                ]
+            }
+        ],
+        "generationConfig": {
+            "responseMimeType": "application/json",
+            "responseSchema": {
+                "type": "OBJECT",
+                "properties": {
+                    "class_key": {"type": "STRING", "enum": CLASSES},
+                    "confidence": {"type": "NUMBER"},
+                },
+                "required": ["class_key", "confidence"],
+            },
+        },
+    }
+
+    # One retry: Gemini occasionally returns a transient 503 under load, and a
+    # single retry is cheap insurance against falling back unnecessarily.
+    for attempt in range(2):
+        try:
+            with httpx.Client(timeout=20) as client:
+                resp = client.post(GEMINI_URL, params={"key": GEMINI_API_KEY}, json=payload)
+                resp.raise_for_status()
+                data = resp.json()
+            text = data["candidates"][0]["content"]["parts"][-1]["text"]
+            parsed = json.loads(text)
+            class_key = parsed["class_key"]
+            confidence = float(parsed["confidence"])
+            if class_key not in CLASSES:
+                return None
+            return class_key, max(0.0, min(1.0, confidence))
+        except Exception:
+            if attempt == 1:
+                return None
+    return None
+
+
 def predict(image_bytes: bytes) -> tuple[str, float, bool]:
     """Returns (class_key, confidence 0..1, is_mock)."""
     if _tflite_interpreter is not None:
@@ -92,6 +163,11 @@ def predict(image_bytes: bytes) -> tuple[str, float, bool]:
         output = _tflite_interpreter.get_tensor(output_details[0]["index"])[0]
         idx = int(output.argmax())
         return CLASSES[idx], float(output[idx]), False
+
+    gemini_result = _gemini_predict(image_bytes)
+    if gemini_result is not None:
+        class_key, confidence = gemini_result
+        return class_key, round(confidence, 4), False
 
     class_key, confidence = _heuristic_predict(image_bytes)
     return class_key, round(confidence, 4), True
