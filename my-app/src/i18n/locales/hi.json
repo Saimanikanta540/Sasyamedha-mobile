@@ -1,6 +1,6 @@
 {
   "common": {
-    "appName": "रैतु मित्र",
+    "appName": "सस्यमेधा",
     "ok": "ठीक है",
     "cancel": "रद्द करें",
     "save": "सेव करें",
@@ -63,6 +63,45 @@
   "diagnose": {
     "confidenceHigh": "उच्च विश्वास",
     "confidenceMedium": "मध्यम विश्वास",
-    "confidenceLow": "अनिश्चित"
+    "confidenceLow": "अनिश्चित",
+    "captureTitle": "रोग पहचान",
+    "captureHint": "एक ही पत्ते को फ्रेम में भरें, अच्छी रोशनी में फोटो लें",
+    "captureButton": "फोटो लें",
+    "permissionTitle": "कैमरा अनुमति चाहिए",
+    "permissionBody": "पत्ते की फोटो लेने के लिए कैमरा चाहिए। कृपया अनुमति दें।",
+    "permissionGrant": "अनुमति दें",
+    "reviewTitle": "क्या यह फोटो ठीक है?",
+    "usePhoto": "यह फोटो उपयोग करें",
+    "retake": "फिर से लें",
+    "analyzing": "फोटो भेजी जा रही है, जाँच हो रही है…",
+    "analyzingHint": "कुछ सेकंड लगेंगे",
+    "resultTitle": "पहचान परिणाम",
+    "lowConfidenceCaution": "परिणाम स्पष्ट नहीं है। कृपया बेहतर रोशनी में फिर से फोटो लें या किसी विशेषज्ञ से संपर्क करें।",
+    "contactExpert": "विशेषज्ञ से संपर्क करें",
+    "viewTreatment": "उपचार देखें",
+    "saveToHistory": "इतिहास में सेव करें",
+    "savedToHistory": "इतिहास में सेव हो गया",
+    "diseaseNames": {
+      "late_blight": "लेट ब्लाइट (झुलसा रोग)",
+      "leaf_curl_virus": "पत्ती मरोड़ वायरस",
+      "healthy": "स्वस्थ"
+    }
+  },
+  "treatment": {
+    "title": "उपचार सलाह",
+    "disclaimer": "यह सलाह केवल संकेतात्मक है। गंभीर मामलों में स्थानीय विशेषज्ञ से सलाह लें।",
+    "symptoms": "लक्षण",
+    "immediateActions": "तुरंत करने वाले काम",
+    "prevention": "रोकथाम",
+    "indicativeCost": "अनुमानित खर्च",
+    "browseTitle": "फसल रोग",
+    "loading": "उपचार जानकारी लोड हो रही है…",
+    "offlineNotCached": "आप ऑफ़लाइन हैं और यह जानकारी अभी सेव नहीं हुई है। एक बार ऑनलाइन खोलने पर यह ऑफ़लाइन भी उपलब्ध होगी।"
+  },
+  "history": {
+    "title": "स्कैन इतिहास",
+    "emptyTitle": "अभी तक कोई स्कैन नहीं",
+    "emptyBody": "आपकी ली गई पत्ती की फोटो और परिणाम यहाँ दिखेंगे, बिना इंटरनेट के भी।",
+    "scanNow": "अभी स्कैन करें"
   }
 }

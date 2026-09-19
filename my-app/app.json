@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "my-app",
+    "name": "Sasyamedha",
     "slug": "my-app",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -12,7 +12,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#0B3B24",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
@@ -33,7 +33,7 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#208AEF",
+          "backgroundColor": "#0B3B24",
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 76
         }
@@ -44,7 +44,7 @@
       [
         "expo-camera",
         {
-          "cameraPermission": "Smart Crop Care uses the camera to photograph crop leaves for diagnosis."
+          "cameraPermission": "Sasyamedha uses the camera to photograph crop leaves for diagnosis."
         }
       ],
       "expo-notifications"

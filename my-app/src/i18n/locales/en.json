@@ -1,6 +1,6 @@
 {
   "common": {
-    "appName": "Rythu Mitra",
+    "appName": "Sasyamedha",
     "ok": "OK",
     "cancel": "Cancel",
     "save": "Save",
@@ -63,6 +63,45 @@
   "diagnose": {
     "confidenceHigh": "High confidence",
     "confidenceMedium": "Medium confidence",
-    "confidenceLow": "Uncertain"
+    "confidenceLow": "Uncertain",
+    "captureTitle": "Diagnose",
+    "captureHint": "Fill the frame with a single leaf, in good light",
+    "captureButton": "Take photo",
+    "permissionTitle": "Camera permission needed",
+    "permissionBody": "We need the camera to photograph the leaf. Please allow access.",
+    "permissionGrant": "Grant permission",
+    "reviewTitle": "Is this photo good?",
+    "usePhoto": "Use this photo",
+    "retake": "Retake",
+    "analyzing": "Uploading and analyzing…",
+    "analyzingHint": "This takes a few seconds",
+    "resultTitle": "Diagnosis result",
+    "lowConfidenceCaution": "The result isn't clear. Please retake the photo in better light, or contact an expert.",
+    "contactExpert": "Contact an expert",
+    "viewTreatment": "View treatment",
+    "saveToHistory": "Save to history",
+    "savedToHistory": "Saved to history",
+    "diseaseNames": {
+      "late_blight": "Late Blight",
+      "leaf_curl_virus": "Leaf Curl Virus",
+      "healthy": "Healthy"
+    }
+  },
+  "treatment": {
+    "title": "Treatment guidance",
+    "disclaimer": "This guidance is indicative only. Consult a local expert for severe cases.",
+    "symptoms": "Symptoms",
+    "immediateActions": "Immediate actions",
+    "prevention": "Prevention",
+    "indicativeCost": "Indicative cost",
+    "browseTitle": "Crop diseases",
+    "loading": "Loading treatment guidance…",
+    "offlineNotCached": "You're offline and this guidance hasn't been saved yet. Open it once online and it'll be available offline too."
+  },
+  "history": {
+    "title": "Scan history",
+    "emptyTitle": "No scans yet",
+    "emptyBody": "Leaf photos and results you've captured will appear here, even without internet.",
+    "scanNow": "Scan now"
   }
 }
