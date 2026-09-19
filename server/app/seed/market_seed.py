@@ -99,6 +99,30 @@ COLD_STORAGES = [
         "cost_per_kg_per_day": 0.95,
         "contact_phone": "9866000203",
     },
+    # Farther out on purpose (~42km / ~59km from the demo farm) — the three
+    # above all sit within 25km, so the app's own "expand search radius"
+    # step (10/25/50/unlimited km) never had anything to actually expand
+    # into. These two make that control demonstrably do something.
+    {
+        "name": "Prakasam District Cold Storage",
+        "latitude": 15.9500,
+        "longitude": 80.3000,
+        "total_capacity_kg": 150000,
+        "available_capacity_kg": 40000,
+        "supported_crops": ["tomato", "chilli"],
+        "cost_per_kg_per_day": 0.70,
+        "contact_phone": "9866000204",
+    },
+    {
+        "name": "Vijayawada AgriCold",
+        "latitude": 16.6000,
+        "longitude": 80.9000,
+        "total_capacity_kg": 400000,
+        "available_capacity_kg": 260000,
+        "supported_crops": ["tomato", "chilli", "paddy", "cotton"],
+        "cost_per_kg_per_day": 0.80,
+        "contact_phone": "9866000205",
+    },
 ]
 
 TRANSPORT_PROVIDERS = [

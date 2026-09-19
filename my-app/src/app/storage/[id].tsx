@@ -10,26 +10,30 @@ import { EmptyState } from '@/components/EmptyState';
 import { ScreenHeader } from '@/components/ScreenHeader';
 import { getColdStorage } from '@/lib/api/endpoints';
 import { useLocationStore } from '@/stores/locationStore';
+import { useSessionStore } from '@/stores/sessionStore';
 
 export default function FacilityDetailScreen() {
   const router = useRouter();
   const { t } = useTranslation();
-  const { id, lat: latParam, lng: lngParam } = useLocalSearchParams<{
+  const { id, lat: latParam, lng: lngParam, commodity: commodityParam } = useLocalSearchParams<{
     id: string;
     lat?: string;
     lng?: string;
+    commodity?: string;
   }>();
   const [booked, setBooked] = useState(false);
   const liveLocation = useLocationStore();
-  // Normally forwarded by the list screen (already resolved there); this fallback only
-  // matters for a direct deep link straight to a facility, bypassing the list screen.
+  const sessionCommodity = useSessionStore((s) => s.commodity);
+  // Normally forwarded by the list screen (already resolved there); these fallbacks only
+  // matter for a direct deep link straight to a facility, bypassing the list screen.
   const lat = latParam ? Number(latParam) : liveLocation.lat;
   const lng = lngParam ? Number(lngParam) : liveLocation.lng;
+  const commodity = commodityParam || sessionCommodity || undefined;
 
   // Same query key as the Cold Storage list screen — reads its cache, no new request.
   const query = useQuery({
-    queryKey: ['coldStorage', lat, lng],
-    queryFn: () => getColdStorage(lat, lng),
+    queryKey: ['coldStorage', lat, lng, commodity],
+    queryFn: () => getColdStorage(lat, lng, commodity),
   });
   const facility = query.data?.find((f) => f.id === id);
 

@@ -183,7 +183,7 @@ export async function postSellSmart(input: SellSmartRequestInput): Promise<SellS
   };
 }
 
-export async function getColdStorage(lat?: number, lng?: number): Promise<ColdStorageFacility[]> {
+export async function getColdStorage(lat?: number, lng?: number, commodity?: string): Promise<ColdStorageFacility[]> {
   return readWithFallback(
     async () => {
       const params = new URLSearchParams();
@@ -191,6 +191,7 @@ export async function getColdStorage(lat?: number, lng?: number): Promise<ColdSt
         params.set('lat', String(lat));
         params.set('lng', String(lng));
       }
+      if (commodity) params.set('commodity', commodity);
       const qs = params.toString();
       const rows = await apiFetch<ServerColdStorage[]>(`/cold-storage${qs ? `?${qs}` : ''}`);
       return rows.map((r) => ({

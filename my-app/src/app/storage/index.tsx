@@ -13,6 +13,7 @@ import { TileGridMap } from '@/components/TileGridMap';
 import { getColdStorage } from '@/lib/api/endpoints';
 import { useIsOnline } from '@/lib/network/connectivity';
 import { useLocationStore } from '@/stores/locationStore';
+import { useSessionStore } from '@/stores/sessionStore';
 
 const DEFAULT_CENTER = { lat: 16.3067, lng: 80.4365 };
 const RADIUS_STEPS = [10, 25, 50, Infinity];
@@ -21,20 +22,25 @@ export default function ColdStorageScreen() {
   const router = useRouter();
   const { t } = useTranslation();
   const isOnline = useIsOnline();
-  const params = useLocalSearchParams<{ destinationLat?: string; destinationLng?: string }>();
+  const params = useLocalSearchParams<{ destinationLat?: string; destinationLng?: string; commodity?: string }>();
   const { width: screenWidth } = useWindowDimensions();
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [radiusStep, setRadiusStep] = useState(0);
 
   const liveLocation = useLocationStore();
+  const sessionCommodity = useSessionStore((s) => s.commodity);
   // A destination chosen on the Sell Smart screen wins (storage near *that* buyer/mandi);
   // otherwise fall back to the device's live location so this screen works standalone too.
   const lat = params.destinationLat ? Number(params.destinationLat) : liveLocation.lat;
   const lng = params.destinationLng ? Number(params.destinationLng) : liveLocation.lng;
+  // Same fallback chain: whatever crop destination/[id].tsx forwarded (it already sends
+  // this — storage/index.tsx just never read it before), else the crop from the last
+  // Sell Smart run in this session, else no filter (show every facility).
+  const commodity = params.commodity || sessionCommodity || undefined;
 
   const query = useQuery({
-    queryKey: ['coldStorage', lat, lng],
-    queryFn: () => getColdStorage(lat, lng),
+    queryKey: ['coldStorage', lat, lng, commodity],
+    queryFn: () => getColdStorage(lat, lng, commodity),
   });
 
   const isOffline = query.fetchStatus === 'paused';
@@ -109,7 +115,12 @@ export default function ColdStorageScreen() {
                   focusFacility(item.id);
                   router.push({
                     pathname: '/storage/[id]',
-                    params: { id: item.id, lat: lat != null ? String(lat) : '', lng: lng != null ? String(lng) : '' },
+                    params: {
+                      id: item.id,
+                      lat: lat != null ? String(lat) : '',
+                      lng: lng != null ? String(lng) : '',
+                      commodity: commodity ?? '',
+                    },
                   });
                 }}
                 accessibilityRole="button"
