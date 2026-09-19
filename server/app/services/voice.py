@@ -9,16 +9,8 @@ works in plain Expo Go.
 """
 
 import base64
-import json
-import logging
 
-import httpx
-
-from app.config import get_settings
-
-logger = logging.getLogger(__name__)
-
-GEMINI_URL_TEMPLATE = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+from app.services.gemini_client import call_gemini
 
 TRANSCRIBE_PROMPT = (
     "Transcribe this short voice clip from a farmer using an agricultural app. "
@@ -37,10 +29,6 @@ class VoiceTranscriptionResult:
 def transcribe_audio(audio_bytes: bytes, mime_type: str) -> VoiceTranscriptionResult | None:
     """Returns None on any failure (missing key, network, malformed response) —
     the caller must degrade gracefully rather than break the voice screen."""
-    settings = get_settings()
-    if not settings.gemini_api_key:
-        return None
-
     payload = {
         "contents": [
             {
@@ -64,22 +52,11 @@ def transcribe_audio(audio_bytes: bytes, mime_type: str) -> VoiceTranscriptionRe
         },
     }
 
-    url = GEMINI_URL_TEMPLATE.format(model=settings.gemini_model)
-    for attempt in range(2):  # one retry — Gemini does occasionally 503 under load
-        try:
-            with httpx.Client(timeout=20) as client:
-                resp = client.post(url, params={"key": settings.gemini_api_key}, json=payload)
-                resp.raise_for_status()
-                data = resp.json()
-            text = data["candidates"][0]["content"]["parts"][-1]["text"]
-            parsed = json.loads(text)
-            return VoiceTranscriptionResult(
-                transcript=parsed["transcript"],
-                transcript_en=parsed["transcript_en"],
-                language_guess=parsed.get("language_guess", ""),
-            )
-        except Exception as exc:
-            logger.warning("voice transcription attempt %d failed: %s", attempt + 1, exc)
-            if attempt == 1:
-                return None
-    return None
+    parsed = call_gemini(payload, timeout=30)
+    if parsed is None:
+        return None
+    return VoiceTranscriptionResult(
+        transcript=parsed["transcript"],
+        transcript_en=parsed["transcript_en"],
+        language_guess=parsed.get("language_guess", ""),
+    )

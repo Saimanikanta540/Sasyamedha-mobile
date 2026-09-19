@@ -48,7 +48,7 @@ async def diagnose(
         )
         
     inference_service = get_inference_service(settings.tflite_model_path)
-    disease_class, confidence = inference_service.predict(image)
+    disease_class, confidence, is_mock = inference_service.predict(image)
     
     # Store to Supabase
     storage = get_storage_service()
@@ -71,14 +71,16 @@ async def diagnose(
         user_id=current_user.id,
         image_url=image_url,
         disease_class=disease_class,
-        confidence=confidence
+        confidence=confidence,
+        is_mock=is_mock,
     )
     session.add(scan)
     session.commit()
     session.refresh(scan)
-    
+
     return DiagnoseResponse(
         scan_id=scan.id,
         disease_class=scan.disease_class,
-        confidence=scan.confidence
+        confidence=scan.confidence,
+        is_mock=scan.is_mock,
     )

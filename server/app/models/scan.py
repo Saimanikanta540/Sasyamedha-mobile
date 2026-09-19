@@ -10,4 +10,8 @@ class Scan(SQLModel, table=True):
     image_url: str
     disease_class: str
     confidence: float
+    # True only for the last-resort hardcoded fallback (no trained model, no
+    # Gemini key/response) — see services/ml_inference.py. Never hide this from
+    # the client, same principle as the web PWA's demo-model chip.
+    is_mock: bool = Field(default=False)
     created_at: datetime = Field(default_factory=datetime.utcnow, index=True)
