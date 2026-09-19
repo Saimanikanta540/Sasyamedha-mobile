@@ -24,13 +24,61 @@ import type {
 } from './types';
 
 /** Read endpoints degrade to mock data on any failure — never throw up to the screen. */
-async function readWithFallback<T>(fn: () => Promise<T>, fallback: () => T): Promise<T> {
+async function readWithFallback<T>(fn: () => Promise<T>, fallback: () => T | Promise<T>): Promise<T> {
   if (!hasBackendConfigured()) return fallback();
   try {
     return await fn();
   } catch {
     return fallback();
   }
+}
+
+/**
+ * The server's actual response/request field names (snake_case, its own shapes) —
+ * distinct from the camelCase types in ./types.ts, which is hand-authored against
+ * the original build brief per that file's own header comment. These `Server*`
+ * shapes are only ever seen inside this module; every exported function below
+ * adapts them into the stable client-facing types so screens don't change.
+ */
+interface ServerMandiPrice {
+  commodity: string;
+  variety: string;
+  state: string;
+  district: string;
+  market: string;
+  min_price: number;
+  max_price: number;
+  modal_price: number;
+  distance_km: number | null;
+}
+
+interface ServerColdStorage {
+  id: string;
+  name: string;
+  latitude: number;
+  longitude: number;
+  total_capacity_kg: number;
+  available_capacity_kg: number;
+  cost_per_kg_per_day: number;
+  distance_km: number | null;
+}
+
+interface ServerSellSmartDestination {
+  destination_id: string;
+  type: string;
+  name: string;
+  price_per_kg: number;
+  breakdown: {
+    gross_revenue: number;
+    transport_cost: number;
+    storage_cost: number;
+    net_return: number;
+    delta_from_best: number;
+  };
+}
+
+interface ServerSellSmartResponse {
+  results: ServerSellSmartDestination[];
 }
 
 export async function login(username: string, password: string): Promise<AuthTokens> {
@@ -64,9 +112,28 @@ export async function getTreatment(disease: string): Promise<TreatmentGuidance> 
   );
 }
 
-export async function getPrices(commodity: string): Promise<PricesResponse> {
+export async function getPrices(commodity: string, lat?: number, lng?: number): Promise<PricesResponse> {
   return readWithFallback(
-    () => apiFetch<PricesResponse>(`/prices?commodity=${encodeURIComponent(commodity)}`),
+    async () => {
+      const params = new URLSearchParams({ commodity });
+      if (lat != null && lng != null) {
+        params.set('lat', String(lat));
+        params.set('lng', String(lng));
+        params.set('sort_by', 'distance');
+      }
+      const rows = await apiFetch<ServerMandiPrice[]>(`/prices?${params.toString()}`);
+      return {
+        asOf: new Date().toISOString(),
+        records: rows.map((r) => ({
+          market: r.market,
+          commodity: r.commodity,
+          modalPriceRupeesPerQuintal: r.modal_price,
+          minPriceRupeesPerQuintal: r.min_price,
+          maxPriceRupeesPerQuintal: r.max_price,
+          distanceKm: r.distance_km ?? undefined,
+        })),
+      };
+    },
     () => fetchGovPrices(commodity).catch(() => mockPrices(commodity)),
   );
 }
@@ -75,15 +142,61 @@ export async function postSellSmart(input: SellSmartRequestInput): Promise<SellS
   // Sell Smart is explicitly server-side only — no offline recompute. If the
   // backend is unreachable this throws, and the caller shows the last cached
   // result marked stale instead of a locally-guessed number.
-  if (!hasBackendConfigured()) {
+  if (!hasBackendConfigured() || !input.location) {
     return mockSellSmart(input.commodity, input.quantityKg);
   }
-  return apiFetch<SellSmartResponse>('/sell-smart', { method: 'POST', body: input });
+  const server = await apiFetch<ServerSellSmartResponse>('/sell-smart', {
+    method: 'POST',
+    body: {
+      commodity: input.commodity,
+      quantity_kg: input.quantityKg,
+      farmer_lat: input.location.lat,
+      farmer_lng: input.location.lng,
+    },
+  });
+  return {
+    calculatedAt: new Date().toISOString(),
+    commodity: input.commodity,
+    quantityKg: input.quantityKg,
+    destinations: server.results.map((r) => ({
+      id: r.destination_id,
+      name: r.name,
+      type: r.type as SellSmartResponse['destinations'][number]['type'],
+      netReturnRupees: r.breakdown.net_return,
+      breakdown: {
+        grossValueRupees: r.breakdown.gross_revenue,
+        transportCostRupees: r.breakdown.transport_cost,
+        storageCostRupees: r.breakdown.storage_cost,
+        // The server doesn't model a separate market-margin deduction — gross
+        // minus transport minus storage already equals net_return exactly.
+        marketMarginRupees: 0,
+      },
+    })),
+  };
 }
 
 export async function getColdStorage(lat?: number, lng?: number): Promise<ColdStorageFacility[]> {
   return readWithFallback(
-    () => apiFetch<ColdStorageFacility[]>(`/cold-storage?lat=${lat}&lng=${lng}`),
+    async () => {
+      const params = new URLSearchParams();
+      if (lat != null && lng != null) {
+        params.set('lat', String(lat));
+        params.set('lng', String(lng));
+      }
+      const qs = params.toString();
+      const rows = await apiFetch<ServerColdStorage[]>(`/cold-storage${qs ? `?${qs}` : ''}`);
+      return rows.map((r) => ({
+        id: r.id,
+        name: r.name,
+        lat: r.latitude,
+        lng: r.longitude,
+        distanceKm: r.distance_km ?? 0,
+        capacityTonnes: r.total_capacity_kg / 1000,
+        availableTonnes: r.available_capacity_kg / 1000,
+        // cost_per_kg_per_day -> per-quintal (100 kg) to match this screen's unit.
+        costPerDayRupeesPerQuintal: r.cost_per_kg_per_day * 100,
+      }));
+    },
     mockColdStorage,
   );
 }

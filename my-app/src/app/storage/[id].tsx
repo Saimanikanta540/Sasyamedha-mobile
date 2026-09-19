@@ -9,6 +9,7 @@ import { AvailabilityBar } from '@/components/AvailabilityBar';
 import { EmptyState } from '@/components/EmptyState';
 import { ScreenHeader } from '@/components/ScreenHeader';
 import { getColdStorage } from '@/lib/api/endpoints';
+import { useLocationStore } from '@/stores/locationStore';
 
 export default function FacilityDetailScreen() {
   const router = useRouter();
@@ -19,8 +20,11 @@ export default function FacilityDetailScreen() {
     lng?: string;
   }>();
   const [booked, setBooked] = useState(false);
-  const lat = latParam ? Number(latParam) : undefined;
-  const lng = lngParam ? Number(lngParam) : undefined;
+  const liveLocation = useLocationStore();
+  // Normally forwarded by the list screen (already resolved there); this fallback only
+  // matters for a direct deep link straight to a facility, bypassing the list screen.
+  const lat = latParam ? Number(latParam) : liveLocation.lat;
+  const lng = lngParam ? Number(lngParam) : liveLocation.lng;
 
   // Same query key as the Cold Storage list screen — reads its cache, no new request.
   const query = useQuery({

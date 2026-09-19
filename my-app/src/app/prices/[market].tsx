@@ -7,16 +7,18 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { EmptyState } from '@/components/EmptyState';
 import { ScreenHeader } from '@/components/ScreenHeader';
 import { getPrices } from '@/lib/api/endpoints';
+import { useLocationStore } from '@/stores/locationStore';
 
 export default function MarketPriceDetailScreen() {
   const router = useRouter();
   const { t } = useTranslation();
   const { market, commodity } = useLocalSearchParams<{ market: string; commodity: string }>();
+  const { lat, lng } = useLocationStore();
 
   // Same query key as the list screen — this reads the already-fetched cache, no new request.
   const query = useQuery({
-    queryKey: ['prices', commodity],
-    queryFn: () => getPrices(commodity),
+    queryKey: ['prices', commodity, lat, lng],
+    queryFn: () => getPrices(commodity, lat, lng),
   });
 
   const record = query.data?.records.find((r) => r.market === market);

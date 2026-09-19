@@ -11,6 +11,7 @@ import { StaleBadge } from '@/components/StaleBadge';
 import { postSellSmart } from '@/lib/api/endpoints';
 import type { SellDestination } from '@/lib/api/types';
 import { useIsOnline } from '@/lib/network/connectivity';
+import { useLocationStore } from '@/stores/locationStore';
 import { useSessionStore } from '@/stores/sessionStore';
 
 const COMMODITIES = ['tomato', 'chilli', 'paddy', 'cotton'] as const;
@@ -27,14 +28,15 @@ export default function SellSmartScreen() {
   const { t } = useTranslation();
   const isOnline = useIsOnline();
   const setSession = useSessionStore((s) => s.set);
+  const { lat, lng } = useLocationStore();
 
   const [commodity, setCommodity] = useState<(typeof COMMODITIES)[number]>('tomato');
   const [quantityKg, setQuantityKg] = useState(0);
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
 
   const query = useQuery({
-    queryKey: ['sellSmart', commodity, quantityKg],
-    queryFn: () => postSellSmart({ commodity, quantityKg }),
+    queryKey: ['sellSmart', commodity, quantityKg, lat, lng],
+    queryFn: () => postSellSmart({ commodity, quantityKg, location: { lat, lng } }),
     enabled: false,
   });
 

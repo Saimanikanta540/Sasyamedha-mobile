@@ -12,6 +12,7 @@ import { StaleBadge } from '@/components/StaleBadge';
 import { getPrices } from '@/lib/api/endpoints';
 import type { MarketPriceRecord } from '@/lib/api/types';
 import { useIsOnline } from '@/lib/network/connectivity';
+import { useLocationStore } from '@/stores/locationStore';
 
 const COMMODITIES = ['tomato', 'chilli', 'paddy', 'cotton'] as const;
 const COMMODITY_LABEL: Record<(typeof COMMODITIES)[number], string> = {
@@ -26,10 +27,11 @@ export default function MarketPricesScreen() {
   const { t } = useTranslation();
   const isOnline = useIsOnline();
   const [commodity, setCommodity] = useState<(typeof COMMODITIES)[number]>('tomato');
+  const { lat, lng } = useLocationStore();
 
   const query = useQuery({
-    queryKey: ['prices', commodity],
-    queryFn: () => getPrices(commodity),
+    queryKey: ['prices', commodity, lat, lng],
+    queryFn: () => getPrices(commodity, lat, lng),
   });
 
   const isOffline = query.fetchStatus === 'paused';
