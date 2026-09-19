@@ -1,56 +1,51 @@
-# Welcome to your Expo app 👋
+# Smart Crop Care — Mobile App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Expo (React Native) client for **Smart Crop Care and Direct Market Access** — a platform
+that takes small and marginal farmers from crop diagnosis through to a profitable sale.
 
-## Get started
+Primary users are Telugu-speaking farmers on basic Android phones with intermittent
+connectivity, so every screen is built offline-first, in three languages (Telugu, English,
+Hindi), with voice output as a first-class interaction path.
 
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Getting started
 
 ```bash
-npm run reset-project
+npm install
+npx expo start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Open the app in a [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+or an Android emulator. Speech-to-text (§ Voice input) requires a development build — it is
+not available in Expo Go.
 
-### Other setup steps
+## Project layout
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+```
+src/
+  app/            Expo Router screens (file-based routing)
+  components/     Shared UI building blocks
+  theme/          Design tokens (color, spacing, type scale)
+  i18n/           i18next setup + te/en/hi resource files
+  lib/
+    api/          Typed API client + contract types + mock fallback data
+    auth/         Secure token storage (expo-secure-store)
+    storage/      SQLite-backed scan history + offline outbox
+    network/      Connectivity detection
+    speech/       Text-to-speech + speech-recognition capability check
+    voice/        Keyword router for the voice assistant
+  hooks/
+```
 
-## Learn more
+## Configuration
 
-To learn more about developing your project with Expo, look at the following resources:
+Set the backend base URL via an environment variable when one is available:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```
+EXPO_PUBLIC_API_BASE_URL=https://api.example.com
+```
 
-## Join the community
+Without it, the app falls back to local mock data so every screen stays demoable offline.
 
-Join our community of developers creating universal apps.
+## EAS builds
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+See `eas.json` for the `preview` (sideloadable APK) and `production` profiles.
