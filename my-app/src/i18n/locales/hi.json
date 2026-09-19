@@ -51,6 +51,8 @@
     "clearCacheConfirmTitle": "कैश साफ़ करें?",
     "clearCacheConfirmBody": "इससे सहेजे गए भाव और उपचार जानकारी हट जाएगी। आपका लॉगिन और लंबित अनुरोध सुरक्षित रहेंगे।",
     "cacheCleared": "कैश साफ़ हो गया",
+    "cacheSizeValue": "{{size}} KB",
+    "lastSyncNever": "अभी तक समन्वयित नहीं हुआ",
     "notifications": "सूचनाएँ",
     "notificationsSub": "भाव और अनुरोध अपडेट की सूचना पाएं"
   },

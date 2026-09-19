@@ -51,6 +51,8 @@
     "clearCacheConfirmTitle": "నిల్వను ఖాళీ చేయాలా?",
     "clearCacheConfirmBody": "ఇది సేవ్ చేసిన ధరలు మరియు చికిత్స సమాచారాన్ని తొలగిస్తుంది. మీ లాగిన్ మరియు పంపవలసిన అభ్యర్థనలు అలాగే ఉంటాయి.",
     "cacheCleared": "నిల్వ ఖాళీ చేయబడింది",
+    "cacheSizeValue": "{{size}} KB",
+    "lastSyncNever": "ఇంకా సమకాలీకరించలేదు",
     "notifications": "నోటిఫికేషన్లు",
     "notificationsSub": "ధరలు మరియు అభ్యర్థన నవీకరణల గురించి తెలియజేయండి"
   },

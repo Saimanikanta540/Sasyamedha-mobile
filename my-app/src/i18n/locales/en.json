@@ -51,6 +51,8 @@
     "clearCacheConfirmTitle": "Clear cached data?",
     "clearCacheConfirmBody": "This removes saved prices and treatment guidance. Your login and any pending requests are kept.",
     "cacheCleared": "Cache cleared",
+    "cacheSizeValue": "{{size}} KB",
+    "lastSyncNever": "Not synced yet",
     "notifications": "Notifications",
     "notificationsSub": "Get notified about prices and request updates"
   },

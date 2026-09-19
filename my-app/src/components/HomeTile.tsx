@@ -1,6 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-
-import { colors, fontSize, minTouchTarget, radii, shadow, spacing } from '@/theme/tokens';
+import { Text, TouchableOpacity } from 'react-native';
 
 interface HomeTileProps {
   icon: string;
@@ -15,58 +13,27 @@ export function HomeTile({ icon, label, sublabel, onPress, tone = 'default' }: H
   const isPrimary = tone === 'primary';
   return (
     <TouchableOpacity
-      style={[styles.tile, isPrimary && styles.tilePrimary]}
+      className={`mb-3 w-[48%] min-h-[104px] rounded-2xl border p-4 shadow-sm ${
+        isPrimary ? 'border-brand-primary bg-brand-primary' : 'border-border bg-surface'
+      }`}
       onPress={onPress}
       activeOpacity={0.75}
       accessibilityRole="button"
       accessibilityLabel={`${label} — ${sublabel}`}
     >
-      <Text style={styles.icon}>{icon}</Text>
-      <Text style={[styles.label, isPrimary && styles.labelPrimary]} numberOfLines={2}>
+      <Text className="mb-2 text-3xl">{icon}</Text>
+      <Text
+        className={`font-sans-bold text-base ${isPrimary ? 'text-white' : 'text-ink-primary'}`}
+        numberOfLines={2}
+      >
         {label}
       </Text>
-      <Text style={[styles.sublabel, isPrimary && styles.sublabelPrimary]} numberOfLines={2}>
+      <Text
+        className={`mt-0.5 text-xs ${isPrimary ? 'text-white/80' : 'text-ink-secondary'}`}
+        numberOfLines={2}
+      >
         {sublabel}
       </Text>
     </TouchableOpacity>
   );
 }
-
-const styles = StyleSheet.create({
-  tile: {
-    width: '48%',
-    minHeight: minTouchTarget + 40,
-    backgroundColor: colors.surface,
-    borderRadius: radii.lg,
-    borderWidth: 1,
-    borderColor: colors.border,
-    padding: spacing.lg,
-    marginBottom: spacing.md,
-    ...shadow.card,
-  },
-  tilePrimary: {
-    backgroundColor: colors.brandPrimary,
-    borderColor: colors.brandPrimary,
-  },
-  icon: {
-    fontSize: 30,
-    marginBottom: spacing.sm,
-  },
-  label: {
-    fontFamily: 'NotoSans_700Bold',
-    fontSize: fontSize.md,
-    color: colors.textPrimary,
-  },
-  labelPrimary: {
-    color: colors.textInverse,
-  },
-  sublabel: {
-    fontFamily: 'NotoSans_400Regular',
-    fontSize: fontSize.xs,
-    color: colors.textSecondary,
-    marginTop: 2,
-  },
-  sublabelPrimary: {
-    color: 'rgba(255,255,255,0.8)',
-  },
-});

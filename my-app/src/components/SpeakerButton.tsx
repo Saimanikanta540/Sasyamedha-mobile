@@ -1,8 +1,7 @@
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { Text, TouchableOpacity } from 'react-native';
 
 import { useSpeak } from '@/lib/speech/tts';
-import { colors, fontSize, radii, spacing } from '@/theme/tokens';
 
 interface SpeakerButtonProps {
   text: string;
@@ -13,52 +12,23 @@ interface SpeakerButtonProps {
 export function SpeakerButton({ text, compact }: SpeakerButtonProps) {
   const { t } = useTranslation();
   const { speak, stop, isSpeaking } = useSpeak();
+  const label = isSpeaking ? t('common.stop') : t('common.listen');
 
   return (
     <TouchableOpacity
-      style={[styles.button, compact && styles.compact, isSpeaking && styles.buttonActive]}
+      className={`min-h-[44px] flex-row items-center gap-1.5 rounded-full ${
+        compact ? 'min-w-[44px] justify-center px-3' : 'px-4 py-2.5'
+      } ${isSpeaking ? 'bg-brand-accent' : 'bg-surface-muted'}`}
       onPress={() => (isSpeaking ? stop() : speak(text))}
       accessibilityRole="button"
-      accessibilityLabel={isSpeaking ? t('common.stop') : t('common.listen')}
+      accessibilityLabel={label}
     >
-      <Text style={styles.icon}>{isSpeaking ? '⏹' : '🔊'}</Text>
+      <Text className="text-lg">{isSpeaking ? '⏹' : '🔊'}</Text>
       {!compact && (
-        <Text style={[styles.label, isSpeaking && styles.labelActive]}>
-          {isSpeaking ? t('common.stop') : t('common.listen')}
+        <Text className={`text-sm font-sans-bold ${isSpeaking ? 'text-white' : 'text-ink-primary'}`}>
+          {label}
         </Text>
       )}
     </TouchableOpacity>
   );
 }
-
-const styles = StyleSheet.create({
-  button: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.xs,
-    backgroundColor: colors.surfaceMuted,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-    borderRadius: radii.pill,
-    minHeight: 44,
-  },
-  compact: {
-    paddingHorizontal: spacing.sm,
-    minWidth: 44,
-    justifyContent: 'center',
-  },
-  buttonActive: {
-    backgroundColor: colors.brandAccent,
-  },
-  icon: {
-    fontSize: fontSize.lg,
-  },
-  label: {
-    fontFamily: 'NotoSans_700Bold',
-    fontSize: fontSize.sm,
-    color: colors.textPrimary,
-  },
-  labelActive: {
-    color: colors.textInverse,
-  },
-});

@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 
-import { colors, fontSize, radii, spacing } from '@/theme/tokens';
+import { colors } from '@/theme/tokens';
 
 interface AvailabilityBarProps {
   availableTonnes: number;
@@ -16,28 +16,15 @@ export function AvailabilityBar({ availableTonnes, capacityTonnes, label }: Avai
 
   return (
     <View>
-      <View style={styles.track}>
-        <View style={[styles.fill, { width: `${Math.max(pct, 4)}%`, backgroundColor: color }]} />
+      <View className="h-2.5 overflow-hidden rounded-full bg-surface-muted">
+        <View
+          className="h-full rounded-full"
+          style={{ width: `${Math.max(pct, 4)}%`, backgroundColor: color }}
+        />
       </View>
-      <Text style={[styles.label, { color }]}>{label}</Text>
+      <Text className="mt-1 font-sans-bold text-xs" style={{ color }}>
+        {label}
+      </Text>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  track: {
-    height: 10,
-    borderRadius: radii.pill,
-    backgroundColor: colors.surfaceMuted,
-    overflow: 'hidden',
-  },
-  fill: {
-    height: '100%',
-    borderRadius: radii.pill,
-  },
-  label: {
-    marginTop: spacing.xs,
-    fontFamily: 'NotoSans_700Bold',
-    fontSize: fontSize.xs,
-  },
-});
