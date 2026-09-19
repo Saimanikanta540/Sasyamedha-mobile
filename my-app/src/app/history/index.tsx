@@ -23,7 +23,7 @@ export default function ScanHistoryScreen() {
   }, [loaded, load]);
 
   const onDelete = (scan: ScanEntry) => {
-    Alert.alert(t('common.cancel'), undefined, [
+    Alert.alert('Delete this scan?', undefined, [
       { text: t('common.cancel'), style: 'cancel' },
       { text: t('common.ok'), style: 'destructive', onPress: () => remove(scan.id) },
     ]);
@@ -87,7 +87,7 @@ export default function ScanHistoryScreen() {
                   className="h-9 w-9 items-center justify-center rounded-full bg-surface-muted"
                   onPress={() => onDelete(item)}
                   accessibilityRole="button"
-                  accessibilityLabel={t('common.cancel')}
+                  accessibilityLabel="Delete"
                 >
                   <Text>🗑️</Text>
                 </TouchableOpacity>
