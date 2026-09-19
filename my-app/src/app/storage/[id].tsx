@@ -7,6 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AvailabilityBar } from '@/components/AvailabilityBar';
 import { EmptyState } from '@/components/EmptyState';
+import { ScreenHeader } from '@/components/ScreenHeader';
 import { getColdStorage } from '@/lib/api/endpoints';
 
 export default function FacilityDetailScreen() {
@@ -37,24 +38,13 @@ export default function FacilityDetailScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-surface-app" edges={['top']}>
-      <View className="flex-row items-center gap-3 px-4 py-4">
-        <TouchableOpacity
-          className="h-10 w-10 items-center justify-center rounded-full bg-surface-muted"
-          onPress={() => router.back()}
-          accessibilityRole="button"
-        >
-          <Text className="text-xl text-ink-primary">←</Text>
-        </TouchableOpacity>
-        <Text className="font-sans-bold text-lg text-ink-primary" numberOfLines={1}>
-          {facility?.name ?? t('common.loading')}
-        </Text>
-      </View>
+      <ScreenHeader title={facility?.name ?? t('common.loading')} onBack={() => router.back()} />
 
       {!facility ? (
         <EmptyState icon="❄️" title={t('history.emptyTitle')} body={t('treatment.offlineNotCached')} />
       ) : (
         <View className="gap-4 px-4">
-          <View className="gap-3 rounded-2xl border border-border bg-surface p-4">
+          <View className="gap-3 rounded-2xl border border-border bg-surface shadow-sm p-4">
             <AvailabilityBar
               availableTonnes={facility.availableTonnes}
               capacityTonnes={facility.capacityTonnes}

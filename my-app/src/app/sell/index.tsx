@@ -6,6 +6,7 @@ import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { EmptyState } from '@/components/EmptyState';
+import { ScreenHeader } from '@/components/ScreenHeader';
 import { StaleBadge } from '@/components/StaleBadge';
 import { postSellSmart } from '@/lib/api/endpoints';
 import type { SellDestination } from '@/lib/api/types';
@@ -66,19 +67,10 @@ export default function SellSmartScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-surface-app" edges={['top']}>
-      <View className="flex-row items-center gap-3 px-4 py-4">
-        <TouchableOpacity
-          className="h-10 w-10 items-center justify-center rounded-full bg-surface-muted"
-          onPress={() => router.back()}
-          accessibilityRole="button"
-        >
-          <Text className="text-xl text-ink-primary">←</Text>
-        </TouchableOpacity>
-        <Text className="font-sans-bold text-lg text-ink-primary">{t('home.tileSell')}</Text>
-      </View>
+      <ScreenHeader title={t('home.tileSell')} subtitle={t('home.tileSellSub')} onBack={() => router.back()} />
 
       <ScrollView contentContainerClassName="gap-4 px-4 pb-12">
-        <View className="gap-3 rounded-2xl border border-border bg-surface p-4">
+        <View className="gap-3 rounded-2xl border border-border bg-surface shadow-sm p-4">
           <Text className="font-sans-bold text-xs text-ink-secondary">{t('home.tileSellSub')}</Text>
           <View className="flex-row flex-wrap gap-2">
             {COMMODITIES.map((c) => (
@@ -161,13 +153,19 @@ export default function SellSmartScreen() {
             {destinations.map((dest, index) => {
               const delta = dest.netReturnRupees - bestReturn;
               const isExpanded = Boolean(expanded[dest.id]);
+              const isBest = index === 0;
               return (
-                <View key={dest.id} className="gap-2 rounded-2xl border border-border bg-surface p-4">
+                <View
+                  key={dest.id}
+                  className={`gap-2 rounded-2xl p-4 shadow-sm ${
+                    isBest ? 'border-2 border-brand-primary bg-surface' : 'border border-border bg-surface'
+                  }`}
+                >
                   <View className="flex-row items-center justify-between">
                     <Text className="font-sans-bold text-base text-ink-primary">{dest.name}</Text>
-                    {index === 0 && (
-                      <View className="rounded-full bg-state-success-bg px-3 py-1">
-                        <Text className="font-sans-bold text-xs text-state-success">Best return</Text>
+                    {isBest && (
+                      <View className="rounded-full bg-brand-primary px-3 py-1">
+                        <Text className="font-sans-bold text-xs text-white">★ Best return</Text>
                       </View>
                     )}
                   </View>

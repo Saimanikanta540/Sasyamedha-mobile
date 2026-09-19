@@ -7,6 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ConfidenceBar } from '@/components/ConfidenceBar';
 import { EmptyState } from '@/components/EmptyState';
+import { ScreenHeader } from '@/components/ScreenHeader';
 import { SpeakerButton } from '@/components/SpeakerButton';
 import { diagnose } from '@/lib/api/endpoints';
 import { PENDING_DISEASE, ScanEntry } from '@/lib/storage/scan-history';
@@ -76,7 +77,7 @@ export default function DiagnosisResultScreen() {
   if (!imageUri) {
     return (
       <SafeAreaView className="flex-1 bg-surface-app" edges={['top']}>
-        <Header title={t('diagnose.resultTitle')} onBack={() => router.back()} />
+        <ScreenHeader title={t('diagnose.resultTitle')} onBack={() => router.back()} />
         <EmptyState
           icon="🌱"
           title={t('diagnose.captureTitle')}
@@ -91,15 +92,17 @@ export default function DiagnosisResultScreen() {
   if (isPending) {
     return (
       <SafeAreaView className="flex-1 bg-surface-app" edges={['top']}>
-        <Header title={t('diagnose.resultTitle')} onBack={goBackHome} />
+        <ScreenHeader title={t('diagnose.resultTitle')} onBack={goBackHome} />
         <ScrollView contentContainerClassName="gap-5 px-4 pb-12 pt-2">
           <Image
             source={{ uri: imageUri }}
             style={{ width: '100%', height: 220, borderRadius: 16 }}
             contentFit="cover"
           />
-          <View className="items-center gap-3 rounded-2xl border border-border bg-surface p-6">
-            <Text className="text-4xl">📡</Text>
+          <View className="items-center gap-3 rounded-2xl border border-border bg-surface shadow-sm p-6">
+            <View className="h-16 w-16 items-center justify-center rounded-full bg-state-warning-bg">
+              <Text className="text-3xl">📡</Text>
+            </View>
             <Text className="text-center font-sans-bold text-base text-ink-primary">
               {t('diagnose.analyzing')}
             </Text>
@@ -116,7 +119,7 @@ export default function DiagnosisResultScreen() {
   if (!disease && (uploadState === 'uploading' || uploadState === 'idle')) {
     return (
       <SafeAreaView className="flex-1 bg-surface-app" edges={['top']}>
-        <Header title={t('diagnose.resultTitle')} onBack={() => router.back()} />
+        <ScreenHeader title={t('diagnose.resultTitle')} onBack={() => router.back()} />
         <View className="flex-1 items-center justify-center gap-4 px-8">
           <Image
             source={{ uri: imageUri }}
@@ -136,7 +139,7 @@ export default function DiagnosisResultScreen() {
   if (!disease && uploadState === 'error') {
     return (
       <SafeAreaView className="flex-1 bg-surface-app" edges={['top']}>
-        <Header title={t('diagnose.resultTitle')} onBack={() => router.back()} />
+        <ScreenHeader title={t('diagnose.resultTitle')} onBack={() => router.back()} />
         <EmptyState
           icon="⚠️"
           title={t('diagnose.resultTitle')}
@@ -157,7 +160,7 @@ export default function DiagnosisResultScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-surface-app" edges={['top']}>
-      <Header title={t('diagnose.resultTitle')} onBack={goBackHome} />
+      <ScreenHeader title={t('diagnose.resultTitle')} onBack={goBackHome} />
       <ScrollView contentContainerClassName="gap-5 px-4 pb-12 pt-2">
         <Image
           source={{ uri: imageUri }}
@@ -165,9 +168,15 @@ export default function DiagnosisResultScreen() {
           contentFit="cover"
         />
 
-        <View className="gap-3 rounded-2xl border border-border bg-surface p-4">
+        <View
+          className={`gap-3 rounded-2xl border p-4 shadow-sm ${
+            isLowConfidence ? 'border-state-warning-bg bg-state-warning-bg/40' : 'border-border bg-surface'
+          }`}
+        >
           <View className="flex-row items-center justify-between">
-            <Text className="font-sans-bold text-xl text-ink-primary">{diseaseName}</Text>
+            <Text className="flex-1 font-sans-bold text-xl text-ink-primary" numberOfLines={2}>
+              {diseaseName}
+            </Text>
             <SpeakerButton text={speechText} compact />
           </View>
           <ConfidenceBar confidence={confidenceValue} />
@@ -211,20 +220,5 @@ export default function DiagnosisResultScreen() {
         )}
       </ScrollView>
     </SafeAreaView>
-  );
-}
-
-function Header({ title, onBack }: { title: string; onBack: () => void }) {
-  return (
-    <View className="flex-row items-center gap-3 px-4 py-4">
-      <TouchableOpacity
-        className="h-10 w-10 items-center justify-center rounded-full bg-surface-muted"
-        onPress={onBack}
-        accessibilityRole="button"
-      >
-        <Text className="text-xl text-ink-primary">←</Text>
-      </TouchableOpacity>
-      <Text className="font-sans-bold text-lg text-ink-primary">{title}</Text>
-    </View>
   );
 }

@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Alert, ScrollView, Switch, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { ScreenHeader } from '@/components/ScreenHeader';
 import { useLanguage } from '@/hooks/use-language';
 import { SUPPORTED_LANGUAGES, SupportedLanguage } from '@/i18n';
 import { clearCache, getCacheSizeKb, getLastSyncAt } from '@/lib/storage/cache-info';
@@ -68,17 +69,7 @@ export default function SettingsScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-surface-app" edges={['top']}>
-      <View className="flex-row items-center gap-3 border-b border-border px-4 py-4">
-        <TouchableOpacity
-          className="h-10 w-10 items-center justify-center rounded-full bg-surface-muted"
-          onPress={() => router.back()}
-          accessibilityRole="button"
-          accessibilityLabel={t('common.back')}
-        >
-          <Text className="text-xl">←</Text>
-        </TouchableOpacity>
-        <Text className="font-sans-bold text-xl text-ink-primary">{t('settings.title')}</Text>
-      </View>
+      <ScreenHeader title={t('settings.title')} onBack={() => router.back()} />
 
       <ScrollView className="flex-1 px-4 pt-5" contentContainerClassName="gap-6 pb-12">
         <View className="gap-3">
@@ -102,7 +93,7 @@ export default function SettingsScreen() {
           ))}
         </View>
 
-        <View className="gap-2 rounded-xl border border-border bg-surface p-4">
+        <View className="gap-2 rounded-xl border border-border bg-surface shadow-sm p-4">
           <Text className="font-sans-bold text-sm text-ink-secondary">{t('settings.cacheSummary')}</Text>
           <View className="flex-row justify-between">
             <Text className="text-sm text-ink-secondary">{t('settings.cacheSize')}</Text>
@@ -125,7 +116,7 @@ export default function SettingsScreen() {
           </TouchableOpacity>
         </View>
 
-        <View className="flex-row items-center justify-between rounded-xl border border-border bg-surface p-4">
+        <View className="flex-row items-center justify-between rounded-xl border border-border bg-surface shadow-sm p-4">
           <View className="flex-1 pr-3">
             <Text className="font-sans-bold text-sm text-ink-primary">{t('settings.notifications')}</Text>
             <Text className="mt-0.5 text-xs text-ink-secondary">{t('settings.notificationsSub')}</Text>

@@ -7,6 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ConfidenceBar } from '@/components/ConfidenceBar';
 import { EmptyState } from '@/components/EmptyState';
+import { ScreenHeader } from '@/components/ScreenHeader';
 import { PENDING_DISEASE, ScanEntry } from '@/lib/storage/scan-history';
 import { useScanHistoryStore } from '@/stores/scanHistoryStore';
 
@@ -31,16 +32,7 @@ export default function ScanHistoryScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-surface-app" edges={['top']}>
-      <View className="flex-row items-center gap-3 px-4 py-4">
-        <TouchableOpacity
-          className="h-10 w-10 items-center justify-center rounded-full bg-surface-muted"
-          onPress={() => router.back()}
-          accessibilityRole="button"
-        >
-          <Text className="text-xl text-ink-primary">←</Text>
-        </TouchableOpacity>
-        <Text className="font-sans-bold text-lg text-ink-primary">{t('history.title')}</Text>
-      </View>
+      <ScreenHeader title={t('history.title')} onBack={() => router.back()} />
 
       {scans.length === 0 ? (
         <EmptyState
@@ -59,7 +51,7 @@ export default function ScanHistoryScreen() {
             const isPending = item.disease === PENDING_DISEASE;
             return (
               <TouchableOpacity
-                className="flex-row items-center gap-3 rounded-2xl border border-border bg-surface p-3"
+                className="flex-row items-center gap-3 rounded-2xl border border-border bg-surface shadow-sm p-3"
                 onPress={() => router.push({ pathname: '/diagnose/result', params: { scanId: item.id } })}
                 accessibilityRole="button"
               >
@@ -75,7 +67,9 @@ export default function ScanHistoryScreen() {
                       : t(`diagnose.diseaseNames.${item.disease}`, { defaultValue: item.disease })}
                   </Text>
                   {isPending ? (
-                    <Text className="text-xs text-state-warning">{t('connectivity.offlineBadge')}</Text>
+                    <View className="self-start rounded-full bg-state-warning-bg px-2.5 py-0.5">
+                      <Text className="text-xs font-sans-bold text-state-warning">⏳ Pending sync</Text>
+                    </View>
                   ) : (
                     <ConfidenceBar confidence={item.confidence} />
                   )}

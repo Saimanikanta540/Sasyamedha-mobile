@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 interface HomeTileProps {
   icon: string;
@@ -13,27 +13,36 @@ export function HomeTile({ icon, label, sublabel, onPress, tone = 'default' }: H
   const isPrimary = tone === 'primary';
   return (
     <TouchableOpacity
-      className={`mb-3 w-[48%] min-h-[104px] rounded-2xl border p-4 shadow-sm ${
-        isPrimary ? 'border-brand-primary bg-brand-primary' : 'border-border bg-surface'
+      className={`mb-3.5 w-[48%] min-h-[136px] justify-between rounded-3xl p-4 shadow-md ${
+        isPrimary ? 'bg-brand-primary' : 'border border-border bg-surface'
       }`}
+      style={{ shadowOpacity: isPrimary ? 0.18 : 0.06, elevation: isPrimary ? 4 : 2 }}
       onPress={onPress}
       activeOpacity={0.75}
       accessibilityRole="button"
       accessibilityLabel={`${label} — ${sublabel}`}
     >
-      <Text className="mb-2 text-3xl">{icon}</Text>
-      <Text
-        className={`font-sans-bold text-base ${isPrimary ? 'text-white' : 'text-ink-primary'}`}
-        numberOfLines={2}
+      <View
+        className={`h-11 w-11 items-center justify-center rounded-2xl ${
+          isPrimary ? 'bg-white/15' : 'bg-surface-app'
+        }`}
       >
-        {label}
-      </Text>
-      <Text
-        className={`mt-0.5 text-xs ${isPrimary ? 'text-white/80' : 'text-ink-secondary'}`}
-        numberOfLines={2}
-      >
-        {sublabel}
-      </Text>
+        <Text className="text-2xl">{icon}</Text>
+      </View>
+      <View className="gap-0.5">
+        <Text
+          className={`font-sans-bold text-base ${isPrimary ? 'text-white' : 'text-ink-primary'}`}
+          numberOfLines={2}
+        >
+          {label}
+        </Text>
+        <Text
+          className={`text-xs leading-4 ${isPrimary ? 'text-white/75' : 'text-ink-secondary'}`}
+          numberOfLines={2}
+        >
+          {sublabel}
+        </Text>
+      </View>
     </TouchableOpacity>
   );
 }

@@ -8,6 +8,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AvailabilityBar } from '@/components/AvailabilityBar';
 import { EmptyState } from '@/components/EmptyState';
+import { ScreenHeader } from '@/components/ScreenHeader';
 import { StaleBadge } from '@/components/StaleBadge';
 import { getColdStorage } from '@/lib/api/endpoints';
 import { useIsOnline } from '@/lib/network/connectivity';
@@ -54,28 +55,21 @@ export default function ColdStorageScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-surface-app" edges={['top']}>
-      <View className="flex-row items-center gap-3 px-4 py-4">
-        <TouchableOpacity
-          className="h-10 w-10 items-center justify-center rounded-full bg-surface-muted"
-          onPress={() => router.back()}
-          accessibilityRole="button"
-        >
-          <Text className="text-xl text-ink-primary">←</Text>
-        </TouchableOpacity>
-        <Text className="font-sans-bold text-lg text-ink-primary">{t('home.tileStore')}</Text>
-      </View>
+      <ScreenHeader title={t('home.tileStore')} subtitle={t('home.tileStoreSub')} onBack={() => router.back()} />
 
-      <MapView ref={mapRef} style={{ height: 220 }} initialRegion={initialRegion}>
-        {(query.data ?? []).map((facility) => (
-          <Marker
-            key={facility.id}
-            coordinate={{ latitude: facility.lat, longitude: facility.lng }}
-            title={facility.name}
-            pinColor={selectedId === facility.id ? '#F58220' : '#0B3B24'}
-            onPress={() => focusFacility(facility.id)}
-          />
-        ))}
-      </MapView>
+      <View className="mx-4 mb-3 overflow-hidden rounded-3xl shadow-md" style={{ elevation: 3 }}>
+        <MapView ref={mapRef} style={{ height: 200 }} initialRegion={initialRegion}>
+          {(query.data ?? []).map((facility) => (
+            <Marker
+              key={facility.id}
+              coordinate={{ latitude: facility.lat, longitude: facility.lng }}
+              title={facility.name}
+              pinColor={selectedId === facility.id ? '#F58220' : '#0B3B24'}
+              onPress={() => focusFacility(facility.id)}
+            />
+          ))}
+        </MapView>
+      </View>
 
       {isOffline && query.data && (
         <View className="px-4 pt-2">
@@ -86,7 +80,7 @@ export default function ColdStorageScreen() {
       {query.isLoading ? (
         <View className="gap-3 px-4 pt-3">
           {[0, 1].map((i) => (
-            <View key={i} className="h-24 rounded-2xl border border-border bg-surface p-4">
+            <View key={i} className="h-24 rounded-2xl border border-border bg-surface shadow-sm p-4">
               <View className="h-3 w-1/2 rounded bg-surface-muted" />
             </View>
           ))}
@@ -108,8 +102,8 @@ export default function ColdStorageScreen() {
             const pct = item.capacityTonnes > 0 ? Math.round((item.availableTonnes / item.capacityTonnes) * 100) : 0;
             return (
               <TouchableOpacity
-                className={`gap-2 rounded-2xl border p-4 ${
-                  selectedId === item.id ? 'border-brand-primary bg-surface' : 'border-border bg-surface'
+                className={`gap-2 rounded-2xl p-4 shadow-sm ${
+                  selectedId === item.id ? 'border-2 border-brand-primary bg-surface' : 'border border-border bg-surface'
                 }`}
                 onPress={() => {
                   focusFacility(item.id);

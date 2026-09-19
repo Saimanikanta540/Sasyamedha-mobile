@@ -59,59 +59,68 @@ export default function HomeScreen() {
   ];
 
   return (
-    <SafeAreaView className="flex-1 bg-surface-app" edges={['top']}>
-      <View className="flex-row items-start justify-between px-4 pb-2 pt-3">
-        <View className="gap-2">
-          <Text className="font-sans-bold text-xl text-brand-primary">{t('common.appName')}</Text>
-          <ConnectivityBadge />
+    <SafeAreaView className="flex-1 bg-brand-primary" edges={['top']}>
+      <View className="gap-4 px-5 pb-7 pt-2">
+        <View className="flex-row items-start justify-between">
+          <View className="gap-1.5">
+            <Text className="font-sans-bold text-2xl text-white">{t('common.appName')}</Text>
+            <ConnectivityBadge />
+          </View>
+          <View className="flex-row items-center gap-2">
+            <TouchableOpacity
+              className="h-11 w-11 items-center justify-center rounded-full bg-white/15"
+              onPress={() => router.push('/history')}
+              accessibilityRole="button"
+              accessibilityLabel={t('history.title')}
+            >
+              <Text className="text-lg">🕘</Text>
+              {pendingCount > 0 && (
+                <View className="absolute -right-1 -top-1 h-5 min-w-[20px] items-center justify-center rounded-full bg-brand-accent px-1">
+                  <Text className="font-sans-bold text-[10px] text-white">{pendingCount}</Text>
+                </View>
+              )}
+            </TouchableOpacity>
+            <TouchableOpacity
+              className="h-11 w-11 items-center justify-center rounded-full bg-white/15"
+              onPress={() => router.push('/settings')}
+              accessibilityRole="button"
+              accessibilityLabel={t('home.settings')}
+            >
+              <Text className="text-lg">⚙️</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <View className="flex-row items-center gap-2">
-          <TouchableOpacity
-            className="h-11 w-11 items-center justify-center rounded-full bg-surface-muted"
-            onPress={() => router.push('/history')}
-            accessibilityRole="button"
-            accessibilityLabel={t('history.title')}
-          >
-            <Text className="text-lg">🕘</Text>
-            {pendingCount > 0 && (
-              <View className="absolute -right-1 -top-1 h-5 min-w-[20px] items-center justify-center rounded-full bg-brand-accent px-1">
-                <Text className="font-sans-bold text-[10px] text-white">{pendingCount}</Text>
-              </View>
-            )}
-          </TouchableOpacity>
-          <TouchableOpacity
-            className="h-11 w-11 items-center justify-center rounded-full bg-surface-muted"
-            onPress={() => router.push('/settings')}
-            accessibilityRole="button"
-            accessibilityLabel={t('home.settings')}
-          >
-            <Text className="text-lg">⚙️</Text>
-          </TouchableOpacity>
-        </View>
+        <Text className="text-sm text-white/70">{t('home.greeting')} 👋</Text>
       </View>
 
-      <ScrollView contentContainerClassName="flex-row flex-wrap justify-between px-4 pb-24">
-        {tiles.map((tile) => (
-          <HomeTile
-            key={tile.label}
-            icon={tile.icon}
-            label={tile.label}
-            sublabel={tile.sublabel}
-            tone={tile.primary ? 'primary' : 'default'}
-            onPress={() => router.push(tile.route)}
-          />
-        ))}
-      </ScrollView>
+      <View className="flex-1 rounded-t-[32px] bg-surface-app">
+        <ScrollView
+          contentContainerClassName="flex-row flex-wrap justify-between px-4 pb-28 pt-6"
+          showsVerticalScrollIndicator={false}
+        >
+          {tiles.map((tile) => (
+            <HomeTile
+              key={tile.label}
+              icon={tile.icon}
+              label={tile.label}
+              sublabel={tile.sublabel}
+              tone={tile.primary ? 'primary' : 'default'}
+              onPress={() => router.push(tile.route)}
+            />
+          ))}
+        </ScrollView>
 
-      <TouchableOpacity
-        className="absolute bottom-6 flex-row items-center gap-2 self-center rounded-full bg-brand-accent px-6 py-3"
-        onPress={() => router.push('/voice')}
-        accessibilityRole="button"
-        accessibilityLabel={t('home.voiceAssistant')}
-      >
-        <Text className="text-lg">🎙️</Text>
-        <Text className="font-sans-bold text-sm text-white">{t('home.voiceAssistant')}</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          className="absolute bottom-6 flex-row items-center gap-2 self-center rounded-full bg-brand-accent px-6 py-3.5 shadow-lg"
+          style={{ shadowOpacity: 0.3, elevation: 6 }}
+          onPress={() => router.push('/voice')}
+          accessibilityRole="button"
+          accessibilityLabel={t('home.voiceAssistant')}
+        >
+          <Text className="text-lg">🎙️</Text>
+          <Text className="font-sans-bold text-sm text-white">{t('home.voiceAssistant')}</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 }

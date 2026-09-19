@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { EmptyState } from '@/components/EmptyState';
+import { ScreenHeader } from '@/components/ScreenHeader';
 import { getPrices } from '@/lib/api/endpoints';
 
 export default function MarketPriceDetailScreen() {
@@ -22,34 +23,25 @@ export default function MarketPriceDetailScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-surface-app" edges={['top']}>
-      <View className="flex-row items-center gap-3 px-4 py-4">
-        <TouchableOpacity
-          className="h-10 w-10 items-center justify-center rounded-full bg-surface-muted"
-          onPress={() => router.back()}
-          accessibilityRole="button"
-        >
-          <Text className="text-xl text-ink-primary">←</Text>
-        </TouchableOpacity>
-        <Text className="font-sans-bold text-lg text-ink-primary">{market}</Text>
-      </View>
+      <ScreenHeader title={market} subtitle={commodity} onBack={() => router.back()} />
 
       {record ? (
         <View className="gap-4 px-4">
-          <View className="items-center gap-1 rounded-2xl border border-border bg-surface p-6">
-            <Text className="text-xs text-ink-secondary">{t('common.viewDetails')}</Text>
-            <Text className="font-sans-bold text-4xl text-brand-primary">
+          <View className="items-center gap-1 rounded-3xl bg-brand-primary p-6 shadow-md" style={{ elevation: 3 }}>
+            <Text className="text-xs font-sans-bold uppercase tracking-wide text-white/70">Modal price</Text>
+            <Text className="font-sans-bold text-4xl text-white">
               ₹{record.modalPriceRupeesPerQuintal}
             </Text>
-            <Text className="text-xs text-ink-secondary">per quintal · {commodity}</Text>
+            <Text className="text-xs text-white/70">per quintal · {commodity}</Text>
           </View>
           <View className="flex-row gap-3">
-            <View className="flex-1 gap-1 rounded-2xl border border-border bg-surface p-4">
+            <View className="flex-1 gap-1 rounded-2xl border border-border bg-surface shadow-sm p-4">
               <Text className="text-xs text-ink-secondary">Min</Text>
               <Text className="font-sans-bold text-lg text-ink-primary">
                 ₹{record.minPriceRupeesPerQuintal}
               </Text>
             </View>
-            <View className="flex-1 gap-1 rounded-2xl border border-border bg-surface p-4">
+            <View className="flex-1 gap-1 rounded-2xl border border-border bg-surface shadow-sm p-4">
               <Text className="text-xs text-ink-secondary">Max</Text>
               <Text className="font-sans-bold text-lg text-ink-primary">
                 ₹{record.maxPriceRupeesPerQuintal}

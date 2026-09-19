@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { ScreenHeader } from '@/components/ScreenHeader';
 import { postTransportRequest } from '@/lib/api/endpoints';
 import { useIsOnline } from '@/lib/network/connectivity';
 import { useOutboxStore } from '@/stores/outboxStore';
@@ -66,16 +67,7 @@ export default function TransportRequestScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-surface-app" edges={['top']}>
-      <View className="flex-row items-center gap-3 px-4 py-4">
-        <TouchableOpacity
-          className="h-10 w-10 items-center justify-center rounded-full bg-surface-muted"
-          onPress={() => router.back()}
-          accessibilityRole="button"
-        >
-          <Text className="text-xl text-ink-primary">←</Text>
-        </TouchableOpacity>
-        <Text className="font-sans-bold text-lg text-ink-primary">{t('home.tileTransport')}</Text>
-      </View>
+      <ScreenHeader title={t('home.tileTransport')} subtitle={t('home.tileTransportSub')} onBack={() => router.back()} />
 
       <ScrollView contentContainerClassName="gap-4 px-4 pb-12">
         {!isOnline && (
@@ -86,22 +78,24 @@ export default function TransportRequestScreen() {
           </View>
         )}
 
-        <Field label="Commodity" value={commodity} onChangeText={setCommodity} placeholder="e.g. Tomato" />
-        <Field
-          label={`Quantity (${t('common.kg')})`}
-          value={quantityText}
-          onChangeText={setQuantityText}
-          keyboardType="numeric"
-          placeholder="500"
-        />
-        <Field label="Pickup location" value={pickupLocation} onChangeText={setPickupLocation} placeholder="Farm / village name" />
-        <Field label="Delivery location" value={deliveryLocation} onChangeText={setDeliveryLocation} placeholder="Mandi / buyer name" />
-        <Field
-          label="Preferred schedule"
-          value={preferredSchedule}
-          onChangeText={setPreferredSchedule}
-          placeholder="e.g. Tomorrow morning"
-        />
+        <View className="gap-4 rounded-2xl border border-border bg-surface p-4 shadow-sm">
+          <Field label="Commodity" value={commodity} onChangeText={setCommodity} placeholder="e.g. Tomato" />
+          <Field
+            label={`Quantity (${t('common.kg')})`}
+            value={quantityText}
+            onChangeText={setQuantityText}
+            keyboardType="numeric"
+            placeholder="500"
+          />
+          <Field label="Pickup location" value={pickupLocation} onChangeText={setPickupLocation} placeholder="Farm / village name" />
+          <Field label="Delivery location" value={deliveryLocation} onChangeText={setDeliveryLocation} placeholder="Mandi / buyer name" />
+          <Field
+            label="Preferred schedule"
+            value={preferredSchedule}
+            onChangeText={setPreferredSchedule}
+            placeholder="e.g. Tomorrow morning"
+          />
+        </View>
 
         {submitError && (
           <Text className="text-sm font-sans-bold text-state-danger">
@@ -143,7 +137,7 @@ function Field({
     <View className="gap-1.5">
       <Text className="font-sans-bold text-xs text-ink-secondary">{label}</Text>
       <TextInput
-        className="min-h-[48px] rounded-xl border border-border bg-surface px-4 text-base text-ink-primary"
+        className="min-h-[48px] rounded-xl border border-border bg-surface-app px-4 text-base text-ink-primary"
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}

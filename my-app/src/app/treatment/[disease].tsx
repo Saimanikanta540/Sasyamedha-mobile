@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { DisclaimerBanner } from '@/components/DisclaimerBanner';
 import { EmptyState } from '@/components/EmptyState';
+import { ScreenHeader } from '@/components/ScreenHeader';
 import { SpeakerButton } from '@/components/SpeakerButton';
 import { StaleBadge } from '@/components/StaleBadge';
 import { getTreatment } from '@/lib/api/endpoints';
@@ -30,19 +31,7 @@ export default function TreatmentGuidanceScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-surface-app" edges={['top']}>
-      <View className="flex-row items-center gap-3 px-4 py-4">
-        <TouchableOpacity
-          className="h-10 w-10 items-center justify-center rounded-full bg-surface-muted"
-          onPress={() => router.back()}
-          accessibilityRole="button"
-        >
-          <Text className="text-xl text-ink-primary">←</Text>
-        </TouchableOpacity>
-        <View className="flex-1">
-          <Text className="font-sans-bold text-lg text-ink-primary">{t('treatment.title')}</Text>
-          <Text className="text-xs text-ink-secondary">{diseaseName}</Text>
-        </View>
-      </View>
+      <ScreenHeader title={t('treatment.title')} subtitle={diseaseName} onBack={() => router.back()} />
 
       {query.data ? (
         <ScrollView contentContainerClassName="gap-4 px-4 pb-12">
@@ -64,7 +53,7 @@ export default function TreatmentGuidanceScreen() {
           <Section title={t('treatment.immediateActions')} items={query.data.immediateActions} numbered />
           <Section title={t('treatment.prevention')} items={query.data.prevention} />
 
-          <View className="gap-2 rounded-2xl border border-border bg-surface p-4">
+          <View className="gap-2 rounded-2xl border border-border bg-surface shadow-sm p-4">
             <Text className="font-sans-bold text-sm text-ink-secondary">
               {t('treatment.indicativeCost')}
             </Text>
@@ -74,6 +63,13 @@ export default function TreatmentGuidanceScreen() {
                 <Text className="font-sans-bold text-sm text-ink-primary">₹{line.amountRupees}</Text>
               </View>
             ))}
+            <View className="h-px bg-border" />
+            <View className="flex-row justify-between">
+              <Text className="font-sans-bold text-sm text-ink-primary">Total</Text>
+              <Text className="font-sans-bold text-base text-brand-primary">
+                ₹{query.data.indicativeCost.reduce((sum, l) => sum + l.amountRupees, 0)}
+              </Text>
+            </View>
           </View>
 
           <TouchableOpacity
@@ -94,7 +90,7 @@ export default function TreatmentGuidanceScreen() {
         <View className="gap-4 px-4 pt-2">
           <Text className="text-sm text-ink-secondary">{t('treatment.loading')}</Text>
           {[0, 1, 2, 3].map((i) => (
-            <View key={i} className="gap-2 rounded-2xl border border-border bg-surface p-4">
+            <View key={i} className="gap-2 rounded-2xl border border-border bg-surface shadow-sm p-4">
               <View className="h-3 w-1/3 rounded bg-surface-muted" />
               <View className="h-3 w-full rounded bg-surface-muted" />
               <View className="h-3 w-4/5 rounded bg-surface-muted" />
@@ -116,7 +112,7 @@ export default function TreatmentGuidanceScreen() {
 
 function Section({ title, items, numbered }: { title: string; items: string[]; numbered?: boolean }) {
   return (
-    <View className="gap-2 rounded-2xl border border-border bg-surface p-4">
+    <View className="gap-2 rounded-2xl border border-border bg-surface shadow-sm p-4">
       <Text className="font-sans-bold text-sm text-ink-secondary">{title}</Text>
       {items.map((item, i) => (
         <View key={item} className="flex-row gap-2">

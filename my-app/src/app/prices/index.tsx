@@ -6,6 +6,7 @@ import { FlatList, RefreshControl, Text, TouchableOpacity, View } from 'react-na
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { EmptyState } from '@/components/EmptyState';
+import { ScreenHeader } from '@/components/ScreenHeader';
 import { StaleBadge } from '@/components/StaleBadge';
 import { getPrices } from '@/lib/api/endpoints';
 import type { MarketPriceRecord } from '@/lib/api/types';
@@ -35,16 +36,7 @@ export default function MarketPricesScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-surface-app" edges={['top']}>
-      <View className="flex-row items-center gap-3 px-4 py-4">
-        <TouchableOpacity
-          className="h-10 w-10 items-center justify-center rounded-full bg-surface-muted"
-          onPress={() => router.back()}
-          accessibilityRole="button"
-        >
-          <Text className="text-xl text-ink-primary">←</Text>
-        </TouchableOpacity>
-        <Text className="font-sans-bold text-lg text-ink-primary">{t('home.tilePrices')}</Text>
-      </View>
+      <ScreenHeader title={t('home.tilePrices')} subtitle={t('home.tilePricesSub')} onBack={() => router.back()} />
 
       <FlatList
         data={COMMODITIES}
@@ -78,7 +70,7 @@ export default function MarketPricesScreen() {
       {query.isLoading ? (
         <View className="gap-3 px-4">
           {[0, 1, 2, 3].map((i) => (
-            <View key={i} className="h-20 rounded-2xl border border-border bg-surface p-4">
+            <View key={i} className="h-20 rounded-2xl border border-border bg-surface shadow-sm p-4">
               <View className="h-3 w-1/2 rounded bg-surface-muted" />
             </View>
           ))}
@@ -113,22 +105,28 @@ export default function MarketPricesScreen() {
 function PriceRow({ record, onPress }: { record: MarketPriceRecord; onPress: () => void }) {
   return (
     <TouchableOpacity
-      className="gap-1 rounded-2xl border border-border bg-surface p-4"
+      className="gap-1 rounded-2xl border border-border bg-surface shadow-sm p-4"
       onPress={onPress}
       accessibilityRole="button"
     >
       <View className="flex-row items-center justify-between">
-        <Text className="font-sans-bold text-base text-ink-primary">{record.market}</Text>
+        <Text className="flex-1 font-sans-bold text-base text-ink-primary" numberOfLines={1}>
+          {record.market}
+        </Text>
         {record.distanceKm != null && (
-          <Text className="text-xs text-ink-secondary">{record.distanceKm} km</Text>
+          <View className="rounded-full bg-surface-muted px-2.5 py-1">
+            <Text className="text-xs font-sans-bold text-ink-secondary">{record.distanceKm} km</Text>
+          </View>
         )}
       </View>
-      <Text className="font-sans-bold text-2xl text-brand-primary">
-        ₹{record.modalPriceRupeesPerQuintal}
-        <Text className="text-xs font-sans-medium text-ink-secondary"> /quintal</Text>
-      </Text>
+      <View className="flex-row items-baseline gap-1.5">
+        <Text className="font-sans-bold text-3xl text-brand-primary">
+          ₹{record.modalPriceRupeesPerQuintal}
+        </Text>
+        <Text className="text-xs text-ink-secondary">/quintal</Text>
+      </View>
       <Text className="text-xs text-ink-secondary">
-        ₹{record.minPriceRupeesPerQuintal} – ₹{record.maxPriceRupeesPerQuintal}
+        Range ₹{record.minPriceRupeesPerQuintal} – ₹{record.maxPriceRupeesPerQuintal}
       </Text>
     </TouchableOpacity>
   );
