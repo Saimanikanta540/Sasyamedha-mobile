@@ -1,15 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FlatList, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AvailabilityBar } from '@/components/AvailabilityBar';
 import { EmptyState } from '@/components/EmptyState';
-import { OsmMapView, type OsmMapViewHandle } from '@/components/OsmMapView';
 import { ScreenHeader } from '@/components/ScreenHeader';
 import { StaleBadge } from '@/components/StaleBadge';
+import { TileGridMap } from '@/components/TileGridMap';
 import { getColdStorage } from '@/lib/api/endpoints';
 import { useIsOnline } from '@/lib/network/connectivity';
 import { useLocationStore } from '@/stores/locationStore';
@@ -22,7 +22,7 @@ export default function ColdStorageScreen() {
   const { t } = useTranslation();
   const isOnline = useIsOnline();
   const params = useLocalSearchParams<{ destinationLat?: string; destinationLng?: string }>();
-  const mapRef = useRef<OsmMapViewHandle>(null);
+  const { width: screenWidth } = useWindowDimensions();
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [radiusStep, setRadiusStep] = useState(0);
 
@@ -41,22 +41,15 @@ export default function ColdStorageScreen() {
   const radiusKm = RADIUS_STEPS[radiusStep];
   const facilities = (query.data ?? []).filter((f) => f.distanceKm <= radiusKm);
 
-  const mapCenter = lat != null && lng != null ? { lat, lng } : DEFAULT_CENTER;
-
-  // The map's initial HTML is only built once on mount (reloading it to recenter
-  // would refetch every OSM tile), so once live GPS resolves after that first
-  // render, pan the already-loaded map to it explicitly.
-  useEffect(() => {
-    if (lat == null || lng == null) return;
-    mapRef.current?.panTo(lat, lng);
-  }, [lat, lng]);
+  const defaultCenter = lat != null && lng != null ? { lat, lng } : DEFAULT_CENTER;
+  const selectedFacility = query.data?.find((f) => f.id === selectedId);
+  // A controlled prop, not an imperative "pan to" call — selecting a facility just
+  // re-centers the map by re-rendering with new coordinates, fetching a fresh small
+  // set of tile images. Simpler and easier to reason about than an animated pan.
+  const mapCenter = selectedFacility ? { lat: selectedFacility.lat, lng: selectedFacility.lng } : defaultCenter;
 
   const focusFacility = (facilityId: string) => {
     setSelectedId(facilityId);
-    const facility = query.data?.find((f) => f.id === facilityId);
-    if (facility) {
-      mapRef.current?.panTo(facility.lat, facility.lng);
-    }
   };
 
   return (
@@ -64,14 +57,14 @@ export default function ColdStorageScreen() {
       <ScreenHeader title={t('home.tileStore')} subtitle={t('home.tileStoreSub')} onBack={() => router.back()} />
 
       <View className="mx-4 mb-3 overflow-hidden rounded-3xl shadow-md" style={{ elevation: 3, height: 200 }}>
-        <OsmMapView
-          ref={mapRef}
+        <TileGridMap
           center={mapCenter}
+          width={screenWidth - 32}
+          height={200}
           markers={(query.data ?? []).map((facility) => ({
             id: facility.id,
             lat: facility.lat,
             lng: facility.lng,
-            title: facility.name,
             selected: selectedId === facility.id,
           }))}
           onMarkerPress={focusFacility}
@@ -130,7 +123,7 @@ export default function ColdStorageScreen() {
                 <AvailabilityBar
                   availableTonnes={item.availableTonnes}
                   capacityTonnes={item.capacityTonnes}
-                  label={`${pct}% free · ${item.availableTonnes}t of ${item.capacityTonnes}t`}
+                  label={`${pct}% · ${t('storage.freeOfCapacity', { available: item.availableTonnes, capacity: item.capacityTonnes })}`}
                 />
                 <Text className="text-xs text-ink-secondary">
                   {t('storage.perQuintalPerDay', { cost: item.costPerDayRupeesPerQuintal })}
