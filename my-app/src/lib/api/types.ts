@@ -115,3 +115,9 @@ export interface BuyerContact {
   quantityRangeKg: [number, number];
   phone: string;
 }
+
+export interface VoiceTranscription {
+  transcript: string;
+  transcriptEn: string;
+  languageGuess: string;
+}

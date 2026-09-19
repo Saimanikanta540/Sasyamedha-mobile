@@ -103,5 +103,25 @@
     "emptyTitle": "No scans yet",
     "emptyBody": "Leaf photos and results you've captured will appear here, even without internet.",
     "scanNow": "Scan now"
+  },
+  "voice": {
+    "headlineListening": "Listening to you...",
+    "headlineIdle": "How can I help you today?",
+    "headlineTranscribing": "Understanding...",
+    "sublineListening": "Tap again when you are done speaking.",
+    "sublineIdle": "Ask about mandi rates, crops, or treatments.",
+    "sublineRouting": "Taking you there…",
+    "sublineNoMatch": "I heard you, but I'm not sure where that goes yet.",
+    "sublineError": "Tap the microphone to try again.",
+    "noBackend": "Voice needs the backend connected. Ask an adult to help set this up.",
+    "noPermission": "Microphone access is needed to use voice.",
+    "recordFailed": "Could not start recording. Please try again.",
+    "transcribeFailed": "Could not understand that. Please try again.",
+    "networkError": "Could not reach the server. Please check your connection.",
+    "promptPrices": "\"Tomato rates in Guntur?\"",
+    "promptTreatment": "\"What is early blight?\"",
+    "promptLogistics": "\"Best logistics to Tenali?\"",
+    "goNow": "Go now",
+    "askAgain": "Ask again"
   }
 }

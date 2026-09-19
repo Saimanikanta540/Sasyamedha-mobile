@@ -21,6 +21,7 @@ import type {
   TransportRequestInput,
   TransportRequestResult,
   TreatmentGuidance,
+  VoiceTranscription,
 } from './types';
 
 /** Read endpoints degrade to mock data on any failure — never throw up to the screen. */
@@ -222,4 +223,35 @@ export async function getBuyer(id: string): Promise<BuyerContact> {
     () => apiFetch<BuyerContact>(`/buyers/${encodeURIComponent(id)}`),
     () => mockBuyer(id),
   );
+}
+
+interface ServerVoiceTranscription {
+  transcript: string;
+  transcript_en: string;
+  language_guess: string;
+}
+
+/**
+ * No offline/mock fallback here, unlike the other endpoints — there is no
+ * sensible way to fake "understanding what was said". Throws on failure
+ * (no backend configured, no network, or the server had no Gemini key
+ * configured and 503'd); the Voice screen shows a clear retry state instead.
+ */
+export async function transcribeVoice(audioUri: string): Promise<VoiceTranscription> {
+  const form = new FormData();
+  form.append('file', {
+    uri: audioUri,
+    name: 'voice.m4a',
+    type: 'audio/mp4',
+  } as unknown as Blob);
+  const server = await apiFetch<ServerVoiceTranscription>('/voice/transcribe', {
+    method: 'POST',
+    body: form,
+    isMultipart: true,
+  });
+  return {
+    transcript: server.transcript,
+    transcriptEn: server.transcript_en,
+    languageGuess: server.language_guess,
+  };
 }

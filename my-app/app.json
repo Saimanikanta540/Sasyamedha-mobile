@@ -50,7 +50,14 @@
           "locationAlwaysPermission": false,
           "locationWhenInUsePermission": "Sasyamedha uses your location once at startup to choose your language."
         }
-      ]
+      ],
+      [
+        "expo-audio",
+        {
+          "microphonePermission": "Sasyamedha uses the microphone so you can ask questions by voice."
+        }
+      ],
+      "expo-asset"
     ],
     "experiments": {
       "typedRoutes": true,

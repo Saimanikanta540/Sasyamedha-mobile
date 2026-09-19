@@ -34,6 +34,10 @@ class Settings(BaseSettings):
     # ML inference
     tflite_model_path: str = ""
 
+    # Gemini (voice transcription — see services/voice.py)
+    gemini_api_key: str = ""
+    gemini_model: str = "gemini-3.6-flash"
+
     # CORS
     cors_origins: str = "http://localhost:3000"
 

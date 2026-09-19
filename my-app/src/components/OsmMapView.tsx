@@ -2,6 +2,8 @@ import { forwardRef, useEffect, useImperativeHandle, useMemo, useRef } from 'rea
 import { StyleSheet, View, type ViewStyle } from 'react-native';
 import WebView from 'react-native-webview';
 
+import { LEAFLET_CSS, LEAFLET_JS } from './leafletAssets';
+
 export interface OsmMapMarker {
   id: string;
   lat: number;
@@ -26,9 +28,13 @@ interface OsmMapViewProps {
  * OpenStreetMap via Leaflet inside a WebView — deliberately not react-native-maps.
  * react-native-maps' Android provider is Google Maps SDK natively, which needs an
  * API key baked into a custom native build; it can never work in plain Expo Go.
- * This is pure HTML/JS, needs no key, no native module beyond react-native-webview
- * (already Expo Go-compatible), and needs only network access to fetch OSM tiles —
- * the same requirement the rest of this app already has for live data.
+ *
+ * Leaflet's JS/CSS are bundled inline (leafletAssets.ts) rather than loaded from a
+ * CDN via <script src>/<link href> at runtime — that's unreliable inside an Android
+ * WebView rendering an inline `html` source (no real origin, so cross-origin
+ * sub-resource loads can silently fail depending on the device/WebView version).
+ * Only the OSM tile images still need the network, and plain https image GETs are
+ * the one kind of remote resource WebViews load reliably regardless of origin.
  */
 function buildHtml(center: { lat: number; lng: number }, zoom: number, markers: OsmMapMarker[]): string {
   const markersJson = JSON.stringify(markers);
@@ -36,15 +42,14 @@ function buildHtml(center: { lat: number; lng: number }, zoom: number, markers: 
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <style>
+  <style>${LEAFLET_CSS}
     html, body, #map { height: 100%; margin: 0; padding: 0; }
     .leaflet-control-attribution { font-size: 9px; }
   </style>
 </head>
 <body>
   <div id="map"></div>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>${LEAFLET_JS}</script>
   <script>
     var map = L.map('map', { zoomControl: true }).setView([${center.lat}, ${center.lng}], ${zoom});
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -119,6 +124,9 @@ export const OsmMapView = forwardRef<OsmMapViewHandle, OsmMapViewProps>(
           ref={webviewRef}
           source={{ html: initialHtml }}
           originWhitelist={['*']}
+          javaScriptEnabled
+          domStorageEnabled
+          mixedContentMode="always"
           onMessage={(event) => onMarkerPress?.(event.nativeEvent.data)}
           style={styles.webview}
         />
