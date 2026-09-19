@@ -1,4 +1,3 @@
-import * as Notifications from 'expo-notifications';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
@@ -38,8 +37,15 @@ export default function SettingsScreen() {
 
   const onToggleNotifications = async (value: boolean) => {
     if (value) {
-      const { status } = await Notifications.requestPermissionsAsync();
-      value = status === 'granted';
+      try {
+        // Loaded lazily — the native module throws on eager import in Expo Go on
+        // newer Android SDKs, and this toggle is the only place that needs it.
+        const Notifications = await import('expo-notifications');
+        const { status } = await Notifications.requestPermissionsAsync();
+        value = status === 'granted';
+      } catch {
+        value = false;
+      }
     }
     setNotificationsEnabled(value);
     await AsyncStorage.setItem(NOTIFICATIONS_KEY, String(value));

@@ -20,3 +20,8 @@ export function useIsOnline(): boolean {
 
   return isOnline;
 }
+
+/** Same signal as `useIsOnline`, shaped as the brief's `useConnectivity()` contract. */
+export function useConnectivity(): { isOnline: boolean } {
+  return { isOnline: useIsOnline() };
+}

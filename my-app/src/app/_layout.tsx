@@ -17,10 +17,18 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import '@/i18n';
 import '@/global.css';
 import { queryClient, queryPersister } from '@/lib/storage/query-client';
+import { useOutboxSync } from '@/stores/outboxStore';
+import { useScanHistoryStore } from '@/stores/scanHistoryStore';
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
 export default function RootLayout() {
+  useOutboxSync();
+
+  useEffect(() => {
+    useScanHistoryStore.getState().load();
+  }, []);
+
   const [fontsLoaded] = useFonts({
     NotoSans_400Regular,
     NotoSans_500Medium,
