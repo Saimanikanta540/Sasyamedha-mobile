@@ -9,8 +9,8 @@ import { ConfidenceBar } from '@/components/ConfidenceBar';
 import { EmptyState } from '@/components/EmptyState';
 import { SpeakerButton } from '@/components/SpeakerButton';
 import { diagnose } from '@/lib/api/endpoints';
-import { PENDING_DISEASE } from '@/lib/storage/scan-history';
-import { useScanHistoryStore } from '@/stores/scanHistoryStore';
+import { PENDING_DISEASE, ScanEntry } from '@/lib/storage/scan-history';
+import { loadScanById, useScanHistoryStore } from '@/stores/scanHistoryStore';
 
 const CONFIDENCE_THRESHOLD = 0.6;
 const EXPERT_HELPLINE = 'tel:18001801551';
@@ -29,6 +29,21 @@ export default function DiagnosisResultScreen() {
   const [localResult, setLocalResult] = useState<{ disease: string; confidence: number } | null>(
     null,
   );
+  // Replay only ever passes a scanId (no imageUri). If this screen mounted before the
+  // scan history store finished hydrating from SQLite, fall back to a direct lookup
+  // rather than treating a real saved scan as missing.
+  const [fallbackScan, setFallbackScan] = useState<ScanEntry | null>(null);
+
+  useEffect(() => {
+    if (storeScan || routeImageUri || !scanId) return;
+    let cancelled = false;
+    loadScanById(scanId).then((found) => {
+      if (!cancelled) setFallbackScan(found);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [storeScan, routeImageUri, scanId]);
 
   const runDiagnose = useCallback(async () => {
     if (!routeImageUri) return;
@@ -50,10 +65,11 @@ export default function DiagnosisResultScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [storeScan == null, routeImageUri]);
 
-  const imageUri = storeScan?.imageUri ?? routeImageUri;
-  const disease = storeScan && storeScan.disease !== PENDING_DISEASE ? storeScan.disease : localResult?.disease;
-  const confidence = storeScan && storeScan.disease !== PENDING_DISEASE ? storeScan.confidence : localResult?.confidence;
-  const isPending = storeScan?.disease === PENDING_DISEASE;
+  const activeScan = storeScan ?? fallbackScan ?? undefined;
+  const imageUri = activeScan?.imageUri ?? routeImageUri;
+  const disease = activeScan && activeScan.disease !== PENDING_DISEASE ? activeScan.disease : localResult?.disease;
+  const confidence = activeScan && activeScan.disease !== PENDING_DISEASE ? activeScan.confidence : localResult?.confidence;
+  const isPending = activeScan?.disease === PENDING_DISEASE;
 
   const goBackHome = () => router.push('/home');
 
