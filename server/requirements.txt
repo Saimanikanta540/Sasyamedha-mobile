@@ -1,0 +1,30 @@
+# Web framework
+fastapi==0.141.1
+uvicorn[standard]==0.53.0
+
+# Validation / ORM
+pydantic==2.13.5
+pydantic-settings==2.15.0
+sqlmodel==0.0.42
+alembic==1.20.0
+psycopg2-binary==2.9.13
+
+# Auth
+python-jose[cryptography]==3.5.0
+
+# File upload / image handling
+python-multipart==0.0.32
+Pillow==12.3.0
+
+# HTTP client (OGD ingestion, Supabase Storage)
+httpx==0.28.1
+supabase==2.31.0
+
+# Scheduling (daily price ingestion)
+APScheduler==3.11.3
+
+# ML inference (successor to tflite-runtime — has wheels for current Python)
+ai-edge-litert==2.2.0
+
+# Tests
+pytest==9.1.1
