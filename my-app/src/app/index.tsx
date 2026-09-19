@@ -1,98 +1,77 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, Image, SafeAreaView } from 'react-native';
+import { Stack } from 'expo-router';
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+export default function OnboardingScreen() {
+  const [selectedLanguage, setSelectedLanguage] = useState('English');
 
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
+  const languages = [
+    { id: 'en', name: 'English' },
+    { id: 'hi', name: 'हिंदी' },
+    { id: 'te', name: 'తెలుగు' },
+    { id: 'mr', name: 'मराठी' },
+  ];
+
   return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
+    <SafeAreaView className="flex-1 bg-green-50">
+      <View className="flex-1 px-6 justify-center">
+        {/* Header / Logo Area */}
+        <View className="items-center mb-10">
+          <View className="w-24 h-24 bg-green-600 rounded-full items-center justify-center mb-6">
+            <Text className="text-4xl">🌱</Text>
+          </View>
+          <Text className="text-3xl font-bold text-green-900 text-center mb-2">
+            Smart Crop & Market Access
+          </Text>
+          <Text className="text-base text-green-700 text-center px-4">
+            AI Crop Diagnosis & Market Insights to empower your farming
+          </Text>
+        </View>
+
+        {/* Language Selection */}
+        <View className="bg-white rounded-3xl p-6 shadow-sm border border-green-100">
+          <Text className="text-lg font-semibold text-gray-800 mb-4">
+            Select Your Language
+          </Text>
+          
+          <View className="space-y-3 gap-3">
+            {languages.map((lang) => (
+              <TouchableOpacity
+                key={lang.id}
+                onPress={() => setSelectedLanguage(lang.name)}
+                className={`p-4 rounded-xl border flex-row items-center justify-between ${
+                  selectedLanguage === lang.name 
+                    ? 'bg-green-100 border-green-500' 
+                    : 'bg-gray-50 border-gray-200'
+                }`}
+              >
+                <Text className={`text-base ${
+                  selectedLanguage === lang.name ? 'font-bold text-green-800' : 'text-gray-700'
+                }`}>
+                  {lang.name}
+                </Text>
+                {selectedLanguage === lang.name && (
+                  <View className="w-5 h-5 rounded-full bg-green-500 items-center justify-center">
+                    <Text className="text-white text-xs">✓</Text>
+                  </View>
+                )}
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
+
+        {/* Continue Button */}
+        <View className="mt-auto mb-8 pt-6">
+          <TouchableOpacity 
+            className="bg-green-600 py-4 rounded-2xl items-center shadow-md"
+            activeOpacity={0.8}
+          >
+            <Text className="text-white text-lg font-semibold">
+              Continue
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </SafeAreaView>
   );
 }
-
-export default function HomeScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
-
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
-
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
-
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
-  },
-  heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
-  },
-  title: {
-    textAlign: 'center',
-  },
-  code: {
-    textTransform: 'uppercase',
-  },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
-  },
-});
