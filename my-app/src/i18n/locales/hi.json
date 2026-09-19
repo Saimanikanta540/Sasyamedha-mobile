@@ -84,9 +84,12 @@
     "saveToHistory": "इतिहास में सेव करें",
     "savedToHistory": "इतिहास में सेव हो गया",
     "diseaseNames": {
-      "late_blight": "लेट ब्लाइट (झुलसा रोग)",
-      "leaf_curl_virus": "पत्ती मरोड़ वायरस",
-      "healthy": "स्वस्थ"
+      "healthy": "स्वस्थ",
+      "early_blight": "अगेती झुलसा रोग",
+      "late_blight": "पछेती झुलसा रोग",
+      "target_spot": "टारगेट स्पॉट",
+      "yellow_leaf_curl_virus": "पीत पत्ती मोड़क विषाणु",
+      "mosaic_virus": "मोज़ेक विषाणु"
     }
   },
   "treatment": {
@@ -104,7 +107,11 @@
     "title": "स्कैन इतिहास",
     "emptyTitle": "अभी तक कोई स्कैन नहीं",
     "emptyBody": "आपकी ली गई पत्ती की फोटो और परिणाम यहाँ दिखेंगे, बिना इंटरनेट के भी।",
-    "scanNow": "अभी स्कैन करें"
+    "scanNow": "अभी स्कैन करें",
+    "pendingAnalysis": "विश्लेषण लंबित है",
+    "pendingSync": "⏳ सिंक लंबित है",
+    "deleteConfirmTitle": "इस स्कैन को हटाएं?",
+    "deleteLabel": "हटाएं"
   },
   "voice": {
     "headlineListening": "मैं आपकी बात सुन रहा हूँ...",

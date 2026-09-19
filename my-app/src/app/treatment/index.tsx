@@ -7,8 +7,11 @@ import { ScreenHeader } from '@/components/ScreenHeader';
 import { KNOWN_DISEASES } from '@/lib/api/mock-data';
 
 const DISEASE_ICON: Record<string, string> = {
+  early_blight: '🍁',
   late_blight: '🍂',
-  leaf_curl_virus: '🌀',
+  target_spot: '🎯',
+  yellow_leaf_curl_virus: '🌀',
+  mosaic_virus: '🧩',
   healthy: '🌿',
 };
 

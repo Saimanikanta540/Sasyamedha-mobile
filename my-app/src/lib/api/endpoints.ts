@@ -166,6 +166,11 @@ export async function postSellSmart(input: SellSmartRequestInput): Promise<SellS
       name: r.name,
       type: r.type as SellSmartResponse['destinations'][number]['type'],
       netReturnRupees: r.breakdown.net_return,
+      // For buyer/fpo destinations, destination_id IS the same id GET
+      // /buyers/{id} uses (both come from the same Destination row
+      // server-side) — without this, the destination detail screen's Buyer/
+      // FPO contact section never renders since it's gated on buyerId.
+      buyerId: r.type !== 'mandi' ? r.destination_id : undefined,
       breakdown: {
         grossValueRupees: r.breakdown.gross_revenue,
         transportCostRupees: r.breakdown.transport_cost,

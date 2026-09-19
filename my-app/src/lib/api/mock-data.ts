@@ -13,9 +13,47 @@ import type {
   TreatmentGuidance,
 } from './types';
 
-export const KNOWN_DISEASES = ['late_blight', 'leaf_curl_virus', 'healthy'] as const;
+// Matches the server's real 6-class tomato model exactly (app/services/
+// ml_inference.py / app/seed/treatment_seed.py) — was 3 classes with a
+// different name for the virus class ('leaf_curl_virus' vs the server's
+// 'yellow_leaf_curl_virus') before this, left over from before real
+// diagnosis existed. Real online diagnosis already returns the server's
+// keys untouched regardless of this list, but the Treat tile's manual
+// browse picker is driven directly by KNOWN_DISEASES, and this file is
+// also every offline/no-backend fallback.
+export const KNOWN_DISEASES = [
+  'healthy',
+  'early_blight',
+  'late_blight',
+  'target_spot',
+  'yellow_leaf_curl_virus',
+  'mosaic_virus',
+] as const;
 
 export const MOCK_TREATMENTS: Record<string, TreatmentGuidance> = {
+  early_blight: {
+    disease: 'early_blight',
+    symptoms: [
+      'Brown spots with concentric rings on older, lower leaves',
+      'Yellowing around the spots',
+      'Leaves dry out and fall early',
+    ],
+    immediateActions: [
+      'Remove and burn the badly affected lower leaves',
+      'Water at the base only, never over the leaves',
+      'Spray a copper-based fungicide, following the dosage on the label',
+      'Repeat after 7 days if new spots appear',
+    ],
+    prevention: [
+      'Rotate tomato with a non-solanaceous crop',
+      'Keep 60cm spacing so leaves dry quickly',
+      'Mulch to stop soil splashing onto leaves',
+    ],
+    indicativeCost: [
+      { label: 'Copper fungicide (1 acre)', amountRupees: 400 },
+      { label: 'Labour for spraying', amountRupees: 300 },
+    ],
+  },
   late_blight: {
     disease: 'late_blight',
     symptoms: [
@@ -39,8 +77,30 @@ export const MOCK_TREATMENTS: Record<string, TreatmentGuidance> = {
       { label: 'Labour for spraying', amountRupees: 300 },
     ],
   },
-  leaf_curl_virus: {
-    disease: 'leaf_curl_virus',
+  target_spot: {
+    disease: 'target_spot',
+    symptoms: [
+      'Small brown spots with concentric rings, like a target',
+      'Spots merge into larger patches on older leaves',
+      'Yellowing and early leaf drop',
+    ],
+    immediateActions: [
+      'Remove severely spotted leaves and destroy them away from the field',
+      'Avoid overhead watering',
+      'Spray a copper-based fungicide, following the dosage on the label',
+    ],
+    prevention: [
+      'Rotate with a non-solanaceous crop',
+      'Stake plants to improve air circulation',
+      'Avoid excess nitrogen fertiliser',
+    ],
+    indicativeCost: [
+      { label: 'Copper fungicide (1 acre)', amountRupees: 400 },
+      { label: 'Labour for spraying', amountRupees: 300 },
+    ],
+  },
+  yellow_leaf_curl_virus: {
+    disease: 'yellow_leaf_curl_virus',
     symptoms: [
       'Upward curling and crinkling of young leaves',
       'Stunted plant growth',
@@ -59,6 +119,31 @@ export const MOCK_TREATMENTS: Record<string, TreatmentGuidance> = {
       { label: 'Neem oil spray (1 acre)', amountRupees: 320 },
       { label: 'Sticky traps (pack of 20)', amountRupees: 260 },
     ],
+  },
+  mosaic_virus: {
+    disease: 'mosaic_virus',
+    symptoms: [
+      'Mottled light and dark green pattern on leaves',
+      'Leaves curled, narrow or misshapen',
+      'Stunted growth and reduced yield',
+    ],
+    immediateActions: [
+      'Uproot and destroy infected plants — there is no cure',
+      'Wash hands and tools with soap after handling infected plants',
+      'Control aphids with a recommended insecticide',
+    ],
+    prevention: [
+      'Use certified virus-free seed',
+      'Control weeds that can host the virus',
+    ],
+    indicativeCost: [{ label: 'Aphid control (1 acre)', amountRupees: 280 }],
+  },
+  healthy: {
+    disease: 'healthy',
+    symptoms: ['Leaves are deep green and evenly coloured', 'No spots, wilting or curling'],
+    immediateActions: ['No treatment needed right now', 'Check the plant again in 5–7 days'],
+    prevention: ['Rotate crops each season', 'Keep adequate spacing between plants'],
+    indicativeCost: [],
   },
 };
 
@@ -197,6 +282,8 @@ export function mockBuyer(id: string): BuyerContact {
       quantityRangeKg: [100, 5000],
       phone: '+919000000001',
       verified: true,
+      indicativePricePerKg: 17,
+      distanceKm: 3,
     },
     'buyer-freshharvest': {
       id,
@@ -208,17 +295,45 @@ export function mockBuyer(id: string): BuyerContact {
       quantityRangeKg: [500, 20000],
       phone: '+919000000002',
       verified: true,
+      indicativePricePerKg: 18,
+      distanceKm: 34,
+    },
+    'buyer-sunrise-traders': {
+      id,
+      name: 'Sunrise Traders',
+      address: 'Market Yard, Tenali',
+      lat: 16.243,
+      lng: 80.64,
+      cropsAccepted: ['chilli', 'paddy'],
+      quantityRangeKg: [200, 8000],
+      phone: '+919000000003',
+      verified: false,
+      indicativePricePerKg: 22,
+      distanceKm: 18,
+    },
+    'fpo-krishna-valley': {
+      id,
+      name: 'Krishna Valley Farmer Producer Organization',
+      address: 'Near Krishna Canal, Guntur',
+      lat: 16.35,
+      lng: 80.5,
+      cropsAccepted: ['tomato', 'chilli'],
+      quantityRangeKg: [100, 10000],
+      phone: '+919000000004',
+      verified: true,
+      indicativePricePerKg: 16.5,
+      distanceKm: 8,
     },
   };
   return byId[id] ?? byId['fpo-guntur-farmers'];
 }
 
 export function mockBuyerList(): BuyerContact[] {
-  return [mockBuyer('buyer-freshharvest')];
+  return [mockBuyer('buyer-freshharvest'), mockBuyer('buyer-sunrise-traders')];
 }
 
 export function mockFpoList(): BuyerContact[] {
-  return [mockBuyer('fpo-guntur-farmers')];
+  return [mockBuyer('fpo-guntur-farmers'), mockBuyer('fpo-krishna-valley')];
 }
 
 export function mockTransportRequest(): TransportRequestResult {

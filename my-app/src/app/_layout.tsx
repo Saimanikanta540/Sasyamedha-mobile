@@ -17,6 +17,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import '@/i18n';
 import '@/global.css';
 import { queryClient, queryPersister } from '@/lib/storage/query-client';
+import { seedDemoScansIfEmpty } from '@/lib/storage/scan-history';
 import { useLocationStore } from '@/stores/locationStore';
 import { useOutboxSync } from '@/stores/outboxStore';
 import { useScanHistoryStore } from '@/stores/scanHistoryStore';
@@ -27,7 +28,7 @@ export default function RootLayout() {
   useOutboxSync();
 
   useEffect(() => {
-    useScanHistoryStore.getState().load();
+    seedDemoScansIfEmpty().finally(() => useScanHistoryStore.getState().load());
     useLocationStore.getState().requestLocation();
   }, []);
 

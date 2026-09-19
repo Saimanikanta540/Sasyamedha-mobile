@@ -84,9 +84,12 @@
     "saveToHistory": "Save to history",
     "savedToHistory": "Saved to history",
     "diseaseNames": {
+      "healthy": "Healthy",
+      "early_blight": "Early Blight",
       "late_blight": "Late Blight",
-      "leaf_curl_virus": "Leaf Curl Virus",
-      "healthy": "Healthy"
+      "target_spot": "Target Spot",
+      "yellow_leaf_curl_virus": "Yellow Leaf Curl Virus",
+      "mosaic_virus": "Mosaic Virus"
     }
   },
   "treatment": {
@@ -104,7 +107,11 @@
     "title": "Scan history",
     "emptyTitle": "No scans yet",
     "emptyBody": "Leaf photos and results you've captured will appear here, even without internet.",
-    "scanNow": "Scan now"
+    "scanNow": "Scan now",
+    "pendingAnalysis": "Pending analysis",
+    "pendingSync": "⏳ Pending sync",
+    "deleteConfirmTitle": "Delete this scan?",
+    "deleteLabel": "Delete"
   },
   "voice": {
     "headlineListening": "Listening to you...",

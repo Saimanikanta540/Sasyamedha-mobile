@@ -84,9 +84,12 @@
     "saveToHistory": "చరిత్రలో సేవ్ చేయండి",
     "savedToHistory": "చరిత్రలో సేవ్ చేయబడింది",
     "diseaseNames": {
-      "late_blight": "ఆలస్య ముడత తెగులు (Late Blight)",
-      "leaf_curl_virus": "ఆకు ముడత వైరస్",
-      "healthy": "ఆరోగ్యంగా ఉంది"
+      "healthy": "ఆరోగ్యకరమైనది",
+      "early_blight": "తొలి ఎండు తెగులు",
+      "late_blight": "ఆలస్య ఎండు తెగులు",
+      "target_spot": "టార్గెట్ స్పాట్",
+      "yellow_leaf_curl_virus": "పసుపు ఆకు ముడత వైరస్",
+      "mosaic_virus": "మొజాయిక్ వైరస్"
     }
   },
   "treatment": {
@@ -104,7 +107,11 @@
     "title": "స్కాన్ చరిత్ర",
     "emptyTitle": "ఇంకా స్కాన్‌లు లేవు",
     "emptyBody": "మీరు తీసిన ఆకు ఫోటోలు మరియు ఫలితాలు ఇక్కడ కనిపిస్తాయి, ఇంటర్నెట్ లేకపోయినా.",
-    "scanNow": "ఇప్పుడు స్కాన్ చేయండి"
+    "scanNow": "ఇప్పుడు స్కాన్ చేయండి",
+    "pendingAnalysis": "విశ్లేషణ పెండింగ్‌లో ఉంది",
+    "pendingSync": "⏳ సింక్ పెండింగ్‌లో ఉంది",
+    "deleteConfirmTitle": "ఈ స్కాన్‌ను తొలగించాలా?",
+    "deleteLabel": "తొలగించు"
   },
   "voice": {
     "headlineListening": "మీరు చెప్పేది వింటున్నాను...",

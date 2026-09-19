@@ -24,7 +24,7 @@ export default function ScanHistoryScreen() {
   }, [loaded, load]);
 
   const onDelete = (scan: ScanEntry) => {
-    Alert.alert('Delete this scan?', undefined, [
+    Alert.alert(t('history.deleteConfirmTitle'), undefined, [
       { text: t('common.cancel'), style: 'cancel' },
       { text: t('common.ok'), style: 'destructive', onPress: () => remove(scan.id) },
     ]);
@@ -63,12 +63,12 @@ export default function ScanHistoryScreen() {
                 <View className="flex-1 gap-1">
                   <Text className="font-sans-bold text-sm text-ink-primary" numberOfLines={1}>
                     {isPending
-                      ? 'Pending analysis'
+                      ? t('history.pendingAnalysis')
                       : t(`diagnose.diseaseNames.${item.disease}`, { defaultValue: item.disease })}
                   </Text>
                   {isPending ? (
                     <View className="self-start rounded-full bg-state-warning-bg px-2.5 py-0.5">
-                      <Text className="text-xs font-sans-bold text-state-warning">⏳ Pending sync</Text>
+                      <Text className="text-xs font-sans-bold text-state-warning">{t('history.pendingSync')}</Text>
                     </View>
                   ) : (
                     <ConfidenceBar confidence={item.confidence} />
@@ -81,7 +81,7 @@ export default function ScanHistoryScreen() {
                   className="h-9 w-9 items-center justify-center rounded-full bg-surface-muted"
                   onPress={() => onDelete(item)}
                   accessibilityRole="button"
-                  accessibilityLabel="Delete"
+                  accessibilityLabel={t('history.deleteLabel')}
                 >
                   <Text>🗑️</Text>
                 </TouchableOpacity>
