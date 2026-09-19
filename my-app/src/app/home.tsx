@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ConnectivityBadge } from '@/components/ConnectivityBadge';
 import { HomeTile } from '@/components/HomeTile';
+import { WeatherWidget } from '@/components/WeatherWidget';
 import { usePendingRequests } from '@/stores/outboxStore';
 
 export default function HomeScreen() {
@@ -90,7 +91,8 @@ export default function HomeScreen() {
             </TouchableOpacity>
           </View>
         </View>
-        <Text className="text-sm text-white/70">{t('home.greeting')} 👋</Text>
+        <Text className="text-sm text-white/70 mb-4">{t('home.greeting')} 👋</Text>
+        <WeatherWidget />
       </View>
 
       <View className="flex-1 rounded-t-[32px] bg-surface-app">

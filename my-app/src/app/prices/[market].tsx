@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { EmptyState } from '@/components/EmptyState';
 import { ScreenHeader } from '@/components/ScreenHeader';
+import { PriceChartWidget } from '@/components/PriceChartWidget';
 import { getPrices } from '@/lib/api/endpoints';
 
 export default function MarketPriceDetailScreen() {
@@ -49,6 +50,13 @@ export default function MarketPriceDetailScreen() {
             </View>
           </View>
           {record.distanceKm != null && (
+            <Text className="text-sm text-ink-secondary mt-2">
+              {t('common.distanceAway', { distance: record.distanceKm })}
+            </Text>
+          )}
+          <PriceChartWidget modalPrice={record.modalPriceRupeesPerQuintal} />
+
+          {false && (
             <Text className="text-sm text-ink-secondary">
               {t('common.distanceAway', { distance: record.distanceKm })}
             </Text>
