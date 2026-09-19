@@ -37,7 +37,7 @@ export default function FarmerDashboard() {
           <TouchableOpacity 
             className="w-[48%] bg-white p-4 rounded-2xl shadow-sm border border-gray-100 items-center"
             activeOpacity={0.7}
-            onPress={() => console.log('Navigate to AI Diagnosis')}
+            onPress={() => router.push('/diagnosis')}
           >
             <View className="w-14 h-14 bg-green-100 rounded-full items-center justify-center mb-3">
               <Text className="text-2xl">📸</Text>
