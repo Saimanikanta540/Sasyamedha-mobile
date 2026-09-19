@@ -1,10 +1,12 @@
 import * as Location from 'expo-location';
 import { create } from 'zustand';
 
-/** Guntur farm coords — used only when live location is denied/unavailable, so
- * distance-sorted screens (Prices, Sell Smart, Cold Storage) always have *something*
- * to call the backend with rather than skipping the request entirely. */
-const FALLBACK = { lat: 16.3067, lng: 80.4365 };
+/** KL University (Koneru Lakshmaiah Education Foundation), Vaddeswaram — used
+ * only when live location is denied/unavailable, so distance-sorted screens
+ * (Prices, Sell Smart, Cold Storage) always have *something* to call the
+ * backend with rather than skipping the request entirely. Verified via
+ * Nominatim (lat/lng for the actual campus POI, not just the general area). */
+const FALLBACK = { lat: 16.4422073, lng: 80.6253234 };
 const LOCATE_TIMEOUT_MS = 5000;
 
 type LocationStatus = 'idle' | 'loading' | 'live' | 'denied' | 'unavailable';

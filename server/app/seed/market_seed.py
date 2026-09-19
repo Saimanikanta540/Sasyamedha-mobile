@@ -123,6 +123,20 @@ COLD_STORAGES = [
         "cost_per_kg_per_day": 0.80,
         "contact_phone": "9866000205",
     },
+    # ~1.6km from KL University (Koneru Lakshmaiah Education Foundation,
+    # Vaddeswaram — 16.4422073, 80.6253234, verified via Nominatim) — the
+    # rest of the seed data was built around the old Guntur-town farm point
+    # and only reaches this area at 20km+.
+    {
+        "name": "Vaddeswaram Cold Storage",
+        "latitude": 16.4300,
+        "longitude": 80.6180,
+        "total_capacity_kg": 120000,
+        "available_capacity_kg": 55000,
+        "supported_crops": ["tomato", "chilli", "paddy", "cotton"],
+        "cost_per_kg_per_day": 0.90,
+        "contact_phone": "9866000206",
+    },
 ]
 
 TRANSPORT_PROVIDERS = [
@@ -161,6 +175,16 @@ TRANSPORT_PROVIDERS = [
         "longitude": 80.4400,
         "rate_per_km": 55,
         "contact_phone": "9900011004",
+    },
+    # ~0.7km from KL University — see the cold storage list above for why.
+    {
+        "name": "Vaddeswaram Logistics",
+        "vehicle_type": "Tata 407 mini truck",
+        "capacity_kg": 2500,
+        "latitude": 16.4380,
+        "longitude": 80.6300,
+        "rate_per_km": 42,
+        "contact_phone": "9900011005",
     },
 ]
 

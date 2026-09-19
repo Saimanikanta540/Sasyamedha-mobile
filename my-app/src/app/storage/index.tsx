@@ -15,7 +15,7 @@ import { useIsOnline } from '@/lib/network/connectivity';
 import { useLocationStore } from '@/stores/locationStore';
 import { useSessionStore } from '@/stores/sessionStore';
 
-const DEFAULT_CENTER = { lat: 16.3067, lng: 80.4365 };
+const DEFAULT_CENTER = { lat: 16.4422073, lng: 80.6253234 }; // KL University, Vaddeswaram
 const RADIUS_STEPS = [10, 25, 50, Infinity];
 
 export default function ColdStorageScreen() {
