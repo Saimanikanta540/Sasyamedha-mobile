@@ -95,9 +95,9 @@ export default function ColdStorageScreen() {
       ) : facilities.length === 0 ? (
         <EmptyState
           icon="❄️"
-          title="No facilities nearby"
-          body={isOffline ? t('treatment.offlineNotCached') : 'No cold storage found within this radius.'}
-          actionLabel={radiusKm !== Infinity ? 'Expand search radius' : undefined}
+          title={t('storage.emptyTitle')}
+          body={isOffline ? t('treatment.offlineNotCached') : t('storage.emptyBody')}
+          actionLabel={radiusKm !== Infinity ? t('storage.expandRadius') : undefined}
           onAction={radiusKm !== Infinity ? () => setRadiusStep((s) => Math.min(s + 1, RADIUS_STEPS.length - 1)) : undefined}
         />
       ) : (
@@ -132,7 +132,9 @@ export default function ColdStorageScreen() {
                   capacityTonnes={item.capacityTonnes}
                   label={`${pct}% free · ${item.availableTonnes}t of ${item.capacityTonnes}t`}
                 />
-                <Text className="text-xs text-ink-secondary">₹{item.costPerDayRupeesPerQuintal}/quintal/day</Text>
+                <Text className="text-xs text-ink-secondary">
+                  {t('storage.perQuintalPerDay', { cost: item.costPerDayRupeesPerQuintal })}
+                </Text>
               </TouchableOpacity>
             );
           }}

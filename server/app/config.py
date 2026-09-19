@@ -38,6 +38,11 @@ class Settings(BaseSettings):
     gemini_api_key: str = ""
     gemini_model: str = "gemini-3.6-flash"
 
+    # In-process OGD price ingestion scheduler (see services/scheduler.py).
+    # 0 disables the background loop entirely — POST /internal/ingest-prices
+    # still works on demand either way.
+    price_ingestion_interval_minutes: int = 180
+
     # CORS
     cors_origins: str = "http://localhost:3000"
 

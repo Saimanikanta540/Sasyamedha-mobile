@@ -45,6 +45,12 @@ export default function HomeScreen() {
       primary: true,
     },
     {
+      icon: '🤝',
+      label: t('home.tileBuyers'),
+      sublabel: t('home.tileBuyersSub'),
+      route: '/buyers',
+    },
+    {
       icon: '❄️',
       label: t('home.tileStore'),
       sublabel: t('home.tileStoreSub'),

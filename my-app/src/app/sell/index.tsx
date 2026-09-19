@@ -15,12 +15,6 @@ import { useLocationStore } from '@/stores/locationStore';
 import { useSessionStore } from '@/stores/sessionStore';
 
 const COMMODITIES = ['tomato', 'chilli', 'paddy', 'cotton'] as const;
-const COMMODITY_LABEL: Record<(typeof COMMODITIES)[number], string> = {
-  tomato: 'Tomato',
-  chilli: 'Chilli',
-  paddy: 'Paddy',
-  cotton: 'Cotton',
-};
 const QUANTITY_STEP = 50;
 
 export default function SellSmartScreen() {
@@ -85,7 +79,7 @@ export default function SellSmartScreen() {
                 accessibilityRole="button"
               >
                 <Text className={`font-sans-bold text-sm ${commodity === c ? 'text-white' : 'text-ink-primary'}`}>
-                  {COMMODITY_LABEL[c]}
+                  {t(`crops.${c}`)}
                 </Text>
               </TouchableOpacity>
             ))}
@@ -120,13 +114,13 @@ export default function SellSmartScreen() {
             accessibilityRole="button"
           >
             <Text className={`font-sans-bold text-base ${canCalculate ? 'text-white' : 'text-ink-muted'}`}>
-              {query.isFetching ? 'Calculating best return…' : t('common.calculate')}
+              {query.isFetching ? t('sell.calculating') : t('common.calculate')}
             </Text>
           </TouchableOpacity>
         </View>
 
         {query.isFetching && !query.data && (
-          <Text className="text-center text-sm text-ink-secondary">Calculating best return…</Text>
+          <Text className="text-center text-sm text-ink-secondary">{t('sell.calculating')}</Text>
         )}
 
         {!query.data && isOffline && (
@@ -167,7 +161,7 @@ export default function SellSmartScreen() {
                     <Text className="font-sans-bold text-base text-ink-primary">{dest.name}</Text>
                     {isBest && (
                       <View className="rounded-full bg-brand-primary px-3 py-1">
-                        <Text className="font-sans-bold text-xs text-white">★ Best return</Text>
+                        <Text className="font-sans-bold text-xs text-white">{t('sell.bestReturn')}</Text>
                       </View>
                     )}
                   </View>
@@ -175,7 +169,7 @@ export default function SellSmartScreen() {
                     ₹{dest.netReturnRupees.toLocaleString()}
                   </Text>
                   <Text className={`text-xs font-sans-bold ${delta >= 0 ? 'text-state-success' : 'text-state-danger'}`}>
-                    {delta >= 0 ? '+₹0 (best)' : `−₹${Math.abs(delta).toLocaleString()} vs best`}
+                    {delta >= 0 ? t('sell.bestBadgeDelta') : t('sell.deltaVsBest', { delta: Math.abs(delta).toLocaleString() })}
                   </Text>
 
                   <TouchableOpacity
@@ -183,16 +177,16 @@ export default function SellSmartScreen() {
                     accessibilityRole="button"
                   >
                     <Text className="text-xs font-sans-bold text-brand-primary">
-                      {isExpanded ? '▲ Hide breakdown' : '▼ Show breakdown'}
+                      {isExpanded ? t('sell.hideBreakdown') : t('sell.showBreakdown')}
                     </Text>
                   </TouchableOpacity>
 
                   {isExpanded && (
                     <View className="gap-1 border-t border-border pt-2">
-                      <BreakdownRow label="Gross value" value={dest.breakdown.grossValueRupees} />
-                      <BreakdownRow label="Transport" value={-dest.breakdown.transportCostRupees} />
-                      <BreakdownRow label="Storage" value={-dest.breakdown.storageCostRupees} />
-                      <BreakdownRow label="Market margin" value={-dest.breakdown.marketMarginRupees} />
+                      <BreakdownRow label={t('sell.grossValue')} value={dest.breakdown.grossValueRupees} />
+                      <BreakdownRow label={t('sell.transport')} value={-dest.breakdown.transportCostRupees} />
+                      <BreakdownRow label={t('sell.storage')} value={-dest.breakdown.storageCostRupees} />
+                      <BreakdownRow label={t('sell.marketMargin')} value={-dest.breakdown.marketMarginRupees} />
                     </View>
                   )}
 

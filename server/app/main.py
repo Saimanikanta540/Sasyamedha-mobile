@@ -7,7 +7,8 @@ from app.middlewares import ObservabilityMiddleware
 from app.config import get_settings
 from app.database import create_db_and_tables
 from app.logging_config import configure_logging
-from app.routers import auth, treatment, diagnosis, market_prices, cold_storage, logistics, sell_smart, scan, voice
+from app.routers import auth, treatment, diagnosis, market_prices, cold_storage, logistics, sell_smart, scan, voice, directory
+from app.services.scheduler import start_price_ingestion_scheduler, stop_price_ingestion_scheduler
 
 configure_logging()
 logger = logging.getLogger(__name__)
@@ -36,7 +37,13 @@ app.add_middleware(
 def on_startup() -> None:
     if settings.database_url.startswith("sqlite"):
         create_db_and_tables()
+    start_price_ingestion_scheduler()
     logger.info("startup", extra={"event": "startup", "env": settings.env})
+
+
+@app.on_event("shutdown")
+def on_shutdown() -> None:
+    stop_price_ingestion_scheduler()
 
 @app.get("/health", tags=["health"])
 def health() -> dict:
@@ -50,3 +57,4 @@ app.include_router(logistics.router)
 app.include_router(sell_smart.router)
 app.include_router(scan.router)
 app.include_router(voice.router)
+app.include_router(directory.router)

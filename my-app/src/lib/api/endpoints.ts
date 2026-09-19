@@ -2,8 +2,10 @@ import { apiFetch, hasBackendConfigured } from './client';
 import { fetchGovPrices } from './prices-fetcher';
 import {
   mockBuyer,
+  mockBuyerList,
   mockColdStorage,
   mockDiagnose,
+  mockFpoList,
   mockPrices,
   mockSellSmart,
   mockTransportRequest,
@@ -218,10 +220,75 @@ export async function getScanHistory(): Promise<ScanHistoryServerEntry[]> {
   );
 }
 
+interface ServerDestination {
+  id: string;
+  name: string;
+  address: string;
+  lat: number;
+  lng: number;
+  crops_accepted: string[];
+  min_quantity_kg: number | null;
+  max_quantity_kg: number | null;
+  indicative_price_per_kg: number | null;
+  phone: string | null;
+  verified: boolean;
+  distance_km: number | null;
+}
+
+function adaptDestination(d: ServerDestination): BuyerContact {
+  return {
+    id: d.id,
+    name: d.name,
+    address: d.address,
+    lat: d.lat,
+    lng: d.lng,
+    cropsAccepted: d.crops_accepted,
+    quantityRangeKg: [d.min_quantity_kg ?? 0, d.max_quantity_kg ?? Infinity],
+    phone: d.phone ?? '',
+    verified: d.verified,
+    indicativePricePerKg: d.indicative_price_per_kg ?? undefined,
+    distanceKm: d.distance_km ?? undefined,
+  };
+}
+
 export async function getBuyer(id: string): Promise<BuyerContact> {
   return readWithFallback(
-    () => apiFetch<BuyerContact>(`/buyers/${encodeURIComponent(id)}`),
+    async () => adaptDestination(await apiFetch<ServerDestination>(`/buyers/${encodeURIComponent(id)}`)),
     () => mockBuyer(id),
+  );
+}
+
+export async function getBuyers(lat?: number, lng?: number, commodity?: string): Promise<BuyerContact[]> {
+  return readWithFallback(
+    async () => {
+      const params = new URLSearchParams();
+      if (lat != null && lng != null) {
+        params.set('lat', String(lat));
+        params.set('lng', String(lng));
+        params.set('radius_km', '150');
+      }
+      if (commodity) params.set('commodity', commodity);
+      const rows = await apiFetch<ServerDestination[]>(`/buyers?${params.toString()}`);
+      return rows.map(adaptDestination);
+    },
+    mockBuyerList,
+  );
+}
+
+export async function getFpos(lat?: number, lng?: number, commodity?: string): Promise<BuyerContact[]> {
+  return readWithFallback(
+    async () => {
+      const params = new URLSearchParams();
+      if (lat != null && lng != null) {
+        params.set('lat', String(lat));
+        params.set('lng', String(lng));
+        params.set('radius_km', '150');
+      }
+      if (commodity) params.set('commodity', commodity);
+      const rows = await apiFetch<ServerDestination[]>(`/fpos?${params.toString()}`);
+      return rows.map(adaptDestination);
+    },
+    mockFpoList,
   );
 }
 

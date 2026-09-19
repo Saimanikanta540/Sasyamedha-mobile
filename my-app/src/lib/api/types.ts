@@ -114,6 +114,9 @@ export interface BuyerContact {
   cropsAccepted: string[];
   quantityRangeKg: [number, number];
   phone: string;
+  verified: boolean;
+  indicativePricePerKg?: number;
+  distanceKm?: number;
 }
 
 export interface VoiceTranscription {

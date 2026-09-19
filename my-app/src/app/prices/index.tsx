@@ -15,12 +15,6 @@ import { useIsOnline } from '@/lib/network/connectivity';
 import { useLocationStore } from '@/stores/locationStore';
 
 const COMMODITIES = ['tomato', 'chilli', 'paddy', 'cotton'] as const;
-const COMMODITY_LABEL: Record<(typeof COMMODITIES)[number], string> = {
-  tomato: 'Tomato',
-  chilli: 'Chilli',
-  paddy: 'Paddy',
-  cotton: 'Cotton',
-};
 
 export default function MarketPricesScreen() {
   const router = useRouter();
@@ -40,7 +34,7 @@ export default function MarketPricesScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-surface-app" edges={['top']}>
-      <ScreenHeader title={t('home.tilePrices')} subtitle="Live Mandi Rates" onBack={() => router.back()} />
+      <ScreenHeader title={t('home.tilePrices')} subtitle={t('prices.subtitle')} onBack={() => router.back()} />
 
       <FlatList
         data={COMMODITIES}
@@ -58,7 +52,7 @@ export default function MarketPricesScreen() {
             <Text
               className={`font-sans-bold text-sm ${commodity === item ? 'text-white' : 'text-ink-primary'}`}
             >
-              {COMMODITY_LABEL[item]}
+              {t(`crops.${item}`)}
             </Text>
           </TouchableOpacity>
         )}
@@ -77,9 +71,9 @@ export default function MarketPricesScreen() {
               className="rounded-3xl p-5 shadow-md flex-row justify-between items-center"
            >
               <View>
-                 <Text className="text-white/80 text-xs uppercase font-sans-bold mb-1">State Average</Text>
+                 <Text className="text-white/80 text-xs uppercase font-sans-bold mb-1">{t('prices.stateAverage')}</Text>
                  <Text className="text-white text-3xl font-sans-bold">₹{avgPrice}</Text>
-                 <Text className="text-white/80 text-xs mt-1">per quintal</Text>
+                 <Text className="text-white/80 text-xs mt-1">{t('prices.perQuintal')}</Text>
               </View>
               <View className="bg-white/20 h-14 w-14 rounded-full items-center justify-center">
                  <Text className="text-2xl">📈</Text>
@@ -102,7 +96,7 @@ export default function MarketPricesScreen() {
           icon="📊"
           title={t('history.emptyTitle')}
           body={isOffline ? t('treatment.offlineNotCached') : t('history.emptyBody')}
-          actionLabel={isOffline ? undefined : 'Try another commodity'}
+          actionLabel={isOffline ? undefined : t('prices.tryAnother')}
           onAction={isOffline ? undefined : () => setCommodity(commodity === 'tomato' ? 'chilli' : 'tomato')}
         />
       ) : (
@@ -125,6 +119,7 @@ export default function MarketPricesScreen() {
 }
 
 function PriceRow({ record, onPress }: { record: MarketPriceRecord; onPress: () => void }) {
+  const { t } = useTranslation();
   const isHigh = (record.modalPriceRupeesPerQuintal || 0) > (record.minPriceRupeesPerQuintal || 0) + 100;
   return (
     <TouchableOpacity
@@ -154,15 +149,15 @@ function PriceRow({ record, onPress }: { record: MarketPriceRecord; onPress: () 
          </View>
          <View className={`rounded-xl px-2 py-1 ${isHigh ? 'bg-green-100' : 'bg-orange-100'}`}>
             <Text className={`text-xs font-sans-bold ${isHigh ? 'text-green-700' : 'text-orange-700'}`}>
-               {isHigh ? '↑ Good' : '↓ Average'}
+               {isHigh ? t('prices.good') : t('prices.average')}
             </Text>
          </View>
       </View>
-      
+
       <View className="h-px bg-border my-3" />
       <View className="flex-row justify-between items-center">
-         <Text className="text-xs text-ink-secondary font-sans-bold">MIN: <Text className="text-ink-primary">₹{record.minPriceRupeesPerQuintal}</Text></Text>
-         <Text className="text-xs text-ink-secondary font-sans-bold">MAX: <Text className="text-ink-primary">₹{record.maxPriceRupeesPerQuintal}</Text></Text>
+         <Text className="text-xs text-ink-secondary font-sans-bold">{t('prices.min')}: <Text className="text-ink-primary">₹{record.minPriceRupeesPerQuintal}</Text></Text>
+         <Text className="text-xs text-ink-secondary font-sans-bold">{t('prices.max')}: <Text className="text-ink-primary">₹{record.maxPriceRupeesPerQuintal}</Text></Text>
       </View>
     </TouchableOpacity>
   );

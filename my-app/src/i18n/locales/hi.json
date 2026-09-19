@@ -36,7 +36,9 @@
     "tileTransport": "परिवहन",
     "tileTransportSub": "वाहन बुक करें",
     "settings": "सेटिंग्स",
-    "voiceAssistant": "बोलकर पूछें"
+    "voiceAssistant": "बोलकर पूछें",
+    "tileBuyers": "खरीदार और एफपीओ",
+    "tileBuyersSub": "किसे बेचना है, पता करें"
   },
   "settings": {
     "title": "सेटिंग्स",
@@ -123,5 +125,81 @@
     "promptLogistics": "\"तेनाली के लिए सबसे अच्छा परिवहन?\"",
     "goNow": "अभी जाएं",
     "askAgain": "फिर से पूछें"
+  },
+  "crops": {
+    "tomato": "टमाटर",
+    "chilli": "मिर्च",
+    "paddy": "धान",
+    "cotton": "कपास"
+  },
+  "sell": {
+    "calculating": "सबसे अच्छा रिटर्न निकाला जा रहा है…",
+    "grossValue": "सकल मूल्य",
+    "transport": "परिवहन",
+    "storage": "भंडारण",
+    "marketMargin": "बाज़ार मार्जिन",
+    "bestReturn": "★ सबसे अच्छा रिटर्न",
+    "bestBadgeDelta": "+₹0 (सर्वश्रेष्ठ)",
+    "deltaVsBest": "−₹{{delta}} सर्वश्रेष्ठ से कम",
+    "showBreakdown": "▼ गणना दिखाएं",
+    "hideBreakdown": "▲ गणना छुपाएं"
+  },
+  "destination": {
+    "subtitle": "गंतव्य विवरण",
+    "netReturn": "शुद्ध रिटर्न",
+    "fullBreakdown": "पूरी गणना",
+    "grossValue": "सकल मूल्य",
+    "transportCost": "परिवहन लागत",
+    "storageCost": "भंडारण लागत",
+    "marketMargin": "बाज़ार मार्जिन",
+    "buyerContact": "खरीदार / एफपीओ संपर्क",
+    "arrangeStorage": "❄️ भंडारण की व्यवस्था करें",
+    "arrangeTransport": "🚚 परिवहन की व्यवस्था करें"
+  },
+  "transport": {
+    "commodityLabel": "फसल",
+    "commodityPlaceholder": "जैसे टमाटर",
+    "quantityLabel": "मात्रा",
+    "pickupLabel": "पिकअप स्थान",
+    "pickupPlaceholder": "खेत / गांव का नाम",
+    "deliveryLabel": "डिलीवरी स्थान",
+    "deliveryPlaceholder": "मंडी / खरीदार का नाम",
+    "scheduleLabel": "पसंदीदा समय",
+    "schedulePlaceholder": "जैसे कल सुबह",
+    "offlineQueueNote": "आपके वापस ऑनलाइन आते ही यह अपने आप भेज दिया जाएगा।"
+  },
+  "storage": {
+    "emptyTitle": "आसपास कोई सुविधा नहीं",
+    "emptyBody": "इस दायरे में कोई कोल्ड स्टोरेज नहीं मिला।",
+    "expandRadius": "खोज का दायरा बढ़ाएं",
+    "checkAvailability": "उपलब्धता जांचें / बुक करें",
+    "confirmTitle": "उपलब्धता जांचें",
+    "confirmBody": "क्या आप अपनी फसल के लिए इस सुविधा की पुष्टि करना चाहते हैं?",
+    "confirmed": "उपलब्धता की पुष्टि हो गई — यह सुविधा आपकी फसल के लिए जगह रखेगी।",
+    "freeOfCapacity": "{{capacity}}t में से {{available}}t खाली है",
+    "perQuintalPerDay": "₹{{cost}} / क्विंटल / दिन"
+  },
+  "buyers": {
+    "title": "खरीदार और एफपीओ",
+    "tabBuyers": "खरीदार",
+    "tabFpos": "एफपीओ",
+    "verified": "सत्यापित",
+    "cropsAccepted": "स्वीकृत फसलें",
+    "quantityWindow": "स्वीकृत मात्रा",
+    "indicativePrice": "सांकेतिक कीमत",
+    "noResultsBuyers": "आसपास कोई खरीदार नहीं मिला।",
+    "noResultsFpos": "आसपास कोई एफपीओ नहीं मिला।",
+    "noResultsBody": "कृपया बाद में फिर से जांचें, या अपना इंटरनेट कनेक्शन जांचें।"
+  },
+  "prices": {
+    "subtitle": "लाइव मंडी भाव",
+    "stateAverage": "राज्य औसत",
+    "perQuintal": "प्रति क्विंटल",
+    "tryAnother": "दूसरी फसल आज़माएं",
+    "min": "न्यूनतम",
+    "max": "अधिकतम",
+    "modalPrice": "मॉडल कीमत",
+    "good": "↑ अच्छा",
+    "average": "↓ औसत"
   }
 }

@@ -22,29 +22,30 @@ export default function MarketPriceDetailScreen() {
   });
 
   const record = query.data?.records.find((r) => r.market === market);
+  const commodityLabel = t(`crops.${commodity}`);
 
   return (
     <SafeAreaView className="flex-1 bg-surface-app" edges={['top']}>
-      <ScreenHeader title={market} subtitle={commodity} onBack={() => router.back()} />
+      <ScreenHeader title={market} subtitle={commodityLabel} onBack={() => router.back()} />
 
       {record ? (
         <View className="gap-4 px-4">
           <View className="items-center gap-1 rounded-3xl bg-brand-primary p-6 shadow-md" style={{ elevation: 3 }}>
-            <Text className="text-xs font-sans-bold uppercase tracking-wide text-white/70">Modal price</Text>
+            <Text className="text-xs font-sans-bold uppercase tracking-wide text-white/70">{t('prices.modalPrice')}</Text>
             <Text className="font-sans-bold text-4xl text-white">
               ₹{record.modalPriceRupeesPerQuintal}
             </Text>
-            <Text className="text-xs text-white/70">per quintal · {commodity}</Text>
+            <Text className="text-xs text-white/70">{t('prices.perQuintal')} · {commodityLabel}</Text>
           </View>
           <View className="flex-row gap-3">
             <View className="flex-1 gap-1 rounded-2xl border border-border bg-surface shadow-sm p-4">
-              <Text className="text-xs text-ink-secondary">Min</Text>
+              <Text className="text-xs text-ink-secondary">{t('prices.min')}</Text>
               <Text className="font-sans-bold text-lg text-ink-primary">
                 ₹{record.minPriceRupeesPerQuintal}
               </Text>
             </View>
             <View className="flex-1 gap-1 rounded-2xl border border-border bg-surface shadow-sm p-4">
-              <Text className="text-xs text-ink-secondary">Max</Text>
+              <Text className="text-xs text-ink-secondary">{t('prices.max')}</Text>
               <Text className="font-sans-bold text-lg text-ink-primary">
                 ₹{record.maxPriceRupeesPerQuintal}
               </Text>

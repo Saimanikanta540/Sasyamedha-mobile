@@ -73,27 +73,42 @@ export default function TransportRequestScreen() {
         {!isOnline && (
           <View className="rounded-xl bg-state-warning-bg p-3">
             <Text className="text-xs font-sans-bold text-state-warning">
-              {t('connectivity.offlineBadge')} — this will be queued and sent automatically once you're back online.
+              {t('connectivity.offlineBadge')} — {t('transport.offlineQueueNote')}
             </Text>
           </View>
         )}
 
         <View className="gap-4 rounded-2xl border border-border bg-surface p-4 shadow-sm">
-          <Field label="Commodity" value={commodity} onChangeText={setCommodity} placeholder="e.g. Tomato" />
           <Field
-            label={`Quantity (${t('common.kg')})`}
+            label={t('transport.commodityLabel')}
+            value={commodity}
+            onChangeText={setCommodity}
+            placeholder={t('transport.commodityPlaceholder')}
+          />
+          <Field
+            label={`${t('transport.quantityLabel')} (${t('common.kg')})`}
             value={quantityText}
             onChangeText={setQuantityText}
             keyboardType="numeric"
             placeholder="500"
           />
-          <Field label="Pickup location" value={pickupLocation} onChangeText={setPickupLocation} placeholder="Farm / village name" />
-          <Field label="Delivery location" value={deliveryLocation} onChangeText={setDeliveryLocation} placeholder="Mandi / buyer name" />
           <Field
-            label="Preferred schedule"
+            label={t('transport.pickupLabel')}
+            value={pickupLocation}
+            onChangeText={setPickupLocation}
+            placeholder={t('transport.pickupPlaceholder')}
+          />
+          <Field
+            label={t('transport.deliveryLabel')}
+            value={deliveryLocation}
+            onChangeText={setDeliveryLocation}
+            placeholder={t('transport.deliveryPlaceholder')}
+          />
+          <Field
+            label={t('transport.scheduleLabel')}
             value={preferredSchedule}
             onChangeText={setPreferredSchedule}
-            placeholder="e.g. Tomorrow morning"
+            placeholder={t('transport.schedulePlaceholder')}
           />
         </View>
 

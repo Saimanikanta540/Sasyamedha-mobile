@@ -21,8 +21,10 @@ class Destination(SQLModel, table=True):
     name: str
     latitude: float
     longitude: float
+    district: str = Field(default="")
     contact_phone: str | None = None
     crops_accepted: list[str] = Field(sa_column=Column(JSON))
     min_quantity_kg: float | None = None
     max_quantity_kg: float | None = None
     offer_price_per_kg: float | None = None
+    verified: bool = Field(default=False)

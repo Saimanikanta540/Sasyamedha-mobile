@@ -36,7 +36,9 @@
     "tileTransport": "Transport",
     "tileTransportSub": "Book a vehicle",
     "settings": "Settings",
-    "voiceAssistant": "Speak to ask"
+    "voiceAssistant": "Speak to ask",
+    "tileBuyers": "Buyers & FPOs",
+    "tileBuyersSub": "Find who to sell to"
   },
   "settings": {
     "title": "Settings",
@@ -123,5 +125,81 @@
     "promptLogistics": "\"Best logistics to Tenali?\"",
     "goNow": "Go now",
     "askAgain": "Ask again"
+  },
+  "crops": {
+    "tomato": "Tomato",
+    "chilli": "Chilli",
+    "paddy": "Paddy",
+    "cotton": "Cotton"
+  },
+  "sell": {
+    "calculating": "Calculating best return…",
+    "grossValue": "Gross value",
+    "transport": "Transport",
+    "storage": "Storage",
+    "marketMargin": "Market margin",
+    "bestReturn": "★ Best return",
+    "bestBadgeDelta": "+₹0 (best)",
+    "deltaVsBest": "−₹{{delta}} vs best",
+    "showBreakdown": "▼ Show breakdown",
+    "hideBreakdown": "▲ Hide breakdown"
+  },
+  "destination": {
+    "subtitle": "Destination details",
+    "netReturn": "Net return",
+    "fullBreakdown": "Full breakdown",
+    "grossValue": "Gross value",
+    "transportCost": "Transport cost",
+    "storageCost": "Storage cost",
+    "marketMargin": "Market margin",
+    "buyerContact": "Buyer / FPO contact",
+    "arrangeStorage": "❄️ Arrange storage",
+    "arrangeTransport": "🚚 Arrange transport"
+  },
+  "transport": {
+    "commodityLabel": "Commodity",
+    "commodityPlaceholder": "e.g. Tomato",
+    "quantityLabel": "Quantity",
+    "pickupLabel": "Pickup location",
+    "pickupPlaceholder": "Farm / village name",
+    "deliveryLabel": "Delivery location",
+    "deliveryPlaceholder": "Mandi / buyer name",
+    "scheduleLabel": "Preferred schedule",
+    "schedulePlaceholder": "e.g. Tomorrow morning",
+    "offlineQueueNote": "This will be queued and sent automatically once you're back online."
+  },
+  "storage": {
+    "emptyTitle": "No facilities nearby",
+    "emptyBody": "No cold storage found within this radius.",
+    "expandRadius": "Expand search radius",
+    "checkAvailability": "Check availability / Book",
+    "confirmTitle": "Check availability",
+    "confirmBody": "Confirm this facility for your harvest?",
+    "confirmed": "Availability confirmed — the facility will hold space for your harvest.",
+    "freeOfCapacity": "{{available}}t free of {{capacity}}t capacity",
+    "perQuintalPerDay": "₹{{cost}} / quintal / day"
+  },
+  "buyers": {
+    "title": "Buyers & FPOs",
+    "tabBuyers": "Buyers",
+    "tabFpos": "FPOs",
+    "verified": "Verified",
+    "cropsAccepted": "Crops accepted",
+    "quantityWindow": "Quantity accepted",
+    "indicativePrice": "Indicative price",
+    "noResultsBuyers": "No buyers found nearby.",
+    "noResultsFpos": "No FPOs found nearby.",
+    "noResultsBody": "Try checking back later, or check your connection."
+  },
+  "prices": {
+    "subtitle": "Live Mandi Rates",
+    "stateAverage": "State Average",
+    "perQuintal": "per quintal",
+    "tryAnother": "Try another commodity",
+    "min": "Min",
+    "max": "Max",
+    "modalPrice": "Modal price",
+    "good": "↑ Good",
+    "average": "↓ Average"
   }
 }

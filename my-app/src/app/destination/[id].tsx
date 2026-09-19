@@ -59,27 +59,27 @@ export default function DestinationDetailScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-surface-app" edges={['top']}>
-      <ScreenHeader title={params.name} subtitle="Destination details" onBack={() => router.back()} />
+      <ScreenHeader title={params.name} subtitle={t('destination.subtitle')} onBack={() => router.back()} />
 
       <ScrollView contentContainerClassName="gap-4 px-4 pb-12">
         <View className="items-center gap-1 rounded-3xl bg-brand-primary p-6 shadow-md" style={{ elevation: 3 }}>
-          <Text className="text-xs font-sans-bold uppercase tracking-wide text-white/70">Net return</Text>
+          <Text className="text-xs font-sans-bold uppercase tracking-wide text-white/70">{t('destination.netReturn')}</Text>
           <Text className="font-sans-bold text-4xl text-white">₹{netReturn.toLocaleString()}</Text>
         </View>
 
         <View className="gap-2 rounded-2xl border border-border bg-surface shadow-sm p-4">
-          <Text className="font-sans-bold text-sm text-ink-secondary">Full breakdown</Text>
-          <Row label="Gross value" value={breakdown.grossValueRupees} />
-          <Row label="Transport cost" value={-breakdown.transportCostRupees} />
-          <Row label="Storage cost" value={-breakdown.storageCostRupees} />
-          <Row label="Market margin" value={-breakdown.marketMarginRupees} />
+          <Text className="font-sans-bold text-sm text-ink-secondary">{t('destination.fullBreakdown')}</Text>
+          <Row label={t('destination.grossValue')} value={breakdown.grossValueRupees} />
+          <Row label={t('destination.transportCost')} value={-breakdown.transportCostRupees} />
+          <Row label={t('destination.storageCost')} value={-breakdown.storageCostRupees} />
+          <Row label={t('destination.marketMargin')} value={-breakdown.marketMarginRupees} />
           <View className="h-px bg-border" />
-          <Row label="Net return" value={netReturn} bold />
+          <Row label={t('destination.netReturn')} value={netReturn} bold />
         </View>
 
         {params.buyerId ? (
           <View className="gap-3 rounded-2xl border border-border bg-surface shadow-sm p-4">
-            <Text className="font-sans-bold text-sm text-ink-secondary">Buyer / FPO contact</Text>
+            <Text className="font-sans-bold text-sm text-ink-secondary">{t('destination.buyerContact')}</Text>
             {buyerQuery.isLoading ? (
               <Text className="text-sm text-ink-secondary">{t('common.loading')}</Text>
             ) : buyerQuery.data ? (
@@ -115,14 +115,14 @@ export default function DestinationDetailScreen() {
             onPress={openStore}
             accessibilityRole="button"
           >
-            <Text className="font-sans-bold text-base text-white">❄️ Arrange storage</Text>
+            <Text className="font-sans-bold text-base text-white">{t('destination.arrangeStorage')}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             className="min-h-[52px] items-center justify-center rounded-full bg-brand-accent"
             onPress={openTransport}
             accessibilityRole="button"
           >
-            <Text className="font-sans-bold text-base text-white">🚚 Arrange transport</Text>
+            <Text className="font-sans-bold text-base text-white">{t('destination.arrangeTransport')}</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

@@ -196,6 +196,7 @@ export function mockBuyer(id: string): BuyerContact {
       cropsAccepted: ['tomato', 'chilli'],
       quantityRangeKg: [100, 5000],
       phone: '+919000000001',
+      verified: true,
     },
     'buyer-freshharvest': {
       id,
@@ -206,9 +207,18 @@ export function mockBuyer(id: string): BuyerContact {
       cropsAccepted: ['tomato', 'cotton'],
       quantityRangeKg: [500, 20000],
       phone: '+919000000002',
+      verified: true,
     },
   };
   return byId[id] ?? byId['fpo-guntur-farmers'];
+}
+
+export function mockBuyerList(): BuyerContact[] {
+  return [mockBuyer('buyer-freshharvest')];
+}
+
+export function mockFpoList(): BuyerContact[] {
+  return [mockBuyer('fpo-guntur-farmers')];
 }
 
 export function mockTransportRequest(): TransportRequestResult {

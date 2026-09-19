@@ -36,7 +36,9 @@
     "tileTransport": "రవాణా",
     "tileTransportSub": "వాహనం బుక్ చేయండి",
     "settings": "సెట్టింగులు",
-    "voiceAssistant": "మాట్లాడి అడగండి"
+    "voiceAssistant": "మాట్లాడి అడగండి",
+    "tileBuyers": "కొనుగోలుదారులు & రైతు సంఘాలు",
+    "tileBuyersSub": "ఎవరికి అమ్మాలో కనుగొనండి"
   },
   "settings": {
     "title": "సెట్టింగులు",
@@ -123,5 +125,81 @@
     "promptLogistics": "\"తెనాలికి ఉత్తమ రవాణా?\"",
     "goNow": "ఇప్పుడే వెళ్ళండి",
     "askAgain": "మళ్లీ అడగండి"
+  },
+  "crops": {
+    "tomato": "టమాటా",
+    "chilli": "మిర్చి",
+    "paddy": "వరి",
+    "cotton": "పత్తి"
+  },
+  "sell": {
+    "calculating": "ఉత్తమ రాబడిని లెక్కిస్తోంది…",
+    "grossValue": "స్థూల విలువ",
+    "transport": "రవాణా",
+    "storage": "నిల్వ",
+    "marketMargin": "మార్కెట్ మార్జిన్",
+    "bestReturn": "★ ఉత్తమ రాబడి",
+    "bestBadgeDelta": "+₹0 (ఉత్తమం)",
+    "deltaVsBest": "−₹{{delta}} ఉత్తమం కంటే తక్కువ",
+    "showBreakdown": "▼ లెక్క చూపించు",
+    "hideBreakdown": "▲ లెక్క దాచు"
+  },
+  "destination": {
+    "subtitle": "గమ్యస్థాన వివరాలు",
+    "netReturn": "నికర రాబడి",
+    "fullBreakdown": "పూర్తి లెక్క",
+    "grossValue": "స్థూల విలువ",
+    "transportCost": "రవాణా ఖర్చు",
+    "storageCost": "నిల్వ ఖర్చు",
+    "marketMargin": "మార్కెట్ మార్జిన్",
+    "buyerContact": "కొనుగోలుదారు / రైతు సంఘం సంప్రదింపు",
+    "arrangeStorage": "❄️ నిల్వ ఏర్పాటు చేయండి",
+    "arrangeTransport": "🚚 రవాణా ఏర్పాటు చేయండి"
+  },
+  "transport": {
+    "commodityLabel": "పంట",
+    "commodityPlaceholder": "ఉదా. టమాటా",
+    "quantityLabel": "పరిమాణం",
+    "pickupLabel": "సేకరణ స్థలం",
+    "pickupPlaceholder": "పొలం / గ్రామం పేరు",
+    "deliveryLabel": "డెలివరీ స్థలం",
+    "deliveryPlaceholder": "మార్కెట్ / కొనుగోలుదారు పేరు",
+    "scheduleLabel": "ఇష్టపడే షెడ్యూల్",
+    "schedulePlaceholder": "ఉదా. రేపు ఉదయం",
+    "offlineQueueNote": "మీరు తిరిగి ఆన్‌లైన్‌లోకి వచ్చిన వెంటనే ఇది స్వయంచాలకంగా పంపబడుతుంది."
+  },
+  "storage": {
+    "emptyTitle": "సమీపంలో సౌకర్యాలు లేవు",
+    "emptyBody": "ఈ పరిధిలో కోల్డ్ స్టోరేజ్ కనుగొనబడలేదు.",
+    "expandRadius": "శోధన పరిధిని పెంచండి",
+    "checkAvailability": "లభ్యత తనిఖీ చేయి / బుక్ చేయి",
+    "confirmTitle": "లభ్యత తనిఖీ చేయండి",
+    "confirmBody": "మీ పంట కోసం ఈ సౌకర్యాన్ని నిర్ధారించాలా?",
+    "confirmed": "లభ్యత నిర్ధారించబడింది — ఈ సౌకర్యం మీ పంట కోసం స్థలం ఉంచుతుంది.",
+    "freeOfCapacity": "{{capacity}}t లో {{available}}t ఖాళీగా ఉంది",
+    "perQuintalPerDay": "₹{{cost}} / క్వింటాల్ / రోజుకు"
+  },
+  "buyers": {
+    "title": "కొనుగోలుదారులు & రైతు సంఘాలు",
+    "tabBuyers": "కొనుగోలుదారులు",
+    "tabFpos": "రైతు సంఘాలు",
+    "verified": "ధృవీకరించబడింది",
+    "cropsAccepted": "అంగీకరించే పంటలు",
+    "quantityWindow": "అంగీకరించే పరిమాణం",
+    "indicativePrice": "సూచించిన ధర",
+    "noResultsBuyers": "సమీపంలో కొనుగోలుదారులు కనుగొనబడలేదు.",
+    "noResultsFpos": "సమీపంలో రైతు సంఘాలు కనుగొనబడలేదు.",
+    "noResultsBody": "దయచేసి తర్వాత మళ్లీ ప్రయత్నించండి లేదా మీ ఇంటర్నెట్‌ను తనిఖీ చేయండి."
+  },
+  "prices": {
+    "subtitle": "ప్రత్యక్ష మార్కెట్ ధరలు",
+    "stateAverage": "రాష్ట్ర సగటు",
+    "perQuintal": "ప్రతి క్వింటాల్‌కు",
+    "tryAnother": "వేరే పంట ప్రయత్నించండి",
+    "min": "కనిష్ఠం",
+    "max": "గరిష్ఠం",
+    "modalPrice": "మోడల్ ధర",
+    "good": "↑ మంచిది",
+    "average": "↓ సగటు"
   }
 }

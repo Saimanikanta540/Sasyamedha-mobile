@@ -34,7 +34,7 @@ export default function FacilityDetailScreen() {
   const facility = query.data?.find((f) => f.id === id);
 
   const onBook = () => {
-    Alert.alert('Check availability', 'Confirm this facility for your harvest?', [
+    Alert.alert(t('storage.confirmTitle'), t('storage.confirmBody'), [
       { text: t('common.cancel'), style: 'cancel' },
       { text: t('common.ok'), onPress: () => setBooked(true) },
     ]);
@@ -52,17 +52,17 @@ export default function FacilityDetailScreen() {
             <AvailabilityBar
               availableTonnes={facility.availableTonnes}
               capacityTonnes={facility.capacityTonnes}
-              label={`${facility.availableTonnes}t free of ${facility.capacityTonnes}t capacity`}
+              label={t('storage.freeOfCapacity', { available: facility.availableTonnes, capacity: facility.capacityTonnes })}
             />
             <Row label={t('common.distanceAway', { distance: facility.distanceKm })} />
-            <Row label={`₹${facility.costPerDayRupeesPerQuintal} / quintal / day`} />
+            <Row label={t('storage.perQuintalPerDay', { cost: facility.costPerDayRupeesPerQuintal })} />
           </View>
 
           {booked ? (
             <View className="items-center gap-2 rounded-2xl bg-state-success-bg p-6">
               <Text className="text-3xl">✅</Text>
               <Text className="text-center font-sans-bold text-base text-state-success">
-                Availability confirmed — the facility will hold space for your harvest.
+                {t('storage.confirmed')}
               </Text>
             </View>
           ) : (
@@ -71,7 +71,7 @@ export default function FacilityDetailScreen() {
               onPress={onBook}
               accessibilityRole="button"
             >
-              <Text className="font-sans-bold text-base text-white">Check availability / Book</Text>
+              <Text className="font-sans-bold text-base text-white">{t('storage.checkAvailability')}</Text>
             </TouchableOpacity>
           )}
         </View>
