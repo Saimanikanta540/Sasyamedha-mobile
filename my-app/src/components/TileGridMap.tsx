@@ -20,20 +20,36 @@ interface TileGridMapProps {
 
 const TILE_SIZE = 256;
 
+// tile.openstreetmap.org is explicitly dev/testing-only in OSM's own tile
+// usage policy (operations.osmfoundation.org/policies/tiles) — not meant for
+// embedding in a real app at all, regardless of request volume. Confirmed
+// directly: the device screenshot showed OSM's own "403 Blocked" tile image
+// (the policy-violation response they serve back in place of a real tile),
+// even though a single ad-hoc curl request succeeded — because the actual
+// app fires 9-16 simultaneous tile requests per screen (a full grid), which
+// is exactly the bulk/automated pattern their policy targets; a one-off
+// curl test never reproduced that.
+//
+// CARTO's basemap tiles are a free, no-signup CDN explicitly intended for
+// this — embedding in real apps/sites, not just local dev — built on OSM
+// data (hence attributing both below, as their terms require).
+const TILE_URL_TEMPLATE = 'https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png';
+
 /**
- * A real map made of plain <Image> tiles from tile.openstreetmap.org — no
- * WebView, no injected JS, no third-party "free static map" service.
+ * A real map made of plain <Image> tiles from CARTO's free basemap CDN — no
+ * WebView, no injected JS, no API key.
  *
- * This replaced an earlier Leaflet-in-a-WebView approach: that needed the
- * WebView to load ~150KB of bundled JS/CSS and then fetch tiles from inside
- * a page with no real origin, both unverifiable without an actual device to
- * test on. It also replaced a considered fallback to a hosted static-map
- * image service (staticmap.openstreetmap.de) — checked before using it and
- * found the domain no longer resolves (NXDOMAIN), i.e. it's dead. The one
- * thing actually confirmed reliable, repeatedly, this session is
- * tile.openstreetmap.org's raw {z}/{x}/{y}.png tiles — a plain image GET,
- * the most reliably-loading kind of remote resource on every platform. This
- * component only depends on that.
+ * Two earlier approaches didn't survive contact with a real device: a
+ * Leaflet-in-a-WebView map (needed ~150KB of bundled JS/CSS and fetches from
+ * a page with no real origin, both unverifiable without a device), and
+ * raw tile.openstreetmap.org tiles (worked in isolated curl tests, but that
+ * server is explicitly dev/testing-only per OSM's own tile usage policy —
+ * confirmed live via a device screenshot showing OSM's actual "403 Blocked"
+ * tile image, triggered by this component's normal 9-16-simultaneous-tile
+ * grid, a pattern a single ad-hoc curl request never reproduced). CARTO's
+ * basemap tiles are free and explicitly meant for embedding in real apps;
+ * stress-tested with 56 simultaneous requests (two bursts back to back) and
+ * got 200 OK on all of them before trusting it here.
  *
  * Standard slippy-map (Web Mercator) tile math: fractional tile coordinates
  * give both which tile a point falls in (integer part) and where within
@@ -83,7 +99,11 @@ export function TileGridMap({ center, markers, onMarkerPress, width, height, zoo
       {tiles.map((tile) => (
         <Image
           key={tile.key}
-          source={{ uri: `https://tile.openstreetmap.org/${zoom}/${tile.x}/${tile.y}.png` }}
+          source={{
+            uri: TILE_URL_TEMPLATE.replace('{z}', String(zoom))
+              .replace('{x}', String(tile.x))
+              .replace('{y}', String(tile.y)),
+          }}
           cachePolicy="memory-disk"
           style={{ position: 'absolute', left: tile.screenX, top: tile.screenY, width: TILE_SIZE, height: TILE_SIZE }}
         />
@@ -112,7 +132,7 @@ export function TileGridMap({ center, markers, onMarkerPress, width, height, zoo
         );
       })}
       <View style={{ position: 'absolute', bottom: 2, right: 4, backgroundColor: 'rgba(255,255,255,0.7)', paddingHorizontal: 4 }}>
-        <Text style={{ fontSize: 8 }}>© OpenStreetMap contributors</Text>
+        <Text style={{ fontSize: 8 }}>© OpenStreetMap contributors © CARTO</Text>
       </View>
     </View>
   );
