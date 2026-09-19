@@ -57,5 +57,10 @@
   "connectivity": {
     "onlineBadge": "Online",
     "offlineBadge": "Offline — showing saved data"
+  },
+  "diagnose": {
+    "confidenceHigh": "High confidence",
+    "confidenceMedium": "Medium confidence",
+    "confidenceLow": "Uncertain"
   }
 }

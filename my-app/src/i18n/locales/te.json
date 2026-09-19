@@ -57,5 +57,10 @@
   "connectivity": {
     "onlineBadge": "ఆన్‌లైన్",
     "offlineBadge": "ఆఫ్‌లైన్ — నిల్వ చేసిన డేటా చూపిస్తోంది"
+  },
+  "diagnose": {
+    "confidenceHigh": "అధిక నమ్మకం",
+    "confidenceMedium": "మధ్యస్థ నమ్మకం",
+    "confidenceLow": "అనిశ్చితం"
   }
 }
