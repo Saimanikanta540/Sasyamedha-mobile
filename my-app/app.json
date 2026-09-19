@@ -47,7 +47,15 @@
           "cameraPermission": "Sasyamedha uses the camera to photograph crop leaves for diagnosis."
         }
       ],
-      "expo-notifications"
+      "expo-notifications",
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": false,
+          "locationAlwaysPermission": false,
+          "locationWhenInUsePermission": "Sasyamedha uses your location once at startup to choose your language."
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,
