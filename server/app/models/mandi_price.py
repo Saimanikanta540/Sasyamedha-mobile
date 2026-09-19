@@ -18,3 +18,6 @@ class MandiPrice(SQLModel, table=True):
     ingested_at: datetime = Field(default_factory=datetime.utcnow, index=True)
     latitude: float | None = None
     longitude: float | None = None
+    # 'seed' (app/seed/market_seed.py) or 'ogd' (data.gov.in, see
+    # services/price_ingestion.py) — never hide which one a price actually is.
+    source: str = Field(default="seed", index=True)

@@ -6,6 +6,7 @@ from app.database import get_session
 from app.models import MandiPrice
 from app.schemas.market_prices import MandiPriceResponse
 from app.services.geo import haversine_distance
+from app.services.price_ingestion import ingest_ogd_prices
 from app.config import get_settings
 
 logger = logging.getLogger(__name__)
@@ -58,7 +59,8 @@ def get_prices(
             modal_price_per_kg=modal_price_kg,
             price_date=item.price_date,
             ingested_at=item.ingested_at,
-            distance_km=distance
+            distance_km=distance,
+            source=item.source,
         ))
         
     if sort_by == "distance" and lat is not None and lng is not None:
@@ -77,8 +79,7 @@ def ingest_prices_internal(
 ):
     if x_internal_token != settings.internal_api_token:
         raise HTTPException(status_code=403, detail="Invalid internal token")
-    
-    # In a real scenario, this would call data.gov.in API
-    # Since we don't have real ingestion logic, we'll just log it.
-    logger.info("Internal price ingestion triggered")
-    return {"message": "Ingestion triggered"}
+
+    report = ingest_ogd_prices(session)
+    logger.info("Internal price ingestion", extra={"event": "ingest_prices", **report.as_dict()})
+    return report.as_dict()

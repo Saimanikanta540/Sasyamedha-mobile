@@ -17,3 +17,4 @@ class MandiPriceResponse(BaseModel):
     price_date: date
     ingested_at: datetime
     distance_km: Optional[float] = None
+    source: str
